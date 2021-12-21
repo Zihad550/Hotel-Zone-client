@@ -1,0 +1,33 @@
+[
+  {
+    "name": "Chicago",
+    "img": "https://i.ibb.co/YB34XGZ/chicaho.jpg",
+    "hotels": "140",
+    "rating": "4.5"
+  },
+  {
+    "name": "Florencia",
+    "img": "https://i.ibb.co/61fgCRK/florencia.jpg",
+    "hotels": "2369",
+    "rating": "4"
+  },
+  {
+    "name": "london",
+    "img": "https://i.ibb.co/L8bd721/london.jpg",
+    "hotels": "2098",
+    "rating": "4.5"
+  },
+
+  {
+    "name": "Paris",
+    "img": "https://i.ibb.co/zQ3jfPN/paris.jpg",
+    "hotels": "7556",
+    "rating": "5"
+  },
+  {
+    "name": "Toronto",
+    "img": "https://i.ibb.co/6vBdnXX/toronto.jpg",
+    "hotels": "2029",
+    "rating": "4"
+  }
+]

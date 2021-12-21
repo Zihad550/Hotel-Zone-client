@@ -20,9 +20,12 @@ const ShowReview = ({ review }) => {
     userEmail,
     homeMessage,
     securityMessage,
+    hotelImage,
+    parentComp,
   } = review;
+  console.log(review);
   return (
-    <Grid item xs={6} md={4}>
+    <Grid item xs={6} md={4} lg={3}>
       <Card
         sx={{
           height: "100%",
@@ -34,20 +37,27 @@ const ShowReview = ({ review }) => {
         <CardMedia
           component="img"
           height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image={hotelImage}
           alt="hotel image will be uploaded soon"
           sx={{ fontSize: 30 }}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {hotelName} reviewed by{" "}
-            <Box sx={{ display: "inline-block", color: "blue" }}>
-              {userName}
-            </Box>
-          </Typography>
-          <Typography gutterBottom variant="h6" component="div">
-            Located at: {city}
-          </Typography>
+          {parentComp === "MyReviews" ? (
+            <Typography variant="h5">{hotelName}</Typography>
+          ) : (
+            <>
+              <Typography gutterBottom variant="h5" component="div">
+                {hotelName} reviewed by{" "}
+                <Box sx={{ display: "inline-block", color: "blue" }}>
+                  {userName}
+                </Box>
+              </Typography>
+              <Typography gutterBottom variant="h6" component="div">
+                Located at: {city}
+              </Typography>
+            </>
+          )}
+
           {securityMessage && (
             <>
               <Typography variant="body1">About Security </Typography>

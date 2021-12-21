@@ -9,6 +9,33 @@
 .home-container {
   height: 100vh;
 }
+.banner-img {
+  filter: brightness(70%);
+  z-index: -5;
+}
+.responsiveImg {
+  width: 100%;
+  height: auto;
+}
+
+.footer-container {
+  background: #363636;
+  color: white;
+}
+
+.footer-container ul {
+  list-style: none;
+  margin: 0;
+}
+
+.footer-container li {
+  margin-bottom: 5px;
+}
+
+.footer-container a {
+  color: white;
+  font-size: 20px;
+}
 
 @media only screen and (max-width: 768px) {
   .leaflet-container {
@@ -19,12 +46,12 @@
 }
 
 @media only screen and (min-width: 769px) {
-  .leaflet-container {
+  /* .leaflet-container {
     position: fixed;
     top: 0;
     right: 0;
     width: 50vw;
     height: 100vh;
     margin-top: 4.7rem;
-  }
+  } */
 }

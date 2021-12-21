@@ -9,26 +9,27 @@ import {
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useParams } from "react-router";
-import reviewImage from "../../images/review-image.svg";
+import useAuth from "../../../hooks/useAuth";
+import reviewImage from "../../../images/review-image.svg";
 
 const Review = () => {
   const { name } = useParams();
+  const { user } = useAuth();
+  // hotel state variables
   const [securityRate, setSecurityRate] = useState(0);
   const [hotelRate, setHotelRate] = useState(0);
-  const [email, setEmail] = useState("");
-  const [userName, setUserName] = useState("");
   const [homeMessage, setHomeMessage] = useState("");
   const [securityMessage, setSecurityMessage] = useState("");
 
   const handleReview = (e) => {
     e.preventDefault();
+    const hotelImage = JSON.parse(localStorage.getItem("hotel"));
     // collect data
     const review = {
+      hotelImage,
       hotelName: name,
       securityRate,
       hotelRate,
-      userName,
-      userEmail: email,
       homeMessage,
       securityMessage,
     };
@@ -39,7 +40,11 @@ const Review = () => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(review),
+      body: JSON.stringify({
+        userEmail: user.email,
+        userName: user.displayName,
+        ...review,
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -55,17 +60,26 @@ const Review = () => {
           <img src={reviewImage} alt="" />{" "}
         </Grid>
         <Grid item xs={12} md={6}>
-          <Typography variant="h5">Review {name} </Typography>
+          <Typography variant="h5">
+            Review{" "}
+            <Typography
+              sx={{ display: "inline-block" }}
+              variant="h5"
+              color="secondary"
+            >
+              {name}
+            </Typography>{" "}
+          </Typography>
           <form onSubmit={handleReview}>
             <TextField
               required
-              onBlur={(e) => setUserName(e.target.value)}
               // defaultValue={user.displayName}
               size="small"
               name="userName"
               label="Name"
               fullWidth
               margin="dense"
+              value={user.displayName}
             />
 
             <TextField
@@ -73,11 +87,12 @@ const Review = () => {
               // defaultValue={user.email}
               type="email"
               size="small"
-              onBlur={(e) => setEmail(e.target.value)}
               label="Email"
               name="email"
               fullWidth
               margin="dense"
+              aria-readonly
+              value={user.email}
             />
             <Box sx={{ my: 2 }}>
               <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>

@@ -14,12 +14,13 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useNavigate } from "react-router";
-
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import useAuth from "../../../hooks/useAuth";
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const { user, logOut } = useAuth();
+  const { displayName, photoURL, email } = user;
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
@@ -38,7 +39,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar sx={{ overflow: "hidden", zIndex: 2 }} position="fixed">
+    <AppBar position="fixed" sx={{ mb: 20 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -47,7 +48,7 @@ const Header = () => {
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            Green Hotel
+            Hotel Zone
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -80,11 +81,24 @@ const Header = () => {
               }}
             >
               <MenuItem onClick={() => navigate("/home")}>
-                <Typography textAlign="center">Home</Typography>
+                <Typography textalign="center">Home</Typography>
               </MenuItem>
               <MenuItem onClick={() => navigate("/reviews")}>
-                <Typography textAlign="center">Reviews</Typography>
+                <Typography textalign="center">Reviews</Typography>
               </MenuItem>
+
+              <MenuItem onClick={() => navigate("/dashboard")}>
+                <Typography textalign="center">Dashboard</Typography>
+              </MenuItem>
+              {email ? (
+                <MenuItem onClick={logOut} textalign="center">
+                  <Typography>Log out</Typography>
+                </MenuItem>
+              ) : (
+                <MenuItem onClick={() => navigate("/login")}>
+                  <Typography textalign="center">Log in</Typography>
+                </MenuItem>
+              )}
             </Menu>
           </Box>
           <Typography
@@ -93,7 +107,7 @@ const Header = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
           >
-            Green Hotel
+            Hotel Zone
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Button
@@ -122,10 +136,14 @@ const Header = () => {
             </Button>
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          {/* user menu */}
+          <Box sx={{ flexGrow: 0, alignItems: "center", display: "flex" }}>
+            <Typography sx={{ mr: 1, fontSize: 20 }} variant="body1">
+              {displayName || email}
+            </Typography>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="user" src={photoURL} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -144,11 +162,32 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              {email ? (
+                <div>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography
+                      onClick={() => navigate("/dashboard")}
+                      textalign="center"
+                    >
+                      Dashboard
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography onClick={logOut} textalign="center">
+                      Log out
+                    </Typography>
+                  </MenuItem>
+                </div>
+              ) : (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography
+                    onClick={() => navigate("/login")}
+                    textalign="center"
+                  >
+                    Log in
+                  </Typography>
                 </MenuItem>
-              ))}
+              )}
             </Menu>
           </Box>
         </Toolbar>

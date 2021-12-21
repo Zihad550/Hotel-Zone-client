@@ -8,7 +8,7 @@ const Reviews = () => {
     fetch("https://desolate-thicket-08194.herokuapp.com/reviews")
       .then((res) => res.json())
       .then((data) => setReviews(data));
-  });
+  }, []);
   return (
     <Container sx={{ mb: 3, mt: 15 }}>
       <Typography
