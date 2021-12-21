@@ -1,7 +1,10 @@
+import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import HomeIcon from "@mui/icons-material/Home";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -17,12 +20,16 @@ import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import * as React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 
 const drawerWidth = 240;
 
 function DashboardContainer(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  // useAuth
+  const { admin } = useAuth();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -50,22 +57,59 @@ function DashboardContainer(props) {
 
       <Divider />
 
-      {/* ================
-      more pages
-      ==================== */}
       <List>
-        <ListItem button onClick={() => navigate("/dashboard/myReviews")}>
-          <ListItemIcon>
-            <AutoAwesomeIcon />
-          </ListItemIcon>
-          <ListItemText primary="My Reviews" />
-        </ListItem>
-        <ListItem button onClick={() => navigate("/dashboard/myBookings")}>
-          <ListItemIcon>
-            <MenuBookIcon />
-          </ListItemIcon>
-          <ListItemText primary="My Bookings" />
-        </ListItem>
+        {/* ================
+      normal user pages
+      ==================== */}
+        {!admin && (
+          <>
+            <ListItem button onClick={() => navigate("/dashboard/myReviews")}>
+              <ListItemIcon>
+                <AutoAwesomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="My Reviews" />
+            </ListItem>
+            <ListItem button onClick={() => navigate("/dashboard/myBookings")}>
+              <ListItemIcon>
+                <MenuBookIcon />
+              </ListItemIcon>
+              <ListItemText primary="My Bookings" />
+            </ListItem>
+          </>
+        )}
+        {/* ==================
+        admin pages
+        ==================== */}
+        {admin && (
+          <>
+            {/* make admin */}
+            <ListItem button onClick={() => navigate("/dashboard/makeAdmin")}>
+              <ListItemIcon>
+                <PersonAddAltRoundedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Make Admin" />
+            </ListItem>
+
+            {/* manage popular cities */}
+            <ListItem
+              button
+              onClick={() => navigate("/dashboard/managePopularCities")}
+            >
+              <ListItemIcon>
+                <AddLocationAltRoundedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Manage Popular Cities" />
+            </ListItem>
+
+            {/* Add new photo to photo gellery */}
+            <ListItem button onClick={() => navigate("/dashboard/addPhoto")}>
+              <ListItemIcon>
+                <AddPhotoAlternateIcon />
+              </ListItemIcon>
+              <ListItemText primary="Add Photo" />
+            </ListItem>
+          </>
+        )}
       </List>
     </div>
   );

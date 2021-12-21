@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import initializeAuthentication from "../Firebase/firebase.init";
@@ -21,17 +22,23 @@ const useFirebase = () => {
 
   // states
   const [user, setUser] = useState({});
+  const [admin, setAdmin] = useState(false);
   const [error, setError] = useState("");
-  const [userInfo, setUserInfo] = useState({});
-  const { email, password } = userInfo;
   const [isLoading, setIsLoading] = useState(false);
+  const [hotelImage, setHotelImage] = useState("");
+
+  // navigate
 
   // login using google
-  const googleLogin = () => {
+  const googleLogin = (location, navigate) => {
     setIsLoading(true);
     signInWithPopup(auth, googleProvider)
       .then((res) => {
+        const user = res.user;
         setUser(res.user);
+        const destination = location?.state?.from || "/";
+        saveUser(user.email, user.displayName, "PUT");
+        navigate(destination);
       })
       .catch((error) => {
         setError(error.message);
@@ -40,11 +47,22 @@ const useFirebase = () => {
   };
 
   // register
-  const register = () => {
+  const registerUser = (email, password, name, navigate) => {
     setIsLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
-      .then((res) => {
-        setUser(res.user);
+      .then(() => {
+        // set error
+        setError("");
+        navigate("/");
+        setUser({ email, displayName: name });
+        saveUser(email, name, "POST");
+
+        // save name
+        updateProfile(auth.currentUser, {
+          displayName: name,
+        }).catch((error) => {
+          setError(error.message);
+        });
       })
       .catch((error) => {
         setError(error.message);
@@ -53,10 +71,15 @@ const useFirebase = () => {
   };
 
   // login
-  const login = () => {
+  const login = (email, password, location, navigate) => {
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
-      .then((res) => setUser(res.user))
+      .then((res) => {
+        setUser(res.user);
+        const destination = location?.state?.from || "/";
+        navigate(destination);
+        setError("");
+      })
       .catch((error) => setError(error.message))
       .finally(() => setIsLoading(false));
   };
@@ -74,8 +97,25 @@ const useFirebase = () => {
   // save user to the server
   const saveUser = (email, displayName, method) => {
     const user = { email, displayName };
-    fetch("");
+    fetch("https://desolate-thicket-08194.herokuapp.com/users", {
+      method,
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
   };
+
+  // checks if the user is admin
+  useEffect(() => {
+    console.log("inside admin");
+    fetch(`https://desolate-thicket-08194.herokuapp.com/users/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setAdmin(data.admin);
+        console.log(data.admin);
+      });
+  }, [user.email]);
 
   // observe the user
   useEffect(() => {
@@ -92,13 +132,12 @@ const useFirebase = () => {
   }, []);
   return {
     user,
+    admin,
     error,
     googleLogin,
-    setUserInfo,
-    register,
+    registerUser,
     login,
     logOut,
-    userInfo,
     isLoading,
   };
 };

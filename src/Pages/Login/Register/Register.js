@@ -10,13 +10,13 @@ import registerImage from "../../../images/register.jpg";
 
 const Register = () => {
   // use firebase
-  const { register, setUserInfo, error, user, googleLogin } = useAuth();
+  const { registerUser, error, user, googleLogin } = useAuth();
   console.log(error);
   // navigate
   const navigate = useNavigate();
   // states
   const [registerData, setRegisterData] = useState({});
-  const { password, re_typed_password } = registerData;
+  const { password, re_typed_password, name, email } = registerData;
 
   const handleBlur = (e) => {
     const field = e.target.name;
@@ -32,8 +32,7 @@ const Register = () => {
     if (password !== re_typed_password) {
       alert("password not matched");
     } else {
-      setUserInfo(registerData);
-      register();
+      registerUser(name, email, password, navigate);
     }
   };
   return (

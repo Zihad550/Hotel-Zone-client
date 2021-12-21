@@ -5,11 +5,17 @@ import AuthProvider from "./contexts/AuthProvider";
 import { ErrorBoundary } from "./ErrorBoundary/ErrorBoundary";
 import AvailableResturents from "./Pages/AvailableResturents/AvailableResturents";
 import Book from "./Pages/Book/Book";
+import AddNewCity from "./Pages/Dashboard/AddNewCity/AddNewCity";
+import AddPhoto from "./Pages/Dashboard/AddPhoto/AddPhoto";
 import DashboardContainer from "./Pages/Dashboard/DashboardContainer/DashboardContainer";
+import MakeAdmin from "./Pages/Dashboard/MakeAdmin/MakeAdmin";
+import ManageExistingCities from "./Pages/Dashboard/ManageExistingCities/ManageExistingCities";
+import ManagePopularCities from "./Pages/Dashboard/ManagePopularCities/ManagePopularCities";
 import MyBookings from "./Pages/Dashboard/MyBookings/MyBookings";
 import MyReviews from "./Pages/Dashboard/MyReviews/MyReviews";
 import Review from "./Pages/Dashboard/Review/Review";
 import Home from "./Pages/HomePage/Home/Home";
+import AdminRoute from "./Pages/Login/AdminRoute/AdminRoute";
 import Login from "./Pages/Login/Login/Login";
 import Register from "./Pages/Login/Register/Register";
 import Reviews from "./Pages/Reviews/Reviews";
@@ -42,6 +48,46 @@ const App = () => {
               <Route path="/dashboard/myBookings" element={<MyBookings />} />
               <Route path="/dashboard/myReviews" element={<MyReviews />} />
               <Route path="/dashboard/review/:name" element={<Review />} />
+              <Route
+                path="/dashboard/makeAdmin"
+                element={
+                  <AdminRoute>
+                    <MakeAdmin />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/dashboard/managePopularCities"
+                element={
+                  <AdminRoute>
+                    <ManagePopularCities />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/dashboard/manageExistingCities"
+                element={
+                  <AdminRoute>
+                    <ManageExistingCities />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/dashboard/AddNewCity"
+                element={
+                  <AdminRoute>
+                    <AddNewCity />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/dashboard/addPhoto"
+                element={
+                  <AdminRoute>
+                    <AddPhoto />
+                  </AdminRoute>
+                }
+              />
             </Route>
           </Routes>
         </BrowserRouter>

@@ -4,19 +4,21 @@ import GoogleIcon from "@mui/icons-material/Google";
 import { Button, Container, Grid, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import loginImage from "../../../images/login.jpg";
 
 const Login = () => {
   // usefirebase
-  const { login, setUserInfo, error } = useAuth();
+  const { login, error, googleLogin } = useAuth();
   console.log(error);
-  // navigate
+  // navigate & location
   const navigate = useNavigate();
+  const location = useLocation();
 
   // states
   const [loginData, setLoginData] = useState({});
+  const { email, password } = loginData;
 
   // handlers
   const handleBlur = (e) => {
@@ -28,8 +30,7 @@ const Login = () => {
   };
   const handleLogin = (e) => {
     e.preventDefault();
-    setUserInfo(loginData);
-    login();
+    login(email, password, location, navigate);
   };
   return (
     <Container
@@ -83,7 +84,11 @@ const Login = () => {
 
           {/* third party authentication */}
           <Box sx={{ display: "flex", my: 1, justifyContent: "center" }}>
-            <Button sx={{ width: "100%" }} endIcon={<GoogleIcon />} />
+            <Button
+              onClick={() => googleLogin(location, navigate)}
+              sx={{ width: "100%" }}
+              endIcon={<GoogleIcon />}
+            />
             <Button sx={{ width: "100%" }} endIcon={<FacebookIcon />} />
             <Button sx={{ width: "100%" }} endIcon={<GitHubIcon />} />
           </Box>
