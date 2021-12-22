@@ -1,5 +1,3 @@
-import FacebookIcon from "@mui/icons-material/Facebook";
-import GitHubIcon from "@mui/icons-material/GitHub";
 import GoogleIcon from "@mui/icons-material/Google";
 import { Button, Container, Grid, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
@@ -15,6 +13,7 @@ const Login = () => {
   // navigate & location
   const navigate = useNavigate();
   const location = useLocation();
+  console.log(location);
 
   // states
   const [loginData, setLoginData] = useState({});
@@ -89,8 +88,8 @@ const Login = () => {
               sx={{ width: "100%" }}
               endIcon={<GoogleIcon />}
             />
-            <Button sx={{ width: "100%" }} endIcon={<FacebookIcon />} />
-            <Button sx={{ width: "100%" }} endIcon={<GitHubIcon />} />
+            {/* <Button sx={{ width: "100%" }} endIcon={<FacebookIcon />} />
+            <Button sx={{ width: "100%" }} endIcon={<GitHubIcon />} /> */}
           </Box>
           <Typography sx={{ textAlign: "center" }} variant="body1">
             New user{" "}

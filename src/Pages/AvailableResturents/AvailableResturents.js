@@ -64,7 +64,14 @@ const Home = () => {
             ))}
           </div>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          sx={{
+            height: "30vh",
+          }}
+        >
           <MapContainer
             className="leaflet-container"
             center={[latitude, longitude]}

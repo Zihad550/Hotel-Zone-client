@@ -30,13 +30,20 @@ const Resturents = ({ setDetails, details }) => {
         alignItems: "center",
         flexDirection: "column",
         justifyContent: "center",
+        mt: { xs: 32, sm: 40 },
       }}
     >
       <Typography sx={{ mb: 2, mt: 2 }} variant="h4">
         Available Hotels
       </Typography>
       <form style={{ width: "100%" }} onSubmit={handleSubmit}>
-        <Box sx={{ display: "flex", mb: 1 }}>
+        <Box
+          sx={{
+            display: "flex",
+            mb: 1,
+            flexDirection: { xs: "column", md: "row" },
+          }}
+        >
           <Box sx={{ width: "100%", mr: 2 }}>
             <InputLabel htmlFor="check-in">Select check in date</InputLabel>
             <TextField
@@ -63,7 +70,13 @@ const Resturents = ({ setDetails, details }) => {
         </Box>
 
         {/* adults, children and room number fields */}
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            overflowY: "scroll",
+          }}
+        >
           <Box sx={{ width: "100%" }}>
             <InputLabel htmlFor="adults">Number of Adults</InputLabel>
             <TextField

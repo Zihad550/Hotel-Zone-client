@@ -6,7 +6,7 @@ import Carousel from "react-elastic-carousel";
 const PhotoGellery = () => {
   const [photos, setPhotos] = useState([]);
   useEffect(() => {
-    fetch("./places.json")
+    fetch("https://desolate-thicket-08194.herokuapp.com/photos")
       .then((res) => res.json())
       .then((data) => setPhotos(data));
   }, []);
@@ -21,7 +21,7 @@ const PhotoGellery = () => {
     <Box sx={{ my: 4 }}>
       <Typography
         variant="h2"
-        sx={{ fontWeight: "medium", mb: 3 }}
+        sx={{ fontWeight: "medium", mb: 3, fontSize: { xs: 35, md: 60 } }}
         textAlign="center"
         color="initial"
       >
@@ -29,8 +29,34 @@ const PhotoGellery = () => {
       </Typography>
       <Carousel breakPoints={breakPoints}>
         {photos.map((photo) => (
-          <Box>
-            <img height="500px" src={photo.src} alt="" />
+          <Box key={photo._id} sx={{ position: "relative" }}>
+            <Box
+              sx={{
+                position: "absolute",
+                transform: "translate(-50%, -50%)",
+                top: "50%",
+                left: "50%",
+                zIndex: 5,
+              }}
+            >
+              <Typography
+                sx={{ fontSize: { md: 34, xs: 30 } }}
+                color="white"
+                variant="h4"
+              >
+                Picture by: {photo.name}
+              </Typography>
+              <Typography
+                sx={{ fontSize: { md: 24, xs: 20 } }}
+                color="white"
+                variant="h5"
+              >
+                While stying at {photo.hotelName}
+              </Typography>
+            </Box>
+            <Box>
+              <img className="banner-img" src={photo.src} alt="" />
+            </Box>
           </Box>
         ))}
       </Carousel>

@@ -10,6 +10,8 @@ import AddPhoto from "./Pages/Dashboard/AddPhoto/AddPhoto";
 import DashboardContainer from "./Pages/Dashboard/DashboardContainer/DashboardContainer";
 import MakeAdmin from "./Pages/Dashboard/MakeAdmin/MakeAdmin";
 import ManageExistingCities from "./Pages/Dashboard/ManageExistingCities/ManageExistingCities";
+import ManageExistingPhoto from "./Pages/Dashboard/ManageExistingPhoto/ManageExistingPhoto";
+import ManagePhotoGallery from "./Pages/Dashboard/ManagePhotoGallery/ManagePhotoGallery";
 import ManagePopularCities from "./Pages/Dashboard/ManagePopularCities/ManagePopularCities";
 import MyBookings from "./Pages/Dashboard/MyBookings/MyBookings";
 import MyReviews from "./Pages/Dashboard/MyReviews/MyReviews";
@@ -17,6 +19,7 @@ import Review from "./Pages/Dashboard/Review/Review";
 import Home from "./Pages/HomePage/Home/Home";
 import AdminRoute from "./Pages/Login/AdminRoute/AdminRoute";
 import Login from "./Pages/Login/Login/Login";
+import PrivateRoute from "./Pages/Login/PrivateRoute/PrivateRoute";
 import Register from "./Pages/Login/Register/Register";
 import Reviews from "./Pages/Reviews/Reviews";
 import SearchHotels from "./Pages/SearchHotels/SearchHotels";
@@ -37,14 +40,32 @@ const App = () => {
             />
             <Route
               path="/Book/:name/:price/:latitude/:longitude/:currency"
-              element={<Book />}
+              element={
+                <PrivateRoute>
+                  <Book />
+                </PrivateRoute>
+              }
             />
             <Route path="/review/:name" element={<Review />} />
-            <Route path="/reviews" element={<Reviews />} />
+            <Route
+              path="/reviews"
+              element={
+                <PrivateRoute>
+                  <Reviews />
+                </PrivateRoute>
+              }
+            />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             {/* dashboard routes */}]
-            <Route path="/dashboard" element={<DashboardContainer />}>
+            <Route
+              path="/dashboard"
+              element={
+                <PrivateRoute>
+                  <DashboardContainer />
+                </PrivateRoute>
+              }
+            >
               <Route path="/dashboard/myBookings" element={<MyBookings />} />
               <Route path="/dashboard/myReviews" element={<MyReviews />} />
               <Route path="/dashboard/review/:name" element={<Review />} />
@@ -81,10 +102,26 @@ const App = () => {
                 }
               />
               <Route
+                path="/dashboard/managePhotoGallery"
+                element={
+                  <AdminRoute>
+                    <ManagePhotoGallery />
+                  </AdminRoute>
+                }
+              />
+              <Route
                 path="/dashboard/addPhoto"
                 element={
                   <AdminRoute>
                     <AddPhoto />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/dashboard/manageExistingPhoto"
+                element={
+                  <AdminRoute>
+                    <ManageExistingPhoto />
                   </AdminRoute>
                 }
               />

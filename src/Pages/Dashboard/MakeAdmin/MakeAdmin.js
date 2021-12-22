@@ -29,33 +29,46 @@ const MakeAdmin = () => {
   };
   return (
     <Grid container spacing={{ md: 2, sm: 1 }}>
-      <Grid item md={6}>
+      <Grid item md={6} xs={12}>
         <img src={makeAdminImage} alt="" />
       </Grid>
       <Grid
         item
         md={6}
+        xs={12}
         sx={{
           display: "flex",
-          alignItems: "flex-start",
+          alignItems: { md: "flex-start", xs: "center" },
           flexDirection: "column",
           justifyContent: "center",
         }}
       >
-        <Typography variant="h3" sx={{ fontWeight: "normal" }}>
+        <Typography
+          variant="h3"
+          sx={{
+            fontWeight: "normal",
+            fontSize: { md: 48, xs: 30 },
+            mb: { xs: 2, md: 0 },
+          }}
+        >
           Make a new admin
         </Typography>
-        <form style={{ width: "50%" }} onSubmit={handleSubmit}>
+        <form className="responsive-form" onSubmit={handleSubmit}>
           <TextField
             onBlur={(e) => setEmail(e.target.value)}
             variant="outlined"
             type="email"
             label="E-mail"
-            fullWidth
             required
+            sx={{ width: { xs: "100%", md: "50%" } }}
           />
           <br />
-          <Button size="large" sx={{ my: 3 }} variant="contained" type="submit">
+          <Button
+            size="large"
+            sx={{ my: { md: 3, xs: 0 }, width: { xs: "100%" } }}
+            variant="contained"
+            type="submit"
+          >
             Make Admin
           </Button>
         </form>

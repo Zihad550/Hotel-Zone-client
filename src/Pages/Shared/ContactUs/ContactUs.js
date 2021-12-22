@@ -10,7 +10,11 @@ const ContactUs = () => {
   return (
     <Container sx={{ my: 10 }}>
       <Typography
-        sx={{ textAlign: "center", fontWeight: "medium" }}
+        sx={{
+          textAlign: "center",
+          fontWeight: "medium",
+          fontSize: { md: 60, xs: 35 },
+        }}
         variant="h2"
       >
         Contact Us
@@ -28,8 +32,13 @@ const ContactUs = () => {
           }}
           item
           md={6}
+          xs={12}
         >
-          <form style={{ width: "100%" }} onSubmit={handleContactUs}>
+          <form
+            className="responsive-form"
+            style={{ width: "100%" }}
+            onSubmit={handleContactUs}
+          >
             <TextField fullWidth required label="Name" />
             <TextField
               fullWidth

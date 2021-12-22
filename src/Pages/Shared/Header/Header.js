@@ -41,6 +41,9 @@ const Header = () => {
   return (
     <AppBar position="fixed" sx={{ mb: 20 }}>
       <Container maxWidth="xl">
+        {/* ===============
+        mobile menu
+        ================== */}
         <Toolbar disableGutters>
           <Typography
             variant="h6"
@@ -86,21 +89,12 @@ const Header = () => {
               <MenuItem onClick={() => navigate("/reviews")}>
                 <Typography textalign="center">Reviews</Typography>
               </MenuItem>
-
-              <MenuItem onClick={() => navigate("/dashboard")}>
-                <Typography textalign="center">Dashboard</Typography>
-              </MenuItem>
-              {email ? (
-                <MenuItem onClick={logOut} textalign="center">
-                  <Typography>Log out</Typography>
-                </MenuItem>
-              ) : (
-                <MenuItem onClick={() => navigate("/login")}>
-                  <Typography textalign="center">Log in</Typography>
-                </MenuItem>
-              )}
             </Menu>
           </Box>
+
+          {/* ==============
+          large screen menu
+          ================ */}
           <Typography
             variant="h6"
             noWrap
@@ -136,9 +130,12 @@ const Header = () => {
             </Button>
           </Box>
 
-          {/* user menu */}
+          {/*================
+           user menu
+           ================== */}
+
           <Box sx={{ flexGrow: 0, alignItems: "center", display: "flex" }}>
-            <Typography sx={{ mr: 1, fontSize: 20 }} variant="body1">
+            <Typography sx={{ mr: 1, fontSize: { md: 20 } }} variant="body1">
               {displayName || email}
             </Typography>
             <Tooltip title="Open settings">

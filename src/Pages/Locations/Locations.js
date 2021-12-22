@@ -6,7 +6,6 @@ const Locations = ({ latitude, longitude, name }) => {
     <MapContainer
       className="leaflet-container"
       center={latitude ? [latitude, longitude] : [51.505, -0.09]}
-      // center={[23.810331, 90.412521]}
       zoom={12}
       scrollWheelZoom={true}
     >

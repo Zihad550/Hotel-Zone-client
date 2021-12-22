@@ -23,9 +23,8 @@ const ShowReview = ({ review }) => {
     hotelImage,
     parentComp,
   } = review;
-  console.log(review);
   return (
-    <Grid item xs={6} md={4} lg={3}>
+    <Grid item xs={12} sm={6} md={4} lg={3}>
       <Card
         sx={{
           height: "100%",
@@ -51,9 +50,6 @@ const ShowReview = ({ review }) => {
                 <Box sx={{ display: "inline-block", color: "blue" }}>
                   {userName}
                 </Box>
-              </Typography>
-              <Typography gutterBottom variant="h6" component="div">
-                Located at: {city}
               </Typography>
             </>
           )}

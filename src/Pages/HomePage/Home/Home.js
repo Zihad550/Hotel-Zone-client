@@ -11,7 +11,7 @@ const Home = () => {
     <>
       <Box
         sx={{
-          height: "100vh",
+          height: { xs: "100vh", lg: "100vh", md: "50vh" },
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -25,10 +25,21 @@ const Home = () => {
             flexDirection: "column",
           }}
         >
-          <Typography sx={{ mb: 2, fontWeight: "medium" }} variant="h2">
+          <Typography
+            sx={{
+              mb: 2,
+              fontWeight: "medium",
+              mt: { xs: 32 },
+              fontSize: { xs: 35 },
+            }}
+            variant="h2"
+          >
             Welcome to Hotel Zone
           </Typography>
-          <Typography sx={{ mb: 5 }} variant="h5">
+          <Typography
+            sx={{ mb: { md: 5, xs: 2 }, fontSize: { xs: 20 } }}
+            variant="h5"
+          >
             Book the best hotel for your stay
           </Typography>
         </Box>

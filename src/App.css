@@ -40,8 +40,16 @@
 @media only screen and (max-width: 768px) {
   .leaflet-container {
     position: fixed;
-    bottom: 0;
-    height: 42vh;
+    top: 60px;
+    height: 30vh;
+    left: 0;
+  }
+  .responsive-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
 }
 

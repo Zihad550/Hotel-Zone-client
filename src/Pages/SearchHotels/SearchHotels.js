@@ -18,7 +18,6 @@ const SearchHotels = () => {
   const [updatedName, setUpdatedName] = useState("");
   const [city, setCity] = useState({});
   const [again, setAgain] = useState(false);
-  console.log(cities);
 
   const navigate = useNavigate();
 
@@ -35,7 +34,7 @@ const SearchHotels = () => {
   }, []);
 
   useEffect(() => {
-    /* fetch(
+    fetch(
       `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=${updatedName}`,
       {
         method: "GET",
@@ -47,7 +46,7 @@ const SearchHotels = () => {
       }
     )
       .then((res) => res.json())
-      .then((data) => setCity(data[0])); */
+      .then((data) => setCity(data[0]));
   }, [updatedName]);
 
   const handleSearch = () => {
@@ -64,19 +63,28 @@ const SearchHotels = () => {
   };
 
   return (
-    <Grid container>
+    <Grid
+      container
+      sx={{ alignItems: { xs: "center" } }}
+      spacing={{ md: 2, sm: 1 }}
+    >
       <Grid
         item
         md={4}
+        xs={12}
         sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
       >
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
+            alignItems: { xs: "center" },
+            mx: "auto",
           }}
         >
-          <Typography variant="h2">Enter the city name</Typography>
+          <Typography sx={{ fontSize: { xs: 30 }, mt: { xs: 5 } }} variant="h2">
+            Enter the city name
+          </Typography>
           <Typography sx={{ mb: 3 }} variant="body1">
             Where you want to book hotel
           </Typography>
@@ -85,11 +93,12 @@ const SearchHotels = () => {
             variant="outlined"
             onBlur={(e) => setCityName(e.target.value)}
             label="Enter City Name"
+            fullWidth
           />
           <Button
             onClick={handleSearch}
             endIcon={<SearchIcon />}
-            sx={{ fontSize: 18 }}
+            sx={{ fontSize: 18, width: { xs: "100%" } }}
             variant="contained"
             color="secondary"
           >
@@ -98,11 +107,11 @@ const SearchHotels = () => {
           {again && <Alert severity="info">Click again</Alert>}
         </Box>
       </Grid>
-      <Grid item md={8}>
+      <Grid item md={8} xs={12}>
         <Typography
           color="primary"
           variant="h4"
-          sx={{ textAlign: "center", mb: 1 }}
+          sx={{ textAlign: "center", mb: 1, mt: { xs: 5 } }}
         >
           Popular cities to travel
         </Typography>

@@ -24,13 +24,18 @@ const Resturent = ({ resturent, images }) => {
   } = resturent;
   localStorage.setItem("hotel", JSON.stringify(max_photo_url));
   const rating = review_score / 2;
-  console.log(rating);
   const navigate = useNavigate();
 
   return (
-    <Card sx={{ my: 1, display: "flex" }}>
+    <Card
+      sx={{
+        my: 1,
+        display: "flex",
+        flexDirection: { sm: "row", xs: "column" },
+      }}
+    >
       <Grid container spacing={2}>
-        <Grid item md={6}>
+        <Grid item md={6} sm={6} xs={12}>
           <CardMedia
             component="img"
             height="auto"
@@ -39,7 +44,7 @@ const Resturent = ({ resturent, images }) => {
             alt="green iguana"
           />
         </Grid>
-        <Grid sx={{ height: "100%" }} item md={6}>
+        <Grid sx={{ height: "100%" }} item md={6} sm={6} xs={12}>
           <CardContent
             sx={{
               height: "100%",

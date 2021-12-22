@@ -102,11 +102,14 @@ function DashboardContainer(props) {
             </ListItem>
 
             {/* Add new photo to photo gellery */}
-            <ListItem button onClick={() => navigate("/dashboard/addPhoto")}>
+            <ListItem
+              button
+              onClick={() => navigate("/dashboard/managePhotoGallery")}
+            >
               <ListItemIcon>
                 <AddPhotoAlternateIcon />
               </ListItemIcon>
-              <ListItemText primary="Add Photo" />
+              <ListItemText primary="Manage Photo Gallery" />
             </ListItem>
           </>
         )}

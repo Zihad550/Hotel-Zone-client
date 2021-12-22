@@ -2,18 +2,14 @@ import { Button, Container, Paper } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const ManagePopularCities = () => {
+const ManagePhotoGallery = () => {
   const navigate = useNavigate();
   return (
     <Container
-      sx={{
-        display: "flex",
-        flexDirection: { md: "row", xs: "column" },
-        alignItems: "center",
-      }}
+      sx={{ display: "flex", flexDirection: { xs: "column", md: "row" } }}
     >
       <Paper
-        onClick={() => navigate("/dashboard/addNewCity")}
+        onClick={() => navigate("/dashboard/addPhoto")}
         sx={{
           width: "300px",
           height: "300px",
@@ -26,11 +22,11 @@ const ManagePopularCities = () => {
         elevation={3}
       >
         <Button sx={{ fontSize: 30 }} color="secondary">
-          Add New City
+          Add New Photo
         </Button>
       </Paper>
       <Paper
-        onClick={() => navigate("/dashboard/manageExistingCities")}
+        onClick={() => navigate("/dashboard/manageExistingPhoto")}
         sx={{
           width: "300px",
           height: "300px",
@@ -43,11 +39,11 @@ const ManagePopularCities = () => {
         elevation={3}
       >
         <Button sx={{ fontSize: 28 }} color="secondary">
-          Manage Existing Cities
+          Manage Existing photos
         </Button>
       </Paper>
     </Container>
   );
 };
 
-export default ManagePopularCities;
+export default ManagePhotoGallery;

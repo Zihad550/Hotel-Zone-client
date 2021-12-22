@@ -1,5 +1,3 @@
-import FacebookIcon from "@mui/icons-material/Facebook";
-import GitHubIcon from "@mui/icons-material/GitHub";
 import GoogleIcon from "@mui/icons-material/Google";
 import { Button, Container, Grid, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
@@ -108,8 +106,8 @@ const Register = () => {
           {/* third party authentication */}
           <Box sx={{ display: "flex", my: 1, justifyContent: "center" }}>
             <Button onClick={googleLogin} endIcon={<GoogleIcon />} />
-            <Button endIcon={<FacebookIcon />} />
-            <Button endIcon={<GitHubIcon />} />
+            {/* <Button endIcon={<FacebookIcon />} />
+            <Button endIcon={<GitHubIcon />} /> */}
           </Box>
           <Typography sx={{ textAlign: "center" }} variant="body1">
             Alredy registered{" "}

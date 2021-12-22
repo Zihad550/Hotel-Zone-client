@@ -36,7 +36,7 @@ const useFirebase = () => {
       .then((res) => {
         const user = res.user;
         setUser(res.user);
-        const destination = location?.state?.from || "/";
+        const destination = location?.state?.from?.pathname || "/";
         saveUser(user.email, user.displayName, "PUT");
         navigate(destination);
       })
@@ -76,7 +76,7 @@ const useFirebase = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
         setUser(res.user);
-        const destination = location?.state?.from || "/";
+        const destination = location?.state?.from?.pathname || "/";
         navigate(destination);
         setError("");
       })
@@ -108,12 +108,10 @@ const useFirebase = () => {
 
   // checks if the user is admin
   useEffect(() => {
-    console.log("inside admin");
     fetch(`https://desolate-thicket-08194.herokuapp.com/users/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setAdmin(data.admin);
-        console.log(data.admin);
       });
   }, [user.email]);
 

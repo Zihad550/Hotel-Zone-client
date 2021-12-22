@@ -55,6 +55,7 @@ const AddPhoto = () => {
         data.insertedId && setIsAdded(true);
         setPhotoInfo("");
       });
+    e.target.reset();
   };
 
   return (
@@ -74,7 +75,7 @@ const AddPhoto = () => {
         md={6}
       >
         <Typography variant="h3" sx={{ mt: 3, mb: 1 }}>
-          Add New Photo
+          Add Photo
         </Typography>
         <Typography variant="h5" color="secondary" sx={{ mb: 2 }}>
           to the Photo gellery
@@ -85,7 +86,6 @@ const AddPhoto = () => {
           onSubmit={handleAddPhoto}
         >
           <TextField
-            value={name}
             onBlur={handleBlur}
             label="Photo picked by"
             fullWidth
@@ -93,7 +93,6 @@ const AddPhoto = () => {
             required
           />
           <TextField
-            value={hotelName}
             onBlur={handleBlur}
             margin="normal"
             label="Hotel name"
@@ -102,7 +101,6 @@ const AddPhoto = () => {
             required
           />
           <TextField
-            value={src}
             onBlur={handleBlur}
             label="Photo url"
             fullWidth

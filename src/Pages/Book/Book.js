@@ -5,6 +5,7 @@ import {
   InputAdornment,
   InputLabel,
   TextField,
+  Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
@@ -15,7 +16,6 @@ import Locations from "../Locations/Locations";
 const Details = () => {
   // usefirebase datas
   const { user } = useAuth();
-  console.log(user);
   const { name, price, latitude, longitude, currency } = useParams();
   const details = JSON.parse(localStorage.getItem("details"));
   const { adults, children, rooms, checkIn, checkOut } = details;
@@ -25,7 +25,6 @@ const Details = () => {
     name,
   });
   const navigate = useNavigate();
-  console.log(bookingDetails);
 
   const img = JSON.parse(localStorage.getItem("hotel"));
 
@@ -55,7 +54,7 @@ const Details = () => {
   };
 
   return (
-    <Container sx={{ height: "100vh" }}>
+    <Container sx={{ height: "100vh", mt: { xs: 40, md: 0 } }}>
       <Grid spacing={1} sx={{ height: "100%" }} container>
         <Grid
           sx={{
@@ -68,8 +67,18 @@ const Details = () => {
           xs={12}
           md={6}
         >
+          <Typography variant="h4">Book Hotel</Typography>
+          <Box sx={{ display: { xs: "block", md: "none" } }}>
+            <img style={{ width: "100%", height: "auto" }} src={img} alt="" />
+          </Box>
           <form style={{ width: "100%" }} onSubmit={handleBooking}>
-            <Box sx={{ display: "flex", mb: 1 }}>
+            <Box
+              sx={{
+                display: "flex",
+                mb: 1,
+                flexDirection: { xs: "column", md: "row" },
+              }}
+            >
               <Box sx={{ width: "100%", mr: 2 }}>
                 <InputLabel htmlFor="check-in">Select check in date</InputLabel>
                 <TextField
@@ -97,7 +106,13 @@ const Details = () => {
             </Box>
 
             {/* adults, children and room number fields */}
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                overflowY: "scroll",
+              }}
+            >
               <Box sx={{ width: "100%" }}>
                 <InputLabel htmlFor="adults">Number of Adults</InputLabel>
                 <TextField
@@ -183,13 +198,16 @@ const Details = () => {
             </Button>
           </form>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <img style={{ width: "100%", height: "auto" }} src={img} alt="" />
-          <Locations
-            latitude={latitude}
-            longitude={longitude}
-            name={name}
-          />{" "}
+        <Grid
+          sx={{ width: "100%", display: "flex", alignItems: "center" }}
+          item
+          xs={12}
+          md={6}
+        >
+          <Box sx={{ display: { xs: "none", md: "block" } }}>
+            <img style={{ width: "100%", height: "auto" }} src={img} alt="" />
+          </Box>
+          <Locations latitude={latitude} longitude={longitude} name={name} />{" "}
         </Grid>
       </Grid>
     </Container>
