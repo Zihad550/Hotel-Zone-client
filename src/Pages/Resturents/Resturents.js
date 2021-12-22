@@ -30,7 +30,7 @@ const Resturents = ({ setDetails, details }) => {
         alignItems: "center",
         flexDirection: "column",
         justifyContent: "center",
-        mt: { xs: 32, sm: 40 },
+        mt: { xs: 32, sm: 40, md: 2 },
       }}
     >
       <Typography sx={{ mb: 2, mt: 2 }} variant="h4">

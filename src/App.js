@@ -47,14 +47,7 @@ const App = () => {
               }
             />
             <Route path="/review/:name" element={<Review />} />
-            <Route
-              path="/reviews"
-              element={
-                <PrivateRoute>
-                  <Reviews />
-                </PrivateRoute>
-              }
-            />
+            <Route path="/reviews" element={<Reviews />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             {/* dashboard routes */}]

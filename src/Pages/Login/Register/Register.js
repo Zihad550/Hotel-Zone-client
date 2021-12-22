@@ -1,17 +1,26 @@
 import GoogleIcon from "@mui/icons-material/Google";
-import { Button, Container, Grid, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Container,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import registerImage from "../../../images/register.jpg";
 
 const Register = () => {
   // use firebase
   const { registerUser, error, user, googleLogin } = useAuth();
-  console.log(error);
-  // navigate
+
+  // navigate & location
   const navigate = useNavigate();
+  const location = useLocation();
+
   // states
   const [registerData, setRegisterData] = useState({});
   const { password, re_typed_password, name, email } = registerData;
@@ -30,7 +39,7 @@ const Register = () => {
     if (password !== re_typed_password) {
       alert("password not matched");
     } else {
-      registerUser(name, email, password, navigate);
+      registerUser(email, password, name, navigate, location);
     }
   };
   return (
@@ -99,6 +108,8 @@ const Register = () => {
             >
               Register
             </Button>
+
+            {error && <Alert severity="error">{error}</Alert>}
           </form>
 
           {/* {user.email ? alert("successfully registered") : alert(error)} */}

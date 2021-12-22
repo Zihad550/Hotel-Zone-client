@@ -24,7 +24,7 @@ const RecentReviews = () => {
           fontWeight: "medium",
           mb: { md: 4, xs: 0 },
           mt: { xs: 30 },
-          fontSize: { xs: 35 },
+          fontSize: { xs: 35, md: 60 },
         }}
         variant="h2"
       >

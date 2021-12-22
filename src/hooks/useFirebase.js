@@ -24,7 +24,7 @@ const useFirebase = () => {
   const [user, setUser] = useState({});
   const [admin, setAdmin] = useState(false);
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [hotelImage, setHotelImage] = useState("");
 
   // navigate
@@ -35,10 +35,11 @@ const useFirebase = () => {
     signInWithPopup(auth, googleProvider)
       .then((res) => {
         const user = res.user;
-        setUser(res.user);
+        // setUser(res.user);
         const destination = location?.state?.from?.pathname || "/";
         saveUser(user.email, user.displayName, "PUT");
         navigate(destination);
+        setError("");
       })
       .catch((error) => {
         setError(error.message);
@@ -47,13 +48,14 @@ const useFirebase = () => {
   };
 
   // register
-  const registerUser = (email, password, name, navigate) => {
+  const registerUser = (email, password, name, navigate, location) => {
     setIsLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
         // set error
         setError("");
-        navigate("/");
+        const destination = location?.state?.from?.pathname || "/";
+        navigate(destination);
         setUser({ email, displayName: name });
         saveUser(email, name, "POST");
 
@@ -75,7 +77,7 @@ const useFirebase = () => {
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
-        setUser(res.user);
+        // setUser(res.user);
         const destination = location?.state?.from?.pathname || "/";
         navigate(destination);
         setError("");
@@ -137,6 +139,7 @@ const useFirebase = () => {
     login,
     logOut,
     isLoading,
+    setError,
   };
 };
 

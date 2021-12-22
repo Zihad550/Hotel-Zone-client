@@ -33,7 +33,7 @@ const SearchHotels = () => {
       .then((data) => setCities(data));
   }, []);
 
-  useEffect(() => {
+  /* useEffect(() => {
     fetch(
       `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=${updatedName}`,
       {
@@ -47,7 +47,7 @@ const SearchHotels = () => {
     )
       .then((res) => res.json())
       .then((data) => setCity(data[0]));
-  }, [updatedName]);
+  }, [updatedName]); */
 
   const handleSearch = () => {
     setUpdatedName(cityName);
@@ -80,6 +80,8 @@ const SearchHotels = () => {
             flexDirection: "column",
             alignItems: { xs: "center" },
             mx: "auto",
+            width: "100%",
+            mx: 2,
           }}
         >
           <Typography sx={{ fontSize: { xs: 30 }, mt: { xs: 5 } }} variant="h2">

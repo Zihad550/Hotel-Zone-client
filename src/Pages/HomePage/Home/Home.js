@@ -30,7 +30,7 @@ const Home = () => {
               mb: 2,
               fontWeight: "medium",
               mt: { xs: 32 },
-              fontSize: { xs: 35 },
+              fontSize: { xs: 35, md: 60 },
             }}
             variant="h2"
           >

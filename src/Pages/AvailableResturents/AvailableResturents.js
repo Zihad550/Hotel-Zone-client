@@ -69,7 +69,7 @@ const Home = () => {
           xs={12}
           md={6}
           sx={{
-            height: "30vh",
+            height: { xs: "30vh", md: "100vh" },
           }}
         >
           <MapContainer

@@ -1,5 +1,12 @@
 import GoogleIcon from "@mui/icons-material/Google";
-import { Button, Container, Grid, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Container,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -9,11 +16,9 @@ import loginImage from "../../../images/login.jpg";
 const Login = () => {
   // usefirebase
   const { login, error, googleLogin } = useAuth();
-  console.log(error);
   // navigate & location
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
 
   // states
   const [loginData, setLoginData] = useState({});
@@ -79,6 +84,7 @@ const Login = () => {
             >
               Login
             </Button>
+            {error && <Alert severity="error">{error}</Alert>}
           </form>
 
           {/* third party authentication */}

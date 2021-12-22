@@ -9,13 +9,14 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Locations from "../Locations/Locations";
 
 const Details = () => {
   // usefirebase datas
-  const { user } = useAuth();
+  const { user, admin } = useAuth();
   const { name, price, latitude, longitude, currency } = useParams();
   const details = JSON.parse(localStorage.getItem("details"));
   const { adults, children, rooms, checkIn, checkOut } = details;
@@ -24,6 +25,7 @@ const Details = () => {
     price,
     name,
   });
+
   const navigate = useNavigate();
 
   const img = JSON.parse(localStorage.getItem("hotel"));
@@ -50,7 +52,10 @@ const Details = () => {
       }),
     })
       .then((res) => res.json())
-      .then((data) => data.insertedId && alert("Successfully Booked"));
+      .then((data) => {
+        data.insertedId && alert("Successfully Booked");
+        !admin && navigate("/dashboard/mybookings");
+      });
   };
 
   return (
@@ -199,7 +204,12 @@ const Details = () => {
           </form>
         </Grid>
         <Grid
-          sx={{ width: "100%", display: "flex", alignItems: "center" }}
+          sx={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
           item
           xs={12}
           md={6}
