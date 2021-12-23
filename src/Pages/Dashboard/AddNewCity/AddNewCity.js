@@ -24,6 +24,7 @@ const AddNewCity = () => {
   };
 
   const handleAddNewCity = (e) => {
+    setIsAdded(false);
     e.preventDefault();
     fetch("https://desolate-thicket-08194.herokuapp.com/cities", {
       method: "POST",

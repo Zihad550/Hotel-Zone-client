@@ -33,33 +33,34 @@ const SearchHotels = () => {
       .then((data) => setCities(data));
   }, []);
 
-  useEffect(() => {
+  /* useEffect(() => {
     fetch(
-      `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=${updatedName}`,
+      "https://hotels4.p.rapidapi.com/locations/search?query=new%20york&locale=en_US",
       {
         method: "GET",
         headers: {
-          "x-rapidapi-host": "booking-com.p.rapidapi.com",
-          "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
+          "x-rapidapi-host": "hotels4.p.rapidapi.com",
+          "x-rapidapi-key":
+            "2b671826bdmshecaaab6a75a61b2p1b7118jsn4d72b7d5fc1a",
         },
       }
     )
       .then((res) => res.json())
-      .then((data) => setCity(data[0]));
+      .then((data) => setCity(data.suggestions[1].entities[0]));
   }, [updatedName]);
 
   const handleSearch = () => {
     setUpdatedName(cityName);
-    if (city?.dest_id) {
+    if (city?.destinationId) {
       navigate(
-        `/AvailableResturents/${city?.dest_id}/${city?.latitude}/${city?.longitude}`
+        `/AvailableResturents/${city?.destinationId}/${city?.latitude}/${city?.longitude}`
       );
 
       setCityName("");
     } else {
       setAgain(true);
     }
-  };
+  }; */
 
   return (
     <Grid
@@ -97,7 +98,8 @@ const SearchHotels = () => {
             fullWidth
           />
           <Button
-            onClick={handleSearch}
+            // onClick={handleSearch}
+            onClick={() => navigate("/availableResturents")}
             endIcon={<SearchIcon />}
             sx={{ fontSize: 18, width: { xs: "100%" } }}
             variant="contained"
