@@ -33,21 +33,20 @@ const SearchHotels = () => {
       .then((data) => setCities(data));
   }, []);
 
-  /* useEffect(() => {
+  useEffect(() => {
     fetch(
       `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=${updatedName}`,
       {
         method: "GET",
         headers: {
           "x-rapidapi-host": "booking-com.p.rapidapi.com",
-          "x-rapidapi-key":
-            "2b671826bdmshecaaab6a75a61b2p1b7118jsn4d72b7d5fc1a",
+          "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
         },
       }
     )
       .then((res) => res.json())
       .then((data) => setCity(data[0]));
-  }, [updatedName]); */
+  }, [updatedName]);
 
   const handleSearch = () => {
     setUpdatedName(cityName);

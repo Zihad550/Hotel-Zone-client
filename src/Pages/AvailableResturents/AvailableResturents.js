@@ -24,8 +24,7 @@ const Home = () => {
         method: "GET",
         headers: {
           "x-rapidapi-host": "booking-com.p.rapidapi.com",
-          "x-rapidapi-key":
-            "2b671826bdmshecaaab6a75a61b2p1b7118jsn4d72b7d5fc1a",
+          "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
         },
       }
     )
