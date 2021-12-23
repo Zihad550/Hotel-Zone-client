@@ -18,6 +18,7 @@ const SearchHotels = () => {
   const [updatedName, setUpdatedName] = useState("");
   const [city, setCity] = useState({});
   const [again, setAgain] = useState(false);
+  console.log(city);
 
   const navigate = useNavigate();
 
@@ -27,30 +28,32 @@ const SearchHotels = () => {
     { width: 768, itemsToShow: 2 },
     { width: 1200, itemsToShow: 2 },
   ];
+
   useEffect(() => {
     fetch("https://desolate-thicket-08194.herokuapp.com/cities")
       .then((res) => res.json())
       .then((data) => setCities(data));
-  }, []);
+  });
 
-  /* useEffect(() => {
-    fetch(
-      "https://hotels4.p.rapidapi.com/locations/search?query=new%20york&locale=en_US",
-      {
-        method: "GET",
-        headers: {
-          "x-rapidapi-host": "hotels4.p.rapidapi.com",
-          "x-rapidapi-key":
-            "2b671826bdmshecaaab6a75a61b2p1b7118jsn4d72b7d5fc1a",
-        },
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => setCity(data.suggestions[1].entities[0]));
+  useEffect(() => {
+    updatedName &&
+      fetch(
+        `https://hotels4.p.rapidapi.com/locations/v2/search?query=${updatedName}&locale=en_US&currency=USD`,
+        {
+          method: "GET",
+          headers: {
+            "x-rapidapi-host": "hotels4.p.rapidapi.com",
+            "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
+          },
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => setCity(data.suggestions[0].entities[0]));
   }, [updatedName]);
 
   const handleSearch = () => {
     setUpdatedName(cityName);
+
     if (city?.destinationId) {
       navigate(
         `/AvailableResturents/${city?.destinationId}/${city?.latitude}/${city?.longitude}`
@@ -60,7 +63,7 @@ const SearchHotels = () => {
     } else {
       setAgain(true);
     }
-  }; */
+  };
 
   return (
     <Grid
@@ -98,8 +101,7 @@ const SearchHotels = () => {
             fullWidth
           />
           <Button
-            // onClick={handleSearch}
-            onClick={() => navigate("/availableResturents")}
+            onClick={handleSearch}
             endIcon={<SearchIcon />}
             sx={{ fontSize: 18, width: { xs: "100%" } }}
             variant="contained"

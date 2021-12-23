@@ -13,17 +13,15 @@ import { useNavigate } from "react-router";
 
 const Resturent = ({ resturent, images }) => {
   const {
-    hotel_name,
+    name,
     address,
-    max_photo_url,
-    currency_code,
-    min_total_price,
-    review_score,
-    latitude,
-    longitude,
+    optimizedThumbUrls,
+    ratePlan,
+    guestReviews,
+    coordinate,
   } = resturent;
-  localStorage.setItem("hotel", JSON.stringify(max_photo_url));
-  const rating = review_score / 2;
+  localStorage.setItem("hotel", JSON.stringify(optimizedThumbUrls.srpDesktop));
+  const rating = guestReviews.unformattedRating / 2;
   const navigate = useNavigate();
 
   return (
@@ -40,7 +38,7 @@ const Resturent = ({ resturent, images }) => {
             component="img"
             height="auto"
             width="100%"
-            image={max_photo_url}
+            image={optimizedThumbUrls.srpDesktop}
             alt="green iguana"
           />
         </Grid>
@@ -54,9 +52,11 @@ const Resturent = ({ resturent, images }) => {
             }}
           >
             <Typography variant="h4" component="div">
-              {hotel_name}
+              {name}
             </Typography>
-            <Typography variant="body1">Address: {address}</Typography>
+            <Typography variant="body1">
+              Address: {address.streetAddress}
+            </Typography>
 
             {/* hotel rating */}
             <Box sx={{ display: "flex", my: 1 }}>
@@ -71,7 +71,7 @@ const Resturent = ({ resturent, images }) => {
             </Box>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <Typography color="success.dark" variant="h6">
-                Minimum price: {min_total_price} {currency_code}
+                Price: {ratePlan.price.exactCurrent} {"USD"}
               </Typography>
               <Button
                 variant="contained"
@@ -79,7 +79,7 @@ const Resturent = ({ resturent, images }) => {
                 sx={{ mt: "auto", height: "100%", fontSize: 17 }}
                 onClick={() =>
                   navigate(
-                    `/book/${hotel_name}/${min_total_price}/${latitude}/${longitude}/${currency_code}`
+                    `/book/${name}/${ratePlan.price.exactCurrent}/${coordinate.lat}/${coordinate.lon}/USD`
                   )
                 }
               >
