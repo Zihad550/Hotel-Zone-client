@@ -18,7 +18,6 @@ const SearchHotels = () => {
   const [updatedName, setUpdatedName] = useState("");
   const [city, setCity] = useState({});
   const [again, setAgain] = useState(false);
-  console.log(city);
 
   const navigate = useNavigate();
 
@@ -33,30 +32,30 @@ const SearchHotels = () => {
     fetch("https://desolate-thicket-08194.herokuapp.com/cities")
       .then((res) => res.json())
       .then((data) => setCities(data));
-  });
+  }, []);
 
   useEffect(() => {
     updatedName &&
       fetch(
-        `https://hotels4.p.rapidapi.com/locations/v2/search?query=${updatedName}&locale=en_US&currency=USD`,
+        `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=${updatedName}`,
         {
           method: "GET",
           headers: {
-            "x-rapidapi-host": "hotels4.p.rapidapi.com",
+            "x-rapidapi-host": "booking-com.p.rapidapi.com",
             "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
           },
         }
       )
         .then((res) => res.json())
-        .then((data) => setCity(data.suggestions[0].entities[0]));
+        .then((data) => setCity(data[0]));
   }, [updatedName]);
 
   const handleSearch = () => {
     setUpdatedName(cityName);
 
-    if (city?.destinationId) {
+    if (city?.dest_id) {
       navigate(
-        `/AvailableResturents/${city?.destinationId}/${city?.latitude}/${city?.longitude}`
+        `/AvailableResturents/${city?.dest_id}/${city?.latitude}/${city?.longitude}`
       );
 
       setCityName("");
