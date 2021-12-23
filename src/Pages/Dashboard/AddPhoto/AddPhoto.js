@@ -1,13 +1,5 @@
 import AddIcon from "@mui/icons-material/Add";
-import {
-  Alert,
-  Button,
-  Grid,
-  Modal,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { Box } from "@mui/system";
+import { Alert, Button, Grid, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 
 const style = {
@@ -29,8 +21,6 @@ const AddPhoto = () => {
     src: "",
   });
   const [isAdded, setIsAdded] = useState(false);
-  const handleClose = () => setIsAdded(false);
-  const { name, hotelName, src } = photoInfo;
   console.log(photoInfo);
 
   const handleBlur = (e) => {
@@ -125,21 +115,6 @@ const AddPhoto = () => {
           </Alert>
         )}
       </Grid>
-      <Modal
-        open={isAdded}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Successfully deleted
-          </Typography>
-          <Button variant="contained" onClick={handleClose} color="error">
-            Close
-          </Button>
-        </Box>
-      </Modal>
     </Grid>
   );
 };

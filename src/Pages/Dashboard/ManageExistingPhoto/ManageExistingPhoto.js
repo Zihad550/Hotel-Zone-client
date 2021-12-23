@@ -13,7 +13,7 @@ const ManageExistingPhoto = () => {
       .then((data) => setPhotos(data));
   }, [isDeleted]);
   return (
-    <Grid container>
+    <Grid container spacing={{ md: 2, xs: 1 }}>
       {photos.map((photo) => (
         <ManageCard
           prop={{ ...photo, setIsDeleted }}

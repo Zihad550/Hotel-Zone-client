@@ -25,7 +25,7 @@ const AlertModal = ({ isDeleted, setIsDeleted }) => {
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Successfully deleted
+          Successfully
         </Typography>
         <Button variant="contained" onClick={handleClose} color="error">
           Close
