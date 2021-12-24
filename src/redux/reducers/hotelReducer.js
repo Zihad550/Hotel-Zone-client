@@ -4,10 +4,7 @@ function hotelReducer(state, action) {
       const newState = [action.payload];
       return newState;
     }
-    case "GET_HOTEL": {
-      const newState = [...state, action.payload];
-      return newState;
-    }
+
     default:
       return state;
   }

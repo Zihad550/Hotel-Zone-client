@@ -4,10 +4,3 @@ export function addHotel(payload) {
     payload,
   };
 }
-
-export function getHotel(payload) {
-  return {
-    type: "GET_HOTEL",
-    payload,
-  };
-}

@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import reviewImage from "../../../images/review-image.svg";
@@ -21,12 +22,15 @@ const Review = () => {
   const [homeMessage, setHomeMessage] = useState("");
   const [securityMessage, setSecurityMessage] = useState("");
 
+  // redux
+  const hotel = useSelector((state) => state[0]);
+  const { max_photo_url } = hotel;
+
   const handleReview = (e) => {
     e.preventDefault();
-    const hotelImage = JSON.parse(localStorage.getItem("hotel"));
     // collect data
     const review = {
-      hotelImage,
+      hotelImage: max_photo_url,
       hotelName: name,
       securityRate,
       hotelRate,

@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 const MyBookedHotel = ({ hotel }) => {
   const navigate = useNavigate();
-  const { name, price, img, email, _id } = hotel;
+  const { name, price, img, email, _id, setIsDeleted } = hotel;
 
   const handleCancelBook = () => {
     if (window.confirm("Are you sure")) {
@@ -24,7 +24,7 @@ const MyBookedHotel = ({ hotel }) => {
         .then((data) => {
           if (data.deletedCount > 0) {
             alert("successfully deleted");
-            window.location.reload();
+            setIsDeleted(true);
           }
         });
     }

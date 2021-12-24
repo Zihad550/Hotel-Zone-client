@@ -18,7 +18,6 @@ const Details = () => {
   // redux datas
 
   const hotel = useSelector((state) => state[0]);
-  useSelector((state) => console.log(state[0]));
 
   console.log(hotel);
   const {
@@ -43,8 +42,6 @@ const Details = () => {
 
   const navigate = useNavigate();
 
-  // const img = JSON.parse(localStorage.getItem("hotel"));
-
   const handleBlur = (e) => {
     const field = e.target.name;
     const value = e.target.value;
@@ -62,7 +59,7 @@ const Details = () => {
       body: JSON.stringify({
         userName: user.displayName,
         userEmail: user.email,
-        max_photo_url,
+        img: max_photo_url,
         ...bookingDetails,
       }),
     })

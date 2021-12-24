@@ -25,7 +25,6 @@ const Resturent = ({ resturent }) => {
     min_total_price,
     hotel_id,
   } = resturent;
-  localStorage.setItem("hotel", JSON.stringify(max_photo_url));
   const rating = review_score / 2;
   const navigate = useNavigate();
 
