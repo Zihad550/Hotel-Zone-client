@@ -9,9 +9,11 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { addHotel } from "../../redux/actions/hotelActions";
 
-const Resturent = ({ resturent, images }) => {
+const Resturent = ({ resturent }) => {
   const {
     hotel_name,
     address,
@@ -21,10 +23,20 @@ const Resturent = ({ resturent, images }) => {
     longitude,
     currency_code,
     min_total_price,
+    hotel_id,
   } = resturent;
   localStorage.setItem("hotel", JSON.stringify(max_photo_url));
   const rating = review_score / 2;
   const navigate = useNavigate();
+
+  /* redux hooks */
+  const dispatch = useDispatch();
+
+  /* handlers */
+  const handleGoToBook = () => {
+    dispatch(addHotel(resturent));
+    navigate(`/book`);
+  };
 
   return (
     <Card
@@ -76,12 +88,13 @@ const Resturent = ({ resturent, images }) => {
               <Button
                 variant="contained"
                 color="primary"
+                onClick={handleGoToBook}
                 sx={{ mt: "auto", height: "100%", fontSize: 17 }}
-                onClick={() =>
+                /*  onClick={() =>
                   navigate(
                     `/book/${hotel_name}/${min_total_price}/${latitude}/${longitude}/${currency_code}`
                   )
-                }
+                } */
               >
                 Book
               </Button>

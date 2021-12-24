@@ -15,14 +15,11 @@ const MyBookings = () => {
       .then((res) => res.json())
       .then((data) => setBookedHotels(data));
   }, [user.email]);
-  /* if (isLoading) {
-    return <CircularProgress />;
-  } */
-  console.log(bookedHotels);
+
   return (
     <Grid container spacing={{ md: 2, xs: 1 }}>
       {bookedHotels.map((hotel) => (
-        <MyBookedHotel key={hotel._id} hotel={hotel} />
+        <MyBookedHotel key={hotel.hotel_id} hotel={hotel} />
       ))}
     </Grid>
   );

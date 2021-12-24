@@ -9,26 +9,41 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
-import { useParams } from "react-router";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Locations from "../Locations/Locations";
 
 const Details = () => {
+  // redux datas
+
+  const hotel = useSelector((state) => state[0]);
+  useSelector((state) => console.log(state[0]));
+
+  console.log(hotel);
+  const {
+    hotel_name,
+    max_photo_url,
+    latitude,
+    longitude,
+    currency_code,
+    min_total_price,
+  } = hotel;
+
   // usefirebase datas
   const { user, admin } = useAuth();
-  const { name, price, latitude, longitude, currency } = useParams();
+  // const { name, price, latitude, longitude, currency } = useParams();
   const details = JSON.parse(localStorage.getItem("details"));
   const { adults, children, rooms, checkIn, checkOut } = details;
   const [bookingDetails, setBookingDetails] = useState({
     ...details,
-    price,
-    name,
+    min_total_price,
+    hotel_name,
   });
 
   const navigate = useNavigate();
 
-  const img = JSON.parse(localStorage.getItem("hotel"));
+  // const img = JSON.parse(localStorage.getItem("hotel"));
 
   const handleBlur = (e) => {
     const field = e.target.name;
@@ -47,7 +62,7 @@ const Details = () => {
       body: JSON.stringify({
         userName: user.displayName,
         userEmail: user.email,
-        img,
+        max_photo_url,
         ...bookingDetails,
       }),
     })
@@ -74,7 +89,11 @@ const Details = () => {
         >
           <Typography variant="h4">Book Hotel</Typography>
           <Box sx={{ display: { xs: "block", md: "none" } }}>
-            <img style={{ width: "100%", height: "auto" }} src={img} alt="" />
+            <img
+              style={{ width: "100%", height: "auto" }}
+              src={max_photo_url}
+              alt=""
+            />
           </Box>
           <form style={{ width: "100%" }} onSubmit={handleBooking}>
             <Box
@@ -158,7 +177,7 @@ const Details = () => {
               fullWidth
               aria-readonly
               id="hotel-name"
-              value={name}
+              value={hotel_name}
             />
             <InputLabel htmlFor="hotel=name">Hotel price</InputLabel>
             <TextField
@@ -166,12 +185,14 @@ const Details = () => {
               fullWidth
               aria-readonly
               id="hotel-name"
-              value={price}
+              value={min_total_price}
               type="number"
               name="hotelPrice"
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position="end">{currency}</InputAdornment>
+                  <InputAdornment position="end">
+                    {currency_code}
+                  </InputAdornment>
                 ),
               }}
             />
@@ -215,9 +236,17 @@ const Details = () => {
           md={6}
         >
           <Box sx={{ display: { xs: "none", md: "block" } }}>
-            <img style={{ width: "100%", height: "auto" }} src={img} alt="" />
+            <img
+              style={{ width: "100%", height: "auto" }}
+              src={max_photo_url}
+              alt=""
+            />
           </Box>
-          <Locations latitude={latitude} longitude={longitude} name={name} />{" "}
+          <Locations
+            latitude={latitude}
+            longitude={longitude}
+            name={hotel_name}
+          />{" "}
         </Grid>
       </Grid>
     </Container>

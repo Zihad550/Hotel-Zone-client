@@ -16,6 +16,7 @@ import ManagePopularCities from "./Pages/Dashboard/ManagePopularCities/ManagePop
 import MyBookings from "./Pages/Dashboard/MyBookings/MyBookings";
 import MyReviews from "./Pages/Dashboard/MyReviews/MyReviews";
 import Review from "./Pages/Dashboard/Review/Review";
+import BestRooms from "./Pages/HomePage/BestRooms/BestRooms";
 import Home from "./Pages/HomePage/Home/Home";
 import AdminRoute from "./Pages/Login/AdminRoute/AdminRoute";
 import Login from "./Pages/Login/Login/Login";
@@ -34,12 +35,14 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/searchHotels" element={<SearchHotels />} />
+            <Route path="/bestRooms" element={<BestRooms />} />
             <Route
               path="/availableResturents/:dest_id/:latitude/:longitude"
               element={<AvailableResturents />}
             />
             <Route
-              path="/Book/:name/:price/:latitude/:longitude/:currency"
+              // path="/Book/:name/:price/:latitude/:longitude/:currency"
+              path="/book"
               element={
                 <PrivateRoute>
                   <Book />
