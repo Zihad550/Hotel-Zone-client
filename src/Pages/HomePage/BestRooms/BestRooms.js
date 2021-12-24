@@ -18,7 +18,7 @@ const BestRooms = () => {
   useEffect(() => {
     fetch("https://polar-island-87071.herokuapp.com/rooms")
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => setRooms(data));
   }, []);
   return (
     <Container sx={{ mt: { md: 28, lg: 15, xs: 30 } }}>
