@@ -17,9 +17,9 @@ import Locations from "../Locations/Locations";
 const Details = () => {
   // redux datas
 
-  const hotel = useSelector((state) => state[0]);
-
-  console.log(hotel);
+  const hotel = useSelector((state) => state.hotel[0]);
+  const bookingInfo = useSelector((state) => state.bookingInfo[0]);
+  useSelector((state) => console.log(state));
   const {
     hotel_name,
     max_photo_url,
@@ -32,10 +32,10 @@ const Details = () => {
   // usefirebase datas
   const { user, admin } = useAuth();
   // const { name, price, latitude, longitude, currency } = useParams();
-  const details = JSON.parse(localStorage.getItem("details"));
-  const { adults, children, rooms, checkIn, checkOut } = details;
+  // const details = JSON.parse(localStorage.getItem("details"));
+  const { adults, children, rooms, checkIn, checkOut } = bookingInfo;
   const [bookingDetails, setBookingDetails] = useState({
-    ...details,
+    ...bookingInfo,
     min_total_price,
     hotel_name,
   });

@@ -9,8 +9,7 @@ import { Box } from "@mui/system";
 import React from "react";
 const Resturents = ({ setDetails, details }) => {
   const { checkIn, checkOut, adults, children, rooms } = details;
-  // localstorage
-  localStorage.setItem("details", JSON.stringify(details));
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };

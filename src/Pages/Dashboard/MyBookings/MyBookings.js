@@ -21,10 +21,7 @@ const MyBookings = () => {
   return (
     <Grid container spacing={{ md: 2, xs: 1 }}>
       {bookedHotels.map((hotel) => (
-        <MyBookedHotel
-          key={hotel.hotel_id}
-          hotel={{ ...hotel, setIsDeleted }}
-        />
+        <MyBookedHotel key={hotel._id} hotel={{ ...hotel, setIsDeleted }} />
       ))}
       <AlertModal isDeleted={isDeleted} setIsDeleted={setIsDeleted} />
     </Grid>

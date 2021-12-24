@@ -1,4 +1,4 @@
-function hotelReducer(state, action) {
+function hotelReducer(state = [], action) {
   switch (action.type) {
     case "ADD_HOTEL": {
       const newState = [action.payload];

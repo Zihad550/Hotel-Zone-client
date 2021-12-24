@@ -61,7 +61,11 @@ const Home = () => {
           <Resturents setDetails={setDetails} details={details} />
           <div style={{ height: "100vh", overflowY: "scroll" }}>
             {hotels?.map((resturent) => (
-              <Resturent key={resturent.hotel_id} resturent={resturent} />
+              <Resturent
+                key={resturent.hotel_id}
+                bookingInfo={details}
+                resturent={resturent}
+              />
             ))}
           </div>
         </Grid>

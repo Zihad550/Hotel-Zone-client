@@ -12,8 +12,9 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { addHotel } from "../../redux/actions/hotelActions";
+import { addBookingInfo } from "../../redux/actions/hotelBookingActions";
 
-const Resturent = ({ resturent }) => {
+const Resturent = ({ resturent, bookingInfo }) => {
   const {
     hotel_name,
     address,
@@ -34,6 +35,7 @@ const Resturent = ({ resturent }) => {
   /* handlers */
   const handleGoToBook = () => {
     dispatch(addHotel(resturent));
+    dispatch(addBookingInfo(bookingInfo));
     navigate(`/book`);
   };
 

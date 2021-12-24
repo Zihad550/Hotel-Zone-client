@@ -23,7 +23,7 @@ const Review = () => {
   const [securityMessage, setSecurityMessage] = useState("");
 
   // redux
-  const hotel = useSelector((state) => state[0]);
+  const hotel = useSelector((state) => state.hotel[0]);
   const { max_photo_url } = hotel;
 
   const handleReview = (e) => {
