@@ -29,7 +29,7 @@ const SearchHotels = () => {
   ];
 
   useEffect(() => {
-    fetch("https://desolate-thicket-08194.herokuapp.com/cities")
+    fetch("https://polar-island-87071.herokuapp.com/cities")
       .then((res) => res.json())
       .then((data) => setCities(data));
   }, []);
@@ -111,11 +111,15 @@ const SearchHotels = () => {
           {again && <Alert severity="info">Click again</Alert>}
         </Box>
       </Grid>
-      <Grid item md={8} xs={12}>
+      <Grid sx={{ mt: { xs: 10, md: 0 } }} item md={8} xs={12}>
         <Typography
-          color="primary"
           variant="h4"
-          sx={{ textAlign: "center", mb: 1, mt: { xs: 5 } }}
+          sx={{
+            mb: 2,
+            fontWeight: "medium",
+            fontSize: { xs: 35, md: 60 },
+            textAlign: "center",
+          }}
         >
           Popular cities to travel
         </Typography>

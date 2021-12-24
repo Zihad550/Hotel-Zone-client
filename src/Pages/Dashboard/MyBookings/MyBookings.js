@@ -11,9 +11,7 @@ const MyBookings = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    fetch(
-      `https://desolate-thicket-08194.herokuapp.com/booked?email=${user.email}`
-    )
+    fetch(`https://polar-island-87071.herokuapp.com/booked?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setBookedHotels(data));
   }, [isDeleted]);

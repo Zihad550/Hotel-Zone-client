@@ -8,7 +8,7 @@ const MyReviews = () => {
   const { user } = useAuth();
   useEffect(() => {
     fetch(
-      `https://desolate-thicket-08194.herokuapp.com/reviews/review?email=${user.email}`
+      `https://polar-island-87071.herokuapp.com/reviews/review?email=${user.email}`
     )
       .then((res) => res.json())
       .then((data) => setMyReviews(data));

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Deluxe Contrast Room",
+    "src": "https://i.ibb.co/GW1Z32X/room-1.jpg",
+    "space": "42",
+    "bed": "2",
+    "bathroom": "1",
+    "price": "150"
+  },
+  {
+    "name": "Luxery Twin Room",
+    "src": "https://i.ibb.co/bsVTt75/room-2.jpg",
+    "space": "52",
+    "bed": "3",
+    "bathroom": "2",
+    "price": "200"
+  },
+  {
+    "name": "Single Contrast Room",
+    "src": "https://i.ibb.co/M83P5MQ/room-3.jpg",
+    "space": "42",
+    "bed": "1",
+    "bathroom": "1",
+    "price": "210"
+  }
+]

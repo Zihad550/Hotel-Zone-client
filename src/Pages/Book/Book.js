@@ -51,7 +51,7 @@ const Details = () => {
   };
   const handleBooking = (e) => {
     e.preventDefault();
-    fetch("https://desolate-thicket-08194.herokuapp.com/booked", {
+    fetch("https://polar-island-87071.herokuapp.com/booked", {
       method: "POST",
       headers: {
         "content-type": "application/json",

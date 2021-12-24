@@ -8,7 +8,7 @@ const ManageExistingPhoto = () => {
   const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
-    fetch("https://desolate-thicket-08194.herokuapp.com/photos")
+    fetch("https://polar-island-87071.herokuapp.com/photos")
       .then((res) => res.json())
       .then((data) => setPhotos(data));
   }, [isDeleted]);

@@ -3,6 +3,7 @@ import React from "react";
 import SearchHotels from "../../SearchHotels/SearchHotels";
 import ContactUs from "../../Shared/ContactUs/ContactUs";
 import Footer from "../../Shared/Footer/Footer";
+import BestRooms from "../BestRooms/BestRooms";
 import PhotoGellery from "../PhotoGellery/PhotoGellery";
 import RecentReviews from "../RecentReviews/RecentReviews";
 
@@ -47,6 +48,9 @@ const Home = () => {
         {/* search hotels */}
         <SearchHotels />
       </Box>
+
+      {/* best rooms */}
+      <BestRooms />
 
       {/* recent reviews */}
       <RecentReviews />

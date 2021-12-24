@@ -6,7 +6,7 @@ const RecentReviews = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch("https://desolate-thicket-08194.herokuapp.com/reviews")
+    fetch("https://polar-island-87071.herokuapp.com/reviews")
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, []);
@@ -17,13 +17,12 @@ const RecentReviews = () => {
     { width: 1200, itemsToShow: 3 },
   ];
   return (
-    <Container sx={{ my: 5 }}>
+    <Container sx={{ mt: { md: 15, xs: 13 } }}>
       <Typography
         sx={{
           textAlign: "center",
           fontWeight: "medium",
           mb: { md: 4, xs: 0 },
-          mt: { xs: 30 },
           fontSize: { xs: 35, md: 60 },
         }}
         variant="h2"

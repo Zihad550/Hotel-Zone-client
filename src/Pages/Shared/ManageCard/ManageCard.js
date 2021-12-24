@@ -15,7 +15,7 @@ const ShowCity = ({ prop, route }) => {
 
   const handleDelete = () => {
     if (window.confirm("Are you sure!")) {
-      fetch(`https://desolate-thicket-08194.herokuapp.com/${route}?id=${_id}`, {
+      fetch(`https://polar-island-87071.herokuapp.com/${route}?id=${_id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

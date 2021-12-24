@@ -37,6 +37,18 @@
   font-size: 20px;
 }
 
+.styledImgContainer {
+  overflow: hidden;
+}
+
+.styledImg {
+  transition: transform 1s;
+}
+
+.styledImg:hover {
+  transform: scale(1.1);
+}
+
 @media only screen and (max-width: 768px) {
   .leaflet-container {
     position: fixed;

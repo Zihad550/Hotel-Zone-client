@@ -39,7 +39,7 @@ const Review = () => {
     };
 
     // send to the server
-    fetch("https://desolate-thicket-08194.herokuapp.com/reviews", {
+    fetch("https://polar-island-87071.herokuapp.com/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",

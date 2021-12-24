@@ -99,7 +99,7 @@ const useFirebase = () => {
   // save user to the server
   const saveUser = (email, displayName, method) => {
     const user = { email, displayName };
-    fetch("https://desolate-thicket-08194.herokuapp.com/users", {
+    fetch("https://polar-island-87071.herokuapp.com/users", {
       method,
       headers: {
         "content-type": "application/json",
@@ -110,7 +110,7 @@ const useFirebase = () => {
 
   // checks if the user is admin
   useEffect(() => {
-    fetch(`https://desolate-thicket-08194.herokuapp.com/users/${user.email}`)
+    fetch(`https://polar-island-87071.herokuapp.com/users/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setAdmin(data.admin);

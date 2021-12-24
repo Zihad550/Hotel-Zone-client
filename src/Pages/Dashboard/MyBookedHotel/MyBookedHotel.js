@@ -17,7 +17,7 @@ const MyBookedHotel = ({ hotel }) => {
 
   const handleCancelBook = () => {
     if (window.confirm("Are you sure")) {
-      fetch(`https://desolate-thicket-08194.herokuapp.com/booked?id=${_id}`, {
+      fetch(`https://polar-island-87071.herokuapp.com/booked?id=${_id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

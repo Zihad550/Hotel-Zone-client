@@ -26,7 +26,7 @@ const AddNewCity = () => {
   const handleAddNewCity = (e) => {
     setIsAdded(false);
     e.preventDefault();
-    fetch("https://desolate-thicket-08194.herokuapp.com/cities", {
+    fetch("https://polar-island-87071.herokuapp.com/cities", {
       method: "POST",
       headers: {
         "content-type": "application/json",

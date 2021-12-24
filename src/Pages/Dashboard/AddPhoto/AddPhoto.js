@@ -34,7 +34,7 @@ const AddPhoto = () => {
   const handleAddPhoto = (e) => {
     setIsAdded(false);
     e.preventDefault();
-    fetch("https://desolate-thicket-08194.herokuapp.com/photos", {
+    fetch("https://polar-island-87071.herokuapp.com/photos", {
       method: "POST",
       headers: {
         "content-type": "application/json",
