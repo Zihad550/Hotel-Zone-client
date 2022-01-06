@@ -29,7 +29,7 @@ const RecentReviews = () => {
       >
         Recent Reviews
       </Typography>
-      <Carousel breakPoints={breakPoints}>
+      <Carousel enableAutoPlay autoPlaySpeed={1500} breakPoints={breakPoints}>
         {reviews.map((review) => (
           <Box key={review._id} sx={{ position: "relative", m: 5 }}>
             <Box

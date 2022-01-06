@@ -27,7 +27,7 @@ const PhotoGellery = () => {
       >
         Our Gallery
       </Typography>
-      <Carousel breakPoints={breakPoints}>
+      <Carousel enableAutoPlay autoPlaySpeed={1500} breakPoints={breakPoints}>
         {photos.map((photo) => (
           <Box key={photo._id} sx={{ position: "relative" }}>
             <Box

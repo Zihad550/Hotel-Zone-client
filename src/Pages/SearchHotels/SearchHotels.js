@@ -123,7 +123,7 @@ const SearchHotels = () => {
         >
           Popular cities to travel
         </Typography>
-        <Carousel breakPoints={breakPoints}>
+        <Carousel enableAutoPlay autoPlaySpeed={1500} breakPoints={breakPoints}>
           {cities.map((city) => (
             <Box key={city._id} sx={{ position: "relative" }}>
               <Box
