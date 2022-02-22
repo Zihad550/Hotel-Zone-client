@@ -1,21 +1,27 @@
-import { Box, Container, Rating, Typography } from "@mui/material";
+import { Container, Grid, Paper, Rating, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import Carousel from "react-elastic-carousel";
+import Slider from "react-slick";
 
 const RecentReviews = () => {
   const [reviews, setReviews] = useState([]);
+  console.log(reviews);
 
   useEffect(() => {
     fetch("https://polar-island-87071.herokuapp.com/reviews")
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, []);
-  const breakPoints = [
-    { width: 1, itemsToShow: 1 },
-    { width: 550, itemstoShow: 2 },
-    { width: 768, itemsToShow: 2 },
-    { width: 1200, itemsToShow: 3 },
-  ];
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+
+    // autoplay: true,
+  };
+
   return (
     <Container sx={{ mt: { md: 15, xs: 13 } }}>
       <Typography
@@ -29,7 +35,75 @@ const RecentReviews = () => {
       >
         Recent Reviews
       </Typography>
-      <Carousel enableAutoPlay autoPlaySpeed={1500} breakPoints={breakPoints}>
+
+      {/* email: "hussainmuzahid83@gmail.com"
+homeMessage: ""
+hotelImage: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/105716224.jpg?k=25b1fdb40fdede66a2afcce439d455021d7a2c262b713a96736d97a11fa5d78e&o="
+hotelName: "Park Plaza London Riverbank"
+hotelRate: 5
+securityMessage: ""
+securityRate: 5
+userEmail: "hussainmuzahid83@gmail.com"
+userName: "" */}
+      <Slider {...settings}>
+        {reviews.map((review) => (
+          <Paper key={review._id} elevation={1}>
+            <Grid container spacing={1}>
+              <Grid sx={{ display: "flex" }} xs={12} sm={6} md={6} item>
+                <img
+                  style={{ width: "100%", height: "290px" }}
+                  src={review.hotelImage}
+                  alt=""
+                />
+              </Grid>
+              <Grid xs={12} sm={6} md={6} item>
+                <Typography variant="h4">{review.hotelName}</Typography>
+
+                {/* comments */}
+                <Grid container spacing={2}>
+                  {review.homeMessage && (
+                    <Grid item>
+                      <Typography variant="h6">About Hotel</Typography>
+                      <Typography variant="body1">
+                        {review.homeMessage}
+                      </Typography>
+                    </Grid>
+                  )}
+
+                  {review.securityMessage && (
+                    <Grid item>
+                      <Typography variant="h6">About Hotel Security</Typography>
+                      <Typography variant="body1">
+                        {review.securityMessage}
+                      </Typography>
+                    </Grid>
+                  )}
+                </Grid>
+
+                {/* ratings */}
+                <Box
+                  sx={{
+                    display: "flex",
+                    height: "100%",
+                    mt: "auto",
+                  }}
+                >
+                  <Box sx={{ mr: 5 }}>
+                    <Typography component="legend">Hotel Rating</Typography>
+                    <Rating value={review.hotelRate} readOnly />
+                  </Box>
+                  <Box>
+                    <Typography component="legend">Security Rating</Typography>
+                    <Rating value={review.securityRate} readOnly />
+                  </Box>
+                </Box>
+              </Grid>
+            </Grid>
+          </Paper>
+        ))}
+      </Slider>
+
+      {/* <Carousel enableAutoPlay autoPlaySpeed={1500} breakPoints={breakPoints}>
         {reviews.map((review) => (
           <Box key={review._id} sx={{ position: "relative", m: 5 }}>
             <Box
@@ -151,7 +225,7 @@ const RecentReviews = () => {
             </Box>
           </Box>
         ))}
-      </Carousel>
+      </Carousel> */}
     </Container>
   );
 };

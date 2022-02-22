@@ -1,6 +1,6 @@
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { IconButton, Rating, Typography } from "@mui/material";
+import { Rating, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
@@ -9,38 +9,46 @@ import SearchHotels from "../../SearchHotels/SearchHotels";
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
-    <IconButton
+    <Box
       sx={{
-        background: "red",
+        background: "violet",
         zIndex: "10",
         position: "absolute",
-        left: 0,
-        bottom: 0,
+        right: 0,
+        bottom: "40%",
         padding: "10px",
+        borderTopLeftRadius: "50px",
+        borderBottomLeftRadius: "50px",
+        cursor: "pointer",
+        color: "white",
       }}
       onClick={onClick}
     >
       <ArrowForwardIosIcon />
-    </IconButton>
+    </Box>
   );
 }
 
 function SamplePrevArrow(props) {
   const { className, style, onClick } = props;
   return (
-    <IconButton
+    <Box
       sx={{
-        background: "red",
+        background: "violet",
         zIndex: "10",
         position: "absolute",
-        left: "50px",
-        bottom: 0,
+        left: 0,
+        bottom: " 40%",
         padding: "10px",
+        borderTopRightRadius: "50px",
+        borderBottomRightRadius: "50px",
+        cursor: "pointer",
+        color: "white",
       }}
       onClick={onClick}
     >
       <ArrowBackIosNewIcon />
-    </IconButton>
+    </Box>
   );
 }
 
@@ -61,9 +69,12 @@ const Banner = () => {
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    autoplay: true,
   };
   return (
-    <Box sx={{ position: "relative" }}>
+    <Box
+      sx={{ position: "relative", mt: { lg: -35, md: 0, sm: -55, xs: -55 } }}
+    >
       <Slider {...settings}>
         {cities.map((city) => (
           <Box
@@ -72,7 +83,7 @@ const Banner = () => {
               backgroundSize: "cover",
 
               backgroundRepeat: "no-repeat",
-              height: "100vh",
+              height: { lg: "80vh", md: "100vh", xs: "70vh" },
               width: "100vw",
             }}
             key={city._id}

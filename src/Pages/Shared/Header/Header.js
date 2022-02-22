@@ -13,10 +13,12 @@ import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 
 const Header = () => {
+  const location = useLocation();
+  console.log(location);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { user, logOut } = useAuth();
@@ -39,7 +41,15 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="fixed" sx={{ mb: 20 }}>
+    <AppBar
+      position="relative"
+      color={
+        location.pathname === "/home" || location.pathname === "/"
+          ? "transparent"
+          : "primary"
+      }
+      sx={{ boxShadow: 0, zIndex: 10, color: "white" }}
+    >
       <Container maxWidth="xl">
         {/* ===============
         mobile menu
@@ -49,7 +59,7 @@ const Header = () => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+            sx={{ mr: 2, display: { xs: "none", md: "flex" }, color: "white" }}
           >
             Hotel Zone
           </Typography>

@@ -26,7 +26,7 @@ const SearchHotels = () => {
       .then((data) => setCities(data));
   }, []);
 
-  /*  useEffect(() => {
+  /* useEffect(() => {
     updatedName &&
       fetch(
         `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=${updatedName}`,
@@ -60,14 +60,19 @@ const SearchHotels = () => {
     <Paper
       elevation={1}
       sx={{
+        width: { lg: "40%", xs: "75%" },
         mx: "auto",
-        width: "50%",
-        position: "absolute",
-        bottom: "-120px",
+        mt: -15,
+        zIndex: 10,
+        position: "relative",
+        pb: 1,
       }}
     >
-      <Box>
-        <Typography sx={{ fontSize: { xs: 30 }, mt: { xs: 5 } }} variant="h2">
+      <Box sx={{ textAlign: "center" }}>
+        <Typography
+          sx={{ fontSize: { xs: 30 }, mt: { xs: 5 }, pt: 1 }}
+          variant="h2"
+        >
           Enter the city name
         </Typography>
         <Typography sx={{ mb: 3 }} variant="body1">
@@ -76,7 +81,11 @@ const SearchHotels = () => {
       </Box>
 
       <Box sx={{ mx: 5 }}>
-        <Box sx={{ display: "flex" }}>
+        <Box
+          sx={{
+            display: "flex",
+          }}
+        >
           <TextField
             variant="outlined"
             onBlur={(e) => setCityName(e.target.value)}
@@ -86,7 +95,7 @@ const SearchHotels = () => {
           <Button
             onClick={handleSearch}
             endIcon={<SearchIcon />}
-            sx={{ fontSize: 18 }}
+            sx={{ fontSize: 18, px: 5 }}
             variant="contained"
             color="secondary"
           >
