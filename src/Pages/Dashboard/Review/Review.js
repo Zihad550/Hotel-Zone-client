@@ -28,7 +28,7 @@ const Review = () => {
 
   const handleReview = (e) => {
     e.preventDefault();
-    // collect data
+    // collect daat
     const review = {
       hotelImage: max_photo_url,
       hotelName: name,

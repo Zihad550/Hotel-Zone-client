@@ -1,8 +1,8 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
-import SearchHotels from "../../SearchHotels/SearchHotels";
 import ContactUs from "../../Shared/ContactUs/ContactUs";
 import Footer from "../../Shared/Footer/Footer";
+import Banner from "../Banner/Banner";
 import BestRooms from "../BestRooms/BestRooms";
 import PhotoGellery from "../PhotoGellery/PhotoGellery";
 import RecentReviews from "../RecentReviews/RecentReviews";
@@ -18,7 +18,7 @@ const Home = () => {
           justifyContent: "center",
         }}
       >
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             alignItems: "center",
@@ -43,10 +43,11 @@ const Home = () => {
           >
             Book the best hotel for your stay
           </Typography>
-        </Box>
+        </Box> */}
 
         {/* search hotels */}
-        <SearchHotels />
+        {/* <SearchHotels /> */}
+        <Banner />
       </Box>
 
       {/* best rooms */}

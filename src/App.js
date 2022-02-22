@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 import "./App.css";
 import AuthProvider from "./contexts/AuthProvider";
 import { ErrorBoundary } from "./ErrorBoundary/ErrorBoundary";

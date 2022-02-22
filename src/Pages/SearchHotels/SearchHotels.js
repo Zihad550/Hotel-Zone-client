@@ -1,15 +1,7 @@
 import SearchIcon from "@mui/icons-material/Search";
-import {
-  Alert,
-  Button,
-  Grid,
-  Rating,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Alert, Button, Paper, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import Carousel from "react-elastic-carousel";
 import { useNavigate } from "react-router-dom";
 
 const SearchHotels = () => {
@@ -34,7 +26,7 @@ const SearchHotels = () => {
       .then((data) => setCities(data));
   }, []);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     updatedName &&
       fetch(
         `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=${updatedName}`,
@@ -48,7 +40,7 @@ const SearchHotels = () => {
       )
         .then((res) => res.json())
         .then((data) => setCity(data[0]));
-  }, [updatedName]);
+  }, [updatedName]); */
 
   const handleSearch = () => {
     setUpdatedName(cityName);
@@ -65,34 +57,26 @@ const SearchHotels = () => {
   };
 
   return (
-    <Grid
-      container
-      sx={{ alignItems: { xs: "center" } }}
-      spacing={{ md: 2, sm: 1 }}
+    <Paper
+      elevation={1}
+      sx={{
+        mx: "auto",
+        width: "50%",
+        position: "absolute",
+        bottom: "-120px",
+      }}
     >
-      <Grid
-        item
-        md={4}
-        xs={12}
-        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: { xs: "center" },
-            mx: "auto",
-            width: "100%",
-            mx: 2,
-          }}
-        >
-          <Typography sx={{ fontSize: { xs: 30 }, mt: { xs: 5 } }} variant="h2">
-            Enter the city name
-          </Typography>
-          <Typography sx={{ mb: 3 }} variant="body1">
-            Where you want to book hotel
-          </Typography>
+      <Box>
+        <Typography sx={{ fontSize: { xs: 30 }, mt: { xs: 5 } }} variant="h2">
+          Enter the city name
+        </Typography>
+        <Typography sx={{ mb: 3 }} variant="body1">
+          Where you want to book hotel
+        </Typography>
+      </Box>
 
+      <Box sx={{ mx: 5 }}>
+        <Box sx={{ display: "flex" }}>
           <TextField
             variant="outlined"
             onBlur={(e) => setCityName(e.target.value)}
@@ -102,65 +86,18 @@ const SearchHotels = () => {
           <Button
             onClick={handleSearch}
             endIcon={<SearchIcon />}
-            sx={{ fontSize: 18, width: { xs: "100%" } }}
+            sx={{ fontSize: 18 }}
             variant="contained"
             color="secondary"
           >
             Search
           </Button>
+        </Box>
+        <Box sx={{ my: 1 }}>
           {again && <Alert severity="info">Click again</Alert>}
         </Box>
-      </Grid>
-      <Grid sx={{ mt: { xs: 10, md: 0 } }} item md={8} xs={12}>
-        <Typography
-          variant="h4"
-          sx={{
-            mb: 2,
-            fontWeight: "medium",
-            fontSize: { xs: 35, md: 60 },
-            textAlign: "center",
-          }}
-        >
-          Popular cities to travel
-        </Typography>
-        <Carousel enableAutoPlay autoPlaySpeed={1500} breakPoints={breakPoints}>
-          {cities.map((city) => (
-            <Box key={city._id} sx={{ position: "relative" }}>
-              <Box
-                sx={{
-                  position: "absolute",
-                  transform: "translate(-50%, -50%)",
-                  top: "50%",
-                  left: "50%",
-                  zIndex: 5,
-                }}
-              >
-                <Typography color="white" variant="h4">
-                  {city.name}
-                </Typography>
-                <Typography color="white" variant="h5">
-                  Available Hotels {city.hotels}
-                </Typography>
-
-                <Box
-                  sx={{ display: "flex", alignItems: "center", color: "white" }}
-                >
-                  <Typography variant="legend">Overall Ratings</Typography>
-                  <Rating
-                    precision={0.5}
-                    defaultValue={parseInt(city.rating)}
-                    readOnly
-                  ></Rating>
-                </Box>
-              </Box>
-              <Box>
-                <img className="banner-img" src={city.img} alt="" />
-              </Box>
-            </Box>
-          ))}
-        </Carousel>
-      </Grid>
-    </Grid>
+      </Box>
+    </Paper>
   );
 };
 
