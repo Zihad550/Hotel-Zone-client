@@ -34,7 +34,26 @@ const Login = () => {
   };
   const handleLogin = (e) => {
     e.preventDefault();
-    login(email, password, location, navigate);
+
+    // login(email, password, location, navigate);
+    fetch("https://polar-island-87071.herokuapp.com/login", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(loginData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          alert("Authentication successful");
+          localStorage.setItem(
+            "hotelZoneUser",
+            JSON.stringify({ password: data.password, email: data.email })
+          );
+        }
+        data.error && alert("Authentication failed");
+      });
   };
   return (
     <Container

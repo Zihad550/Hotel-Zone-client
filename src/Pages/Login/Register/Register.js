@@ -25,6 +25,8 @@ const Register = () => {
   const [registerData, setRegisterData] = useState({});
   const { password, re_typed_password, name, email } = registerData;
 
+  console.log(registerData);
+
   const handleBlur = (e) => {
     const field = e.target.name;
     const value = e.target.value;
@@ -32,14 +34,31 @@ const Register = () => {
     newData[field] = value;
     setRegisterData(newData);
   };
-  console.log(user);
 
   const handleRegister = (e) => {
     e.preventDefault();
     if (password !== re_typed_password) {
       alert("password not matched");
     } else {
-      registerUser(email, password, name, navigate, location);
+      /* registerUser(email, password, name, navigate, location); */
+      fetch("https://polar-island-87071.herokuapp.com/register", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(registerData),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          data.insertedId && console.log(data);
+          if (data.insertedId) {
+            alert("Authentication  successful");
+            localStorage.setItem(
+              "hotelZoneUser",
+              JSON.stringify({ password: data.password, email: data.email })
+            );
+          }
+        });
     }
   };
   return (

@@ -1,11 +1,10 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { Alert, Button, Paper, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SearchHotels = () => {
-  const [cities, setCities] = useState([]);
   const [cityName, setCityName] = useState("");
   const [updatedName, setUpdatedName] = useState("");
   const [city, setCity] = useState({});
@@ -20,13 +19,7 @@ const SearchHotels = () => {
     { width: 1200, itemsToShow: 2 },
   ];
 
-  useEffect(() => {
-    fetch("https://polar-island-87071.herokuapp.com/cities")
-      .then((res) => res.json())
-      .then((data) => setCities(data));
-  }, []);
-
-  useEffect(() => {
+  /* useEffect(() => {
     updatedName &&
       fetch(
         `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=${updatedName}`,
@@ -40,7 +33,7 @@ const SearchHotels = () => {
       )
         .then((res) => res.json())
         .then((data) => setCity(data[0]));
-  }, [updatedName]);
+  }, [updatedName]); */
 
   const handleSearch = () => {
     setUpdatedName(cityName);

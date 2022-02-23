@@ -1,8 +1,8 @@
 import HomeIcon from "@mui/icons-material/Home";
 import MenuIcon from "@mui/icons-material/Menu";
 import ReviewsIcon from "@mui/icons-material/Reviews";
+import { Avatar } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
-import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
@@ -14,16 +14,21 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useLocation, useNavigate } from "react-router";
-import useAuth from "../../../hooks/useAuth";
 
 const Header = () => {
   const location = useLocation();
   console.log(location);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const { user, logOut } = useAuth();
-  const { displayName, photoURL, email } = user;
+  const [userExists, setUserExists] = React.useState(false);
+  // const { user, logOut } = useAuth();
+  // const { displayName, photoURL, email } = user;
+  const [user, setUser] = React.useState(null);
   const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    localStorage.removeItem("hotelZoneUser");
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -39,6 +44,27 @@ const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const savedUser = JSON.parse(localStorage.getItem("hotelZoneUser"));
+  console.log(savedUser);
+
+  React.useEffect(() => {
+    setUserExists(false);
+    if (savedUser) {
+      setUserExists(true);
+      fetch("https://polar-island-87071.herokuapp.com/users/user", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(savedUser),
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+    } else {
+      setUserExists(false);
+    }
+  }, []);
 
   return (
     <AppBar
@@ -146,11 +172,11 @@ const Header = () => {
 
           <Box sx={{ flexGrow: 0, alignItems: "center", display: "flex" }}>
             <Typography sx={{ mr: 1, fontSize: { md: 20 } }} variant="body1">
-              {displayName || email}
+              {/* {displayName || email} */}
             </Typography>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="user" src={photoURL} />
+                <Avatar alt="user" src="" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -169,7 +195,7 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {email ? (
+              {userExists ? (
                 <div>
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Typography
@@ -180,7 +206,7 @@ const Header = () => {
                     </Typography>
                   </MenuItem>
                   <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography onClick={logOut} textalign="center">
+                    <Typography onClick={handleLogOut} textalign="center">
                       Log out
                     </Typography>
                   </MenuItem>
