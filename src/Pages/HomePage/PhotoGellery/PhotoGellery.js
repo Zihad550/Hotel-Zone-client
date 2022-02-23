@@ -21,7 +21,12 @@ const PhotoGellery = () => {
     <Box sx={{ my: 4 }}>
       <Typography
         variant="h2"
-        sx={{ fontWeight: "medium", mb: 3, fontSize: { xs: 35, md: 60 } }}
+        sx={{
+          fontWeight: "medium",
+          mb: 3,
+          fontSize: { xs: 35, md: 60 },
+          fontFamily: "'Lobster', cursive",
+        }}
         textAlign="center"
         color="initial"
       >

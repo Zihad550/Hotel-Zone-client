@@ -26,7 +26,7 @@ const SearchHotels = () => {
       .then((data) => setCities(data));
   }, []);
 
-  /* useEffect(() => {
+  useEffect(() => {
     updatedName &&
       fetch(
         `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=${updatedName}`,
@@ -40,7 +40,7 @@ const SearchHotels = () => {
       )
         .then((res) => res.json())
         .then((data) => setCity(data[0]));
-  }, [updatedName]); */
+  }, [updatedName]);
 
   const handleSearch = () => {
     setUpdatedName(cityName);

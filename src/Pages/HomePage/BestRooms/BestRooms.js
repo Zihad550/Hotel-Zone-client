@@ -28,6 +28,7 @@ const BestRooms = () => {
           fontWeight: "medium",
           fontSize: { xs: 35, md: 60 },
           textAlign: "center",
+          fontFamily: "'Lobster', cursive",
         }}
         variant="h2"
       >

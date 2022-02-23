@@ -14,6 +14,7 @@ const ContactUs = () => {
           textAlign: "center",
           fontWeight: "medium",
           fontSize: { md: 60, xs: 35 },
+          fontFamily: "'Lobster', cursive",
         }}
         variant="h2"
       >

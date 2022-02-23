@@ -30,6 +30,7 @@ const RecentReviews = () => {
           fontWeight: "medium",
           mb: { md: 4, xs: 0 },
           fontSize: { xs: 35, md: 60 },
+          fontFamily: "'Lobster', cursive",
         }}
         variant="h2"
       >
@@ -48,7 +49,7 @@ userName: "" */}
       <Slider {...settings}>
         {reviews.map((review) => (
           <Paper key={review._id} elevation={1}>
-            <Grid container spacing={1}>
+            <Grid container spacing={2}>
               <Grid sx={{ display: "flex" }} xs={12} sm={6} md={6} item>
                 <img
                   style={{ width: "100%", height: "290px" }}
@@ -60,7 +61,7 @@ userName: "" */}
                 <Typography variant="h4">{review.hotelName}</Typography>
 
                 {/* comments */}
-                <Grid container spacing={2}>
+                <Grid container>
                   {review.homeMessage && (
                     <Grid item>
                       <Typography variant="h6">About Hotel</Typography>
@@ -84,8 +85,7 @@ userName: "" */}
                 <Box
                   sx={{
                     display: "flex",
-                    height: "100%",
-                    mt: "auto",
+                    mt: 2,
                   }}
                 >
                   <Box sx={{ mr: 5 }}>
