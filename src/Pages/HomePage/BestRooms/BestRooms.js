@@ -21,7 +21,7 @@ const BestRooms = () => {
       .then((data) => setRooms(data));
   }, []);
   return (
-    <Container sx={{ mt: { md: 40, lg: 15, xs: 30 } }}>
+    <Container sx={{ mt: { lg: -13, md: 45, xs: -32 } }}>
       <Typography
         sx={{
           mb: 2,

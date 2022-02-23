@@ -18,7 +18,7 @@ const PhotoGellery = () => {
   ];
 
   return (
-    <Box sx={{ my: 4 }}>
+    <Box sx={{ my: 4, mt: 15 }}>
       <Typography
         variant="h2"
         sx={{

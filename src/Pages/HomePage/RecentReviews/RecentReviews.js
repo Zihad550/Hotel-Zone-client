@@ -28,7 +28,7 @@ const RecentReviews = () => {
         sx={{
           textAlign: "center",
           fontWeight: "medium",
-          mb: { md: 4, xs: 0 },
+          mb: { md: 4, xs: 3 },
           fontSize: { xs: 35, md: 60 },
           fontFamily: "'Lobster', cursive",
         }}

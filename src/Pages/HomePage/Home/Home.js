@@ -4,6 +4,7 @@ import ContactUs from "../../Shared/ContactUs/ContactUs";
 import Footer from "../../Shared/Footer/Footer";
 import Banner from "../Banner/Banner";
 import BestRooms from "../BestRooms/BestRooms";
+import Blog from "../Blog/Blog";
 import OurPartners from "../OurPartners/OurPartners";
 import PhotoGellery from "../PhotoGellery/PhotoGellery";
 import RecentReviews from "../RecentReviews/RecentReviews";
@@ -62,6 +63,9 @@ const Home = () => {
 
       {/* our partners */}
       <OurPartners />
+
+      {/* our blog */}
+      <Blog />
 
       {/* Photo gellery */}
       <PhotoGellery />
