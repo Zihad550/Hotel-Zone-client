@@ -1,7 +1,7 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { Alert, Button, Paper, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SearchHotels = () => {
@@ -19,7 +19,7 @@ const SearchHotels = () => {
     { width: 1200, itemsToShow: 2 },
   ];
 
-  /* useEffect(() => {
+  useEffect(() => {
     updatedName &&
       fetch(
         `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=${updatedName}`,
@@ -33,7 +33,7 @@ const SearchHotels = () => {
       )
         .then((res) => res.json())
         .then((data) => setCity(data[0]));
-  }, [updatedName]); */
+  }, [updatedName]);
 
   const handleSearch = () => {
     setUpdatedName(cityName);
