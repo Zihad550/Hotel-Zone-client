@@ -13,7 +13,7 @@ const MakeAdmin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const user = { email };
-    fetch("http://localhost:8000/admin", {
+    fetch("https://polar-island-87071.herokuapp.com/admin", {
       method: "PUT",
       headers: {
         "content-type": "application/json",

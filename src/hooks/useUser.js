@@ -12,7 +12,7 @@ const useUser = () => {
     Object.keys(user).length > 0 &&
     console.log('inside')
     setIsLoading(true)
-    fetch(`http://localhost:8000/admin?email=${user.email}`).then(res => res.json()).then(data => setAdmin(data.admin)).finally(() => setIsLoading(false))
+    fetch(`https://polar-island-87071.herokuapp.com/admin?email=${user.email}`).then(res => res.json()).then(data => setAdmin(data.admin)).finally(() => setIsLoading(false))
   }, [])
   return {
     user,

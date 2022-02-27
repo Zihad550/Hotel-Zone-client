@@ -41,7 +41,7 @@ const Register = () => {
       alert("password not matched");
     } else {
       /* registerUser(email, password, name, navigate, location); */
-      fetch("http://localhost:8000/register", {
+      fetch("https://polar-island-87071.herokuapp.com/register", {
         method: "POST",
         headers: {
           "content-type": "application/json",
