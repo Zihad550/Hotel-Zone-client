@@ -1,41 +1,127 @@
-import { Container, Grid, Typography } from "@mui/material";
+import FacebookIcon from '@mui/icons-material/Facebook';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import LogoDevIcon from '@mui/icons-material/LogoDev';
+import { Grid, IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
+import partner1 from "../../../images/partners/1.png";
+import partner2 from "../../../images/partners/2.png";
+import partner3 from "../../../images/partners/3.png";
+import payment1 from "../../../images/payments/american-express.png";
+import payment2 from "../../../images/payments/money.png";
+import payment3 from "../../../images/payments/paypal1.png";
+import payment4 from "../../../images/payments/visa.png";
+import Copyright from './Copyright';
+import Newsletter from "./Newsletter";
 
 const Footer = () => {
+  const partners = [
+    partner1, partner2, partner3
+  ]
+
+  const contactTypes = [
+    "Address","Phone", "App", "Email"
+  ]
+
+  const contactInfos = [
+    "Dhaka, Bangladesh", "+88 01234567891", "WhatsApp", "jehadhossain008@gmail.com"
+  ]
+
+  const payments = [
+    payment1, payment2, payment3, payment4
+  ]
+
+  const socials = [
+    <LinkedInIcon/>, <FacebookIcon/>, <LogoDevIcon/>
+  ]
   return (
-    <Box className="footer-container" sx={{ py: 3 }}>
-      <Container>
+    <Box sx={{mt:15}}>
+      {/* newsletter section */}
+      <Newsletter/>
+      {/* footer */}
+      <Box className="footer-container" sx={{ py: 3 }}>
         <Grid
           container
           sx={{
-            justifyContent: "space-between",
-            flexDirection: { md: "row", xs: "column" },
-            alignItems: { xs: "center", md: "default" },
+            pl:5
           }}
+          spacing={2}
         >
-          <Grid item md={6} xs={12}>
-            <Typography variant="h4">Hotel Zone</Typography>
+          <Grid item xxl={4} lg={3} md={6} xs={12}>
+            <Typography sx={{fontFamily: "'Lora', serif"}} variant="h6">About</Typography>
+            <Typography sx={{width:'80%', my:2}} color="" variant="body1">Welcome to Hotel Zone, where comfort is everything. Beautiful room presentations, straightforward booking & reservation options, & a whole lot more awaits here.</Typography>
+            <Box sx={{display:'flex',  height:'5rem'}}>
+            {
+              partners.map(partner => (
+                <img  key={partner} src={partner} alt="" />
+              ))
+            }
+            </Box>
+            
           </Grid>
-          <Grid sx={{ mt: { md: 0, xs: 2 } }} item md={6} xs={12}>
-            <Typography variant="subtitle1">Quick Links</Typography>
-            <ul>
-              <li>
-                <a href="#">Home</a>
-              </li>
-              <li>
-                <a href="#">Reviews</a>
-              </li>
-              <li>
-                <a href="#">My Bookings</a>
-              </li>
-              <li>
-                <a href="#">Contact us</a>
-              </li>
-            </ul>
+          <Grid  item xxl={2} lg={3} md={6} xs={12} sx={{mt:{xs:5, md:0}}}>
+          <Typography sx={{fontFamily: "'Lora', serif", mb:2}} variant="h6">Contact</Typography>
+
+          {/* contact  */}
+            <Grid container spacing={1}>
+              <Grid item>
+                {
+                  contactTypes.map(type => (
+                    <Typography key={type} variant="body1">
+                      {type}:
+                    </Typography>
+                  ))
+                }
+              </Grid>
+              <Grid item>
+                {
+                  contactInfos.map(info => (
+                    <Typography key={info} variant="body1">
+                      {info}
+                    </Typography>
+                  ))
+                }
+              </Grid>
+            </Grid>
           </Grid>
+          {/* contact */}
+        {/* payment */}
+        <Grid  item lg={3} md={6} xs={12} sx={{mt:{md:5, lg:0, xs:5}}}>
+            <Typography sx={{fontFamily: "'Lora', serif"}} variant="h6">Payment</Typography>
+            <Typography sx={{width:'80%', my:2}} variant="body1">Pay any way you choose, we support all payment options.</Typography>
+         <Box sx={{display:'flex'}}>
+         {
+            payments.map(payment => (
+             <Box sx={{pr:1}} key={payment}>
+                <img src={payment} alt="" />
+             </Box>
+            ))
+          }
+         </Box>
+                  </Grid>
+        {/* payment */}
+        {/* social */}
+        <Grid  item lg={3} md={6} xs={12} sx={{mt:{md:5, lg:0, xs:5}}}>
+            <Typography sx={{fontFamily: "'Lora', serif"}} variant="h6">Get Social
+</Typography>
+            <Typography sx={{width:'80%', my:2}} variant="body1">Follow us on social media and keep in touch with Alloggio.
+
+</Typography>
+{
+          socials.map(social => (
+            <IconButton key={social}>
+              {social}
+            </IconButton>
+          ))
+        }
+                  </Grid>
+        {/* social */}
+        
         </Grid>
-      </Container>
+    </Box>
+
+    {/* copyright section */}
+    <Copyright/>
     </Box>
   );
 };
