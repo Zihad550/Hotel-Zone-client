@@ -5,7 +5,7 @@ import {
   Container,
   Grid,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
@@ -41,7 +41,7 @@ const Register = () => {
       alert("password not matched");
     } else {
       /* registerUser(email, password, name, navigate, location); */
-      fetch("https://polar-island-87071.herokuapp.com/register", {
+      fetch("http://localhost:8000/register", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -57,8 +57,10 @@ const Register = () => {
               "hotelZoneUser",
               JSON.stringify({ password: data.password, email: data.email })
             );
+          }else{
+            alert(data.error)
           }
-        });
+        }).finally(e.target.reset())
     }
   };
   return (

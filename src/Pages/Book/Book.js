@@ -5,7 +5,7 @@ import {
   InputAdornment,
   InputLabel,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
@@ -30,9 +30,8 @@ const Details = () => {
   } = hotel;
 
   // usefirebase datas
-  const { user, admin } = useAuth();
-  // const { name, price, latitude, longitude, currency } = useParams();
-  // const details = JSON.parse(localStorage.getItem("details"));
+  const { user} = useAuth();
+  
   const { adults, children, rooms, checkIn, checkOut } = bookingInfo;
   const [bookingDetails, setBookingDetails] = useState({
     ...bookingInfo,
@@ -51,7 +50,8 @@ const Details = () => {
   };
   const handleBooking = (e) => {
     e.preventDefault();
-    fetch("https://polar-island-87071.herokuapp.com/booked", {
+    if(user){
+      fetch("https://polar-island-87071.herokuapp.com/booked", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -66,8 +66,13 @@ const Details = () => {
       .then((res) => res.json())
       .then((data) => {
         data.insertedId && alert("Successfully Booked");
-        !admin && navigate("/dashboard/mybookings");
+         navigate("/dashboard/mybookings");
       });
+    }else{
+      navigate('/login')
+    }
+    
+    
   };
 
   return (
@@ -200,7 +205,7 @@ const Details = () => {
               name="userName"
               fullWidth
               id="user-name"
-              value={user.displayName}
+              value={user ? user.name : ""}
             />
             <InputLabel htmlFor="user-email">Your E-mail</InputLabel>
             <TextField
@@ -209,7 +214,7 @@ const Details = () => {
               fullWidth
               aria-readonly
               id="user-email"
-              value={user?.email}
+              value={user ? user.email : ""}
             />
             <Button
               variant="contained"

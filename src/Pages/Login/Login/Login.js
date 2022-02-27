@@ -5,7 +5,7 @@ import {
   Container,
   Grid,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
@@ -19,6 +19,9 @@ const Login = () => {
   // navigate & location
   const navigate = useNavigate();
   const location = useLocation();
+  console.log(location)
+  console.log(location?.state?.from)
+  
 
   // states
   const [loginData, setLoginData] = useState({});
@@ -51,9 +54,12 @@ const Login = () => {
             "hotelZoneUser",
             JSON.stringify({ password: data.password, email: data.email })
           );
+          
+          navigate('/home')
+          window.location.reload();
         }
         data.error && alert("Authentication failed");
-      });
+      }).finally(e.target.reset())
   };
   return (
     <Container

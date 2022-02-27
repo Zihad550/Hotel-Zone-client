@@ -5,6 +5,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
+import { CircularProgress } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -27,16 +28,21 @@ const drawerWidth = 240;
 function DashboardContainer(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+   // navigate
+   const navigate = useNavigate();
 
   // useAuth
-  const { admin } = useAuth();
+  const { admin, isLoading } = useAuth();
+  console.log(admin)
+  if(isLoading){
+    return <CircularProgress/>
+  }
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  // navigate
-  const navigate = useNavigate();
+ 
 
   const drawer = (
     <div>
@@ -61,7 +67,7 @@ function DashboardContainer(props) {
         {/* ================
       normal user pages
       ==================== */}
-        {!admin && (
+        {admin || (
           <>
             <ListItem button onClick={() => navigate("/dashboard/myReviews")}>
               <ListItemIcon>

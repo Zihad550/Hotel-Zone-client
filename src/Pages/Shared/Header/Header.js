@@ -14,20 +14,19 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useLocation, useNavigate } from "react-router";
+import useAuth from "../../../hooks/useAuth";
 
 const Header = () => {
   const location = useLocation();
-  console.log(location);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [userExists, setUserExists] = React.useState(false);
-  // const { user, logOut } = useAuth();
-  // const { displayName, photoURL, email } = user;
-  const [user, setUser] = React.useState(null);
+  const { user} = useAuth();
+  
   const navigate = useNavigate();
 
   const handleLogOut = () => {
     localStorage.removeItem("hotelZoneUser");
+    window.location.reload()
   };
 
   const handleOpenNavMenu = (event) => {
@@ -45,26 +44,7 @@ const Header = () => {
     setAnchorElUser(null);
   };
 
-  const savedUser = JSON.parse(localStorage.getItem("hotelZoneUser"));
-  console.log(savedUser);
-
-  React.useEffect(() => {
-    setUserExists(false);
-    if (savedUser) {
-      setUserExists(true);
-      fetch("https://polar-island-87071.herokuapp.com/users/user", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(savedUser),
-      })
-        .then((res) => res.json())
-        .then((data) => console.log(data));
-    } else {
-      setUserExists(false);
-    }
-  }, []);
+  
 
   return (
     <AppBar
@@ -195,7 +175,7 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {userExists ? (
+              {user ? (
                 <div>
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Typography

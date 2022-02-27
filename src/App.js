@@ -43,7 +43,6 @@ const App = () => {
               element={<AvailableResturents />}
             />
             <Route
-              // path="/Book/:name/:price/:latitude/:longitude/:currency"
               path="/book"
               element={
                 <PrivateRoute>

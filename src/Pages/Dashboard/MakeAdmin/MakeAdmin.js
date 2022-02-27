@@ -6,24 +6,28 @@ import makeAdminImage from "../../../images/admin.svg";
 const MakeAdmin = () => {
   const [email, setEmail] = useState("");
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const { token } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const user = { email };
-    fetch("https://polar-island-87071.herokuapp.com/users/admin", {
+    fetch("http://localhost:8000/admin", {
       method: "PUT",
       headers: {
         "content-type": "application/json",
-        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(user),
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data)
         if (data.modifiedCount) {
           setSuccess(true);
+        }
+        else{
+          setError(true)
         }
       });
   };
@@ -72,7 +76,8 @@ const MakeAdmin = () => {
             Make Admin
           </Button>
         </form>
-        {success && <Alert severity="success">Made Admin successfully</Alert>}
+        {success && <Alert severity="success">Made Admin successfully</Alert> }
+        {error &&  <Alert severity="error">User does not exists</Alert>}
       </Grid>
     </Grid>
   );
