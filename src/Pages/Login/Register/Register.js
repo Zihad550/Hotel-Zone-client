@@ -57,6 +57,7 @@ const Register = () => {
               "hotelZoneUser",
               JSON.stringify({ password: data.password, email: data.email })
             );
+            window.location.reload()
           }else{
             alert(data.error)
           }

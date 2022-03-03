@@ -9,10 +9,14 @@ const useUser = () => {
   const user = JSON.parse(localStorage.getItem('hotelZoneUser'));
   console.log(user)
   useEffect(() => {
-    Object.keys(user).length > 0 &&
-    console.log('inside')
-    setIsLoading(true)
-    fetch(`https://polar-island-87071.herokuapp.com/admin?email=${user.email}`).then(res => res.json()).then(data => setAdmin(data.admin)).finally(() => setIsLoading(false))
+    
+    if(user){
+      if(Object.keys(user).length > 0){
+        setIsLoading(true)
+        fetch(`https://polar-island-87071.herokuapp.com/admin?email=${user.email}`).then(res => res.json()).then(data => setAdmin(data.admin)).finally(() => setIsLoading(false))
+      }
+    }
+   
   }, [])
   return {
     user,
