@@ -57,6 +57,8 @@ const Footer = () => {
               ))
             }
             </Box>
+
+            {/* It is one of my best projects. It is a hotel booking website. Here normal users can log in/register. Book a hotel see its location and give a review. And an admin can add a new popular city and choose which review to show on the home page. */}
             
           </Grid>
           <Grid  item xxl={2} lg={3} md={6} xs={12} sx={{mt:{xs:5, md:0}}}>
