@@ -69,7 +69,7 @@ const Banner = () => {
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    autoplay: true,
+    // autoplay: true,
   };
   return (
     <Box
@@ -79,12 +79,11 @@ const Banner = () => {
         {cities.map((city) => (
           <Box
             sx={{
-              backgroundImage: `url(${city.img})`,
+              background: `url(${city.img}) no-repeat center`,
               backgroundSize: "cover",
-
-              backgroundRepeat: "no-repeat",
               height: { lg: "80vh", md: "100vh", xs: "70vh" },
               width: "100vw",
+              zIndex:10
             }}
             key={city._id}
           >
