@@ -1,4 +1,3 @@
-import GoogleIcon from "@mui/icons-material/Google";
 import {
   Alert,
   Button,
@@ -7,7 +6,6 @@ import {
   TextField,
   Typography
 } from "@mui/material";
-import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
@@ -57,6 +55,7 @@ const Register = () => {
               "hotelZoneUser",
               JSON.stringify({ password: data.password, email: data.email })
             );
+            navigate('/')
             window.location.reload()
           }else{
             alert(data.error)
@@ -136,12 +135,7 @@ const Register = () => {
 
           {/* {user.email ? alert("successfully registered") : alert(error)} */}
 
-          {/* third party authentication */}
-          <Box sx={{ display: "flex", my: 1, justifyContent: "center" }}>
-            <Button onClick={googleLogin} endIcon={<GoogleIcon />} />
-            {/* <Button endIcon={<FacebookIcon />} />
-            <Button endIcon={<GitHubIcon />} /> */}
-          </Box>
+          
           <Typography sx={{ textAlign: "center" }} variant="body1">
             Alredy registered{" "}
             <Button onClick={() => navigate("/login")}>Login</Button>

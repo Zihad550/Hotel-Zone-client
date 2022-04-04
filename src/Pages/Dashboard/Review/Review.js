@@ -4,7 +4,7 @@ import {
   Grid,
   Rating,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
@@ -48,6 +48,7 @@ const Review = () => {
         userEmail: user.email,
         userName: user.displayName,
         ...review,
+        deletable: true
       }),
     })
       .then((res) => res.json())
@@ -143,7 +144,7 @@ const Review = () => {
               />
             </Box>
 
-            <Button type="submit" variant="contained" type="submit">
+            <Button type="submit" variant="contained" >
               Send
             </Button>
           </form>{" "}

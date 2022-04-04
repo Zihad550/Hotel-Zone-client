@@ -1,4 +1,3 @@
-import GoogleIcon from "@mui/icons-material/Google";
 import {
   Alert,
   Button,
@@ -7,7 +6,6 @@ import {
   TextField,
   Typography
 } from "@mui/material";
-import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
@@ -112,16 +110,7 @@ const Login = () => {
             {error && <Alert severity="error">{error}</Alert>}
           </form>
 
-          {/* third party authentication */}
-          <Box sx={{ display: "flex", my: 1, justifyContent: "center" }}>
-            <Button
-              onClick={() => googleLogin(location, navigate)}
-              sx={{ width: "100%" }}
-              endIcon={<GoogleIcon />}
-            />
-            {/* <Button sx={{ width: "100%" }} endIcon={<FacebookIcon />} />
-            <Button sx={{ width: "100%" }} endIcon={<GitHubIcon />} /> */}
-          </Box>
+         
           <Typography sx={{ textAlign: "center" }} variant="body1">
             New user{" "}
             <Button onClick={() => navigate("/register")}>

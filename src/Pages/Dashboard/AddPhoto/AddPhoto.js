@@ -39,7 +39,7 @@ const AddPhoto = () => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(photoInfo),
+      body: JSON.stringify({...photoInfo, deletable: true}),
     })
       .then((res) => res.json())
       .then((data) => {

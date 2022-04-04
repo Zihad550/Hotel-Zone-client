@@ -12,13 +12,11 @@ const MakeAdmin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const user = { email };
-    fetch("https://polar-island-87071.herokuapp.com/admin", {
+    fetch(`https://polar-island-87071.herokuapp.com/admin?email=${email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(user),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -64,7 +62,7 @@ const MakeAdmin = () => {
             type="email"
             label="E-mail"
             required
-            sx={{ width: { xs: "100%", md: "50%" } }}
+            sx={{ width: { xs: "100%", md: "100%" } }}
           />
           <br />
           <Button

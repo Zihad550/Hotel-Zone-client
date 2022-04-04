@@ -5,7 +5,7 @@ import {
   Grid,
   Rating,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
@@ -31,7 +31,7 @@ const AddNewCity = () => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(cityInfo),
+      body: JSON.stringify({...cityInfo, deletable: true}),
     })
       .then((res) => res.json())
       .then((data) => data.insertedId && setIsAdded(true));

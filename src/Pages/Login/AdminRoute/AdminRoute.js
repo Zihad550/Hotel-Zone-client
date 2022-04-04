@@ -1,6 +1,6 @@
-import { CircularProgress } from "@mui/material";
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import Spinner from "../../../components/Spinner";
 import useAuth from "../../../hooks/useAuth";
 
 const AdminRoute = ({ children, ...rest }) => {
@@ -8,7 +8,7 @@ const AdminRoute = ({ children, ...rest }) => {
   const location = useLocation();
   console.log(isLoading)
   if(isLoading){
-    return <CircularProgress/>
+    return <Spinner/>
   }
   else if (admin && user) {
     return children;

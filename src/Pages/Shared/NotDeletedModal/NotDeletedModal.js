@@ -14,21 +14,21 @@ const style = {
   p: 4,
 };
 
-const AlertModal = ({ isDeleted, setIsDeleted }) => {
-  const handleClose = () => setIsDeleted(false);
+const NotDeletedModal = ({  setShowAlert, showAlert }) => {
+  const handleClose = () => setShowAlert(false);
+  console.log(showAlert)
   return (
     <Modal
-      open={isDeleted}
+      open={showAlert}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
+       <Typography id="modal-modal-title" variant="h6" component="h2">
+       You cannot delete the existing one. Please create a new one to delete.
+     </Typography>
        
-         <Typography id="modal-modal-title" variant="h6" component="h2">
-         Successfully Deleted
-       </Typography> 
-      
         <Button variant="contained" onClick={handleClose} color="error">
           Close
         </Button>
@@ -37,4 +37,4 @@ const AlertModal = ({ isDeleted, setIsDeleted }) => {
   );
 };
 
-export default AlertModal;
+export default NotDeletedModal;

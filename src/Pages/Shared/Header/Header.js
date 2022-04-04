@@ -21,6 +21,7 @@ const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { user} = useAuth();
+  console.log(user)
   
   const navigate = useNavigate();
 

@@ -5,13 +5,12 @@ import {
   CardContent,
   CardMedia,
   Grid,
-  Typography,
+  Typography
 } from "@mui/material";
 import React from "react";
 
 const ShowCity = ({ prop, route }) => {
-  const { img, name, _id, setIsDeleted, src } = prop;
-  console.log(prop);
+  const { img, name, _id, setIsDeleted, src, setShowAlert } = prop;
 
   const handleDelete = () => {
     if (window.confirm("Are you sure!")) {
@@ -20,18 +19,16 @@ const ShowCity = ({ prop, route }) => {
       })
         .then((res) => res.json())
         .then((data) => {
+          console.log(data)
           data.deletedCount > 0 && setIsDeleted(true);
+          data.deletedCount === 0 && setShowAlert(true);
         });
     }
   };
   return (
     <Grid item md={4} lg={3}>
       <Card>
-        {/* {img ? (
-          <CardMedia component="img" image={img} />
-        ) : (
-          <CardMedia component="img" image={src} />
-        )} */}
+        
         <CardMedia component="img" image={img || src} />
         <CardContent>
           <Typography variant="h4">{name}</Typography>
