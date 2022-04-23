@@ -1,45 +1,42 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { Alert, Button, Paper, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SearchHotels = () => {
+  // states
   const [cityName, setCityName] = useState("");
-  const [updatedName, setUpdatedName] = useState("");
   const [city, setCity] = useState({});
-  const [again, setAgain] = useState(false);
+  const [searching, setSearching] = useState(false);
+  console.log(cityName)
 
+  // react router hooks
   const navigate = useNavigate();
 
-  useEffect(() => {
-    updatedName &&
-      fetch(
-        `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=${updatedName}`,
+  // handlers
+  const  handleSearch = async () => {
+    setSearching(true);
+    const res = await fetch(
+        `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=${cityName}`,
         {
-          method: "GET",
           headers: {
             "x-rapidapi-host": "booking-com.p.rapidapi.com",
             "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
           },
         }
       )
-        .then((res) => res.json())
-        .then((data) => setCity(data[0]));
-  }, [updatedName]);
-
-  const handleSearch = () => {
-    setUpdatedName(cityName);
-
-    if (city?.dest_id) {
-      navigate(
-        `/AvailableResturents/${city?.dest_id}/${city?.latitude}/${city?.longitude}`
-      );
-
-      setCityName("");
-    } else {
-      setAgain(true);
-    }
+      
+        const data = await res.json();
+        setCity(data[0])
+        if(data[0].hotels > 0){
+          setSearching(false)
+          setCity(data[0])
+          const {dest_id, latitude, longitude} = data[0];
+          navigate(
+            `/AvailableResturents/${dest_id}/${latitude}/${longitude}`
+          );
+        }
   };
 
   return (
@@ -85,12 +82,13 @@ const SearchHotels = () => {
             sx={{ fontSize: 18, px: 5 }}
             variant="contained"
             color="secondary"
+            disabled={searching}
           >
             Search
           </Button>
         </Box>
         <Box sx={{ my: 1 }}>
-          {again && <Alert severity="info">Click again</Alert>}
+          {searching && <Alert severity="info">Searching...</Alert>}
         </Box>
       </Box>
     </Paper>
