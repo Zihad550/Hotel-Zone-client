@@ -1,14 +1,19 @@
 import { Alert, Button, Grid, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
-import useAuth from "../../../hooks/useAuth";
+import React, { useEffect, useState } from "react";
+import useAllContext from "../../../hooks/useAllContext";
 import makeAdminImage from "../../../images/admin.svg";
 
 const MakeAdmin = () => {
+  // states
   const [email, setEmail] = useState("");
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
-  const { token } = useAuth();
+  // context 
+  const {setTitle} = useAllContext();
+  useEffect(() => {
+    setTitle('Make Admin');
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,7 +25,6 @@ const MakeAdmin = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
         if (data.modifiedCount) {
           setSuccess(true);
         }

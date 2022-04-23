@@ -8,12 +8,20 @@ import {
   Typography
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import useAllContext from "../../../hooks/useAllContext";
 
 const AddNewCity = () => {
+  // states
   const [cityInfo, setCityInfo] = useState({ rating: 0 });
   const [isAdded, setIsAdded] = useState(false);
-  console.log(cityInfo);
+
+  // context
+  const {setTitle} = useAllContext();
+ 
+  useEffect(() => {
+    setTitle('Add New City');
+  }, [])
 
   const handleBlur = (e) => {
     const field = e.target.name;

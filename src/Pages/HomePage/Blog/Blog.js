@@ -9,7 +9,7 @@ import {
   CardMedia,
   Container,
   Grid,
-  Typography,
+  Typography
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
@@ -134,10 +134,9 @@ const Blog = () => {
               }}
             ></span>
             <Typography
-              sx={{ mt: 2 }}
+              sx={{ mt: 2, fontFamily: "'Courgette', cursive"  }}
               textAlign="center"
               variant="body1"
-              sx={{ fontFamily: "'Courgette', cursive" }}
             >
               <FormatQuoteIcon /> JEHAD HOSSAIN
             </Typography>

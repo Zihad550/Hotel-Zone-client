@@ -8,22 +8,19 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import useAuth from "../../../hooks/useAuth";
+import useAllContext from "../../../hooks/useAllContext";
 import loginImage from "../../../images/login.jpg";
 
 const Login = () => {
   // usefirebase
-  const { login, error, googleLogin } = useAuth();
+  const { error } = useAllContext();
   // navigate & location
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location)
-  console.log(location?.state?.from)
   
 
   // states
   const [loginData, setLoginData] = useState({});
-  const { email, password } = loginData;
 
   // handlers
   const handleBlur = (e) => {

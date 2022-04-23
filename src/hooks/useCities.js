@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-
+import axios from '../services/http.service';
 const useCities = () => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [cities, setCities] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
-  console.log('inside' , showAlert)
   useEffect(() => {
-    fetch("https://polar-island-87071.herokuapp.com/cities")
-      .then((res) => res.json())
-      .then((data) => setCities(data));
+    async function fetchCities(){
+      const res = await axios.get('/cities');
+      setCities(res.data);
+    }
+    fetchCities()
   }, [isDeleted, showAlert]);
   return { cities, setCities, isDeleted, setIsDeleted, showAlert, setShowAlert };
 };

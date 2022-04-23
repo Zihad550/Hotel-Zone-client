@@ -4,7 +4,7 @@ import React from 'react'
 
 const Copyright = () => {
   return (
-    <Box sx={{my:'auto', background: '#F3ECE8', py:1,textAlign:'center' }}><Typography variant="body2">&copy; Copyright Jehad Hossain</Typography></Box>
+    <Box sx={{my:'auto', background: '#F3ECE8', py:1,textAlign:'center' }}><Typography variant="body2">&copy; 2022 Copyright. All rights reserved.</Typography></Box>
   )
 }
 

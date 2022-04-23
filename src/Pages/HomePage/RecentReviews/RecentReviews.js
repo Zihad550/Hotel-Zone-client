@@ -5,7 +5,6 @@ import Slider from "react-slick";
 
 const RecentReviews = () => {
   const [reviews, setReviews] = useState([]);
-  console.log(reviews);
 
   useEffect(() => {
     fetch("https://polar-island-87071.herokuapp.com/reviews")

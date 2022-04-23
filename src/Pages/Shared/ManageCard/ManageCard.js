@@ -19,7 +19,6 @@ const ShowCity = ({ prop, route }) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data)
           data.deletedCount > 0 && setIsDeleted(true);
           data.deletedCount === 0 && setShowAlert(true);
         });

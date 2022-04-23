@@ -1,6 +1,4 @@
-import HomeIcon from "@mui/icons-material/Home";
 import MenuIcon from "@mui/icons-material/Menu";
-import ReviewsIcon from "@mui/icons-material/Reviews";
 import { Avatar } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -14,14 +12,13 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useLocation, useNavigate } from "react-router";
-import useAuth from "../../../hooks/useAuth";
+import useAllContext from "../../../hooks/useAllContext";
 
 const Header = () => {
   const location = useLocation();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const { user} = useAuth();
-  console.log(user)
+  const { user} = useAllContext();
   
   const navigate = useNavigate();
 
@@ -45,16 +42,19 @@ const Header = () => {
     setAnchorElUser(null);
   };
 
+  const pages = [
+    {id:1, name: 'Home', link: '/'},
+    {id:2, name: 'Blogs', link: '/blogs'},
+    {id:3, name: 'About Us', link: '/about'},
+    {id:4, name: 'Contact Us', link: '/contact'},
+  ]
+
   
 
   return (
     <AppBar
       position="relative"
-      color={
-        location.pathname === "/home" || location.pathname === "/"
-          ? "transparent"
-          : "primary"
-      }
+      style={location.pathname === '/' ? {background: '#80808030'} : {background: 'gray'}}
       sx={{ boxShadow: 0, zIndex: 10, color: "white" }}
     >
       <Container maxWidth="xl">
@@ -100,12 +100,13 @@ const Header = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              <MenuItem onClick={() => navigate("/home")}>
-                <Typography textalign="center">Home</Typography>
-              </MenuItem>
-              <MenuItem onClick={() => navigate("/reviews")}>
-                <Typography textalign="center">Reviews</Typography>
-              </MenuItem>
+              {
+                pages.map(page => (
+                  <MenuItem key={page.id} onClick={() => navigate(page.link)}>
+                  <Typography textalign="center">{page.name}</Typography>
+                </MenuItem>
+                ))
+              }
             </Menu>
           </Box>
 
@@ -121,8 +122,11 @@ const Header = () => {
             Hotel Zone
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button
-              onClick={() => navigate("/home")}
+            {
+              pages.map(page => (
+                <Button
+                key={page.id}
+              onClick={() => navigate(page.link)}
               sx={{
                 my: 2,
                 color: "white",
@@ -131,20 +135,11 @@ const Header = () => {
                 fontSize: 17,
               }}
             >
-              Home <HomeIcon sx={{ fontSize: 30, ml: 1 }} />
+              {page.name}
             </Button>
-            <Button
-              onClick={() => navigate("/reviews")}
-              sx={{
-                my: 2,
-                color: "white",
-                display: "flex",
-                alignItems: "center",
-                fontSize: 17,
-              }}
-            >
-              Reviews <ReviewsIcon sx={{ fontSize: 30, ml: 1 }} />
-            </Button>
+              ))
+            }
+           
           </Box>
 
           {/*================

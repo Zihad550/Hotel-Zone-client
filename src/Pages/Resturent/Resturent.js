@@ -5,7 +5,7 @@ import {
   CardMedia,
   Grid,
   Rating,
-  Typography,
+  Typography
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
@@ -20,11 +20,7 @@ const Resturent = ({ resturent, bookingInfo }) => {
     address,
     max_photo_url,
     review_score,
-    latitude,
-    longitude,
-    currency_code,
     min_total_price,
-    hotel_id,
   } = resturent;
   const rating = review_score / 2;
   const navigate = useNavigate();

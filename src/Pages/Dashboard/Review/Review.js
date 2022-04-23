@@ -10,12 +10,12 @@ import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
-import useAuth from "../../../hooks/useAuth";
+import useAllContext from "../../../hooks/useAllContext";
 import reviewImage from "../../../images/review-image.svg";
 
 const Review = () => {
   const { name } = useParams();
-  const { user } = useAuth();
+  const { user } = useAllContext();
   // hotel state variables
   const [securityRate, setSecurityRate] = useState(0);
   const [hotelRate, setHotelRate] = useState(0);

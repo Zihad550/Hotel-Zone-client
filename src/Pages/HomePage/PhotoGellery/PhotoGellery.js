@@ -1,72 +1,101 @@
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
-import Carousel from "react-elastic-carousel";
+import React, { useCallback, useEffect, useState } from "react";
+import Carousel, { Modal, ModalGateway } from "react-images";
+import Slider from 'react-slick';
 
-const PhotoGellery = () => {
+function PhotoGallery() {
+  const [currentImage, setCurrentImage] = useState(0);
+  const [viewerIsOpen, setViewerIsOpen] = useState(false);
   const [photos, setPhotos] = useState([]);
+  
+  // function to open the lightbox with current photo index
+  const openLightbox = useCallback(( index ) => {
+    setCurrentImage(index);
+    setViewerIsOpen(true);
+  }, []);
+  
+// close the lightbox
+  const closeLightbox = () => {
+    setCurrentImage(0);
+    setViewerIsOpen(false);
+  };
+
+  // settings for slider
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    rows: 2,
+    autoplay: true
+  }
+  
+  // side effect to load images from server
   useEffect(() => {
     fetch("https://polar-island-87071.herokuapp.com/photos")
       .then((res) => res.json())
       .then((data) => setPhotos(data));
   }, []);
-  const breakPoints = [
-    { width: 1, itemsToShow: 1 },
-    { width: 550, itemstoShow: 1 },
-    { width: 768, itemsToShow: 2 },
-    { width: 1200, itemsToShow: 3 },
-  ];
 
   return (
-    <Box sx={{ my: 4, mt: 15 }}>
+    <Box sx={{mt:15}}>
       <Typography
-        variant="h2"
         sx={{
+          textAlign: "center",
           fontWeight: "medium",
-          mb: 3,
-          fontSize: { xs: 35, md: 60 },
+          fontSize: { md: 60, xs: 35 },
           fontFamily: "'Lobster', cursive",
+          mb: 3,
         }}
-        textAlign="center"
-        color="initial"
+        variant="h2"
       >
-        Our Gallery
+        Gallery
       </Typography>
-      <Carousel enableAutoPlay autoPlaySpeed={1500} breakPoints={breakPoints}>
-        {photos.map((photo) => (
-          <Box key={photo._id} sx={{ position: "relative" }}>
+      <Slider {...settings} >
+      {photos.map((photo, index) => (
+          <Box key={photo._id} onClick={() => openLightbox(index)} sx={{ position: "relative" }}>
             <Box
               sx={{
                 position: "absolute",
                 transform: "translate(-50%, -50%)",
-                top: "50%",
+                bottom: "0",
                 left: "50%",
                 zIndex: 5,
               }}
             >
               <Typography
-                sx={{ fontSize: { md: 34, xs: 30 } }}
                 color="white"
-                variant="h4"
+                variant="caption"
               >
                 Picture by: {photo.name}
               </Typography>
-              <Typography
-                sx={{ fontSize: { md: 24, xs: 20 } }}
-                color="white"
-                variant="h5"
-              >
-                While stying at {photo.hotelName}
-              </Typography>
+             
             </Box>
             <Box>
-              <img className="banner-img" src={photo.src} alt="" />
+              <img style={{width: `100%`, height: 'auto'}} className="banner-img " src={photo.src} alt="" />
             </Box>
           </Box>
         ))}
-      </Carousel>
+        </Slider>
+        
+      <ModalGateway>
+        {viewerIsOpen ? (
+          <Modal onClose={closeLightbox}>
+            <Carousel
+              currentIndex={currentImage}
+              views={photos.map(photo => ({
+                ...photo,
+                srcset: photo.srcSet,
+                caption: photo.title
+              }))}
+            />
+          </Modal>
+        ) : null}
+      </ModalGateway>
     </Box>
   );
-};
+}
 
-export default PhotoGellery;
+export default PhotoGallery;

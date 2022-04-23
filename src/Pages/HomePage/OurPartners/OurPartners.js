@@ -17,7 +17,7 @@ const partners = [
 
 const OurPartners = () => {
   return (
-    <Container>
+    <Container sx={{mt:10 }}>
       <Typography
         sx={{
           textAlign: "center",

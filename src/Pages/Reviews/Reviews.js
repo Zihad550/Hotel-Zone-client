@@ -1,7 +1,9 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import Banner from '../../components/Banner.jsx';
+import src from '../../images/reviews/reviews-banner.jpg';
+import Footer from '../Shared/Footer/Footer';
 import ShowReview from "../ShowReview/ShowReview";
-
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
@@ -10,20 +12,22 @@ const Reviews = () => {
       .then((data) => setReviews(data));
   }, []);
   return (
-    <Container sx={{ mb: 3, mt: 15 }}>
-      <Typography
-        sx={{ textAlign: "center", mb: 2 }}
-        variant="h3"
-        color="primary"
-      >
-        Reviews{" "}
-      </Typography>
+   <>
+   {/* banner */}
+   <Banner src={src} title="Reviews" />
+    {/* body */}
+    <Container sx={{mt:5}}>
+      
       <Grid container spacing={3}>
         {reviews.map((review) => (
           <ShowReview key={review._id} review={review} />
         ))}
       </Grid>
     </Container>
+
+    {/* footer */}
+    <Footer/>
+   </>
   );
 };
 

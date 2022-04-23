@@ -12,13 +12,6 @@ const SearchHotels = () => {
 
   const navigate = useNavigate();
 
-  const breakPoints = [
-    { width: 1, itemsToShow: 1 },
-    { width: 550, itemstoShow: 1 },
-    { width: 768, itemsToShow: 2 },
-    { width: 1200, itemsToShow: 2 },
-  ];
-
   useEffect(() => {
     updatedName &&
       fetch(
@@ -77,6 +70,7 @@ const SearchHotels = () => {
         <Box
           sx={{
             display: "flex",
+            flexDirection: {xs: 'column', md: 'row'}
           }}
         >
           <TextField

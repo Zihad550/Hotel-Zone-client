@@ -3,18 +3,19 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import "./App.css";
-import AuthProvider from "./contexts/AuthProvider";
+import ContextProvider from "./contexts/ContextProvider";
 import { ErrorBoundary } from "./ErrorBoundary/ErrorBoundary";
+import AboutUs from "./Pages/AboutUs";
 import AvailableResturents from "./Pages/AvailableResturents/AvailableResturents";
+import Blogs from "./Pages/Blogs/Blogs";
 import Book from "./Pages/Book/Book";
+import ContactUs from "./Pages/ContactUs";
 import AddNewCity from "./Pages/Dashboard/AddNewCity/AddNewCity";
 import AddPhoto from "./Pages/Dashboard/AddPhoto/AddPhoto";
 import DashboardContainer from "./Pages/Dashboard/DashboardContainer/DashboardContainer";
 import MakeAdmin from "./Pages/Dashboard/MakeAdmin/MakeAdmin";
 import ManageExistingCities from "./Pages/Dashboard/ManageExistingCities/ManageExistingCities";
 import ManageExistingPhoto from "./Pages/Dashboard/ManageExistingPhoto/ManageExistingPhoto";
-import ManagePhotoGallery from "./Pages/Dashboard/ManagePhotoGallery/ManagePhotoGallery";
-import ManagePopularCities from "./Pages/Dashboard/ManagePopularCities/ManagePopularCities";
 import MyBookings from "./Pages/Dashboard/MyBookings/MyBookings";
 import MyReviews from "./Pages/Dashboard/MyReviews/MyReviews";
 import Review from "./Pages/Dashboard/Review/Review";
@@ -24,18 +25,23 @@ import AdminRoute from "./Pages/Login/AdminRoute/AdminRoute";
 import Login from "./Pages/Login/Login/Login";
 import PrivateRoute from "./Pages/Login/PrivateRoute/PrivateRoute";
 import Register from "./Pages/Login/Register/Register";
-import Reviews from "./Pages/Reviews/Reviews";
 import SearchHotels from "./Pages/SearchHotels/SearchHotels";
 import Header from "./Pages/Shared/Header/Header";
 const App = () => {
   return (
     <ErrorBoundary>
-      <AuthProvider>
+      <ContextProvider>
         <BrowserRouter>
           <Header />
           <Routes>
+            {/* main routes */}
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/contact" element={<ContactUs />} />
+
+            {/* sub routes */}
             <Route path="/searchHotels" element={<SearchHotels />} />
             <Route path="/bestRooms" element={<BestRooms />} />
             <Route
@@ -50,8 +56,8 @@ const App = () => {
                 </PrivateRoute>
               }
             />
-            <Route path="/review/:name" element={<Review />} />
-            <Route path="/reviews" element={<Reviews />} />
+            {/* <Route path="/review/:name" element={<Review />} />
+            <Route path="/reviews" element={<Reviews />} /> */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             {/* dashboard routes */}]
@@ -74,14 +80,7 @@ const App = () => {
                   </AdminRoute>
                 }
               />
-              <Route
-                path="/dashboard/managePopularCities"
-                element={
-                  <AdminRoute>
-                    <ManagePopularCities />
-                  </AdminRoute>
-                }
-              />
+             
               <Route
                 path="/dashboard/manageExistingCities"
                 element={
@@ -98,14 +97,7 @@ const App = () => {
                   </AdminRoute>
                 }
               />
-              <Route
-                path="/dashboard/managePhotoGallery"
-                element={
-                  <AdminRoute>
-                    <ManagePhotoGallery />
-                  </AdminRoute>
-                }
-              />
+             
               <Route
                 path="/dashboard/addPhoto"
                 element={
@@ -125,7 +117,7 @@ const App = () => {
             </Route>
           </Routes>
         </BrowserRouter>
-      </AuthProvider>
+      </ContextProvider>
     </ErrorBoundary>
   );
 };

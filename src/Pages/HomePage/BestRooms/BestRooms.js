@@ -8,7 +8,7 @@ import {
   Container,
   Grid,
   IconButton,
-  Typography,
+  Typography
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
@@ -21,7 +21,7 @@ const BestRooms = () => {
       .then((data) => setRooms(data));
   }, []);
   return (
-    <Container sx={{ mt: { lg: -13, md: 45, xs: -32 } }}>
+    <Container sx={{ mt: { lg:0, md: 25, sm: -32, xs: -10 } }}>
       <Typography
         sx={{
           mb: 2,
@@ -36,7 +36,7 @@ const BestRooms = () => {
       </Typography>
       <Grid container spacing={{ xs: 1, md: 2 }}>
         {rooms.map((room) => (
-          <Grid item md={4} xs={12}>
+          <Grid key={room._id} item md={4} xs={12}>
             <Card>
               <Box className="styledImgContainer">
                 <CardMedia

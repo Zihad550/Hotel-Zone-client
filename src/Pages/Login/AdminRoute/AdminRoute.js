@@ -1,12 +1,11 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import Spinner from "../../../components/Spinner";
-import useAuth from "../../../hooks/useAuth";
+import useAllContext from "../../../hooks/useAllContext";
 
 const AdminRoute = ({ children, ...rest }) => {
-  const { user, admin , isLoading} = useAuth();
+  const { user, admin , isLoading} = useAllContext();
   const location = useLocation();
-  console.log(isLoading)
   if(isLoading){
     return <Spinner/>
   }

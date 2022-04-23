@@ -21,17 +21,16 @@ const Home = () => {
     fetch(
       `https://booking-com.p.rapidapi.com/v1/hotels/search?units=metric&order_by=popularity&checkout_date=${checkOut}&adults_number=${adults}&checkin_date=${checkIn}&room_number=${rooms}&filter_by_currency=AED&dest_type=city&locale=en-gb&dest_id=${dest_id}&include_adjacency=true&page_number=0&children_number=${children}&children_ages=5%2C0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1`,
       {
-        method: "GET",
         headers: {
           "x-rapidapi-host": "booking-com.p.rapidapi.com",
           "x-rapidapi-key":
-            "0a3e9bf460msh6f2200b2ad45533p183995jsn461d6364bf35",
+            process.env.REACT_APP_X_RAPID_API_KEY,
         },
       }
     )
       .then((res) => res.json())
       .then((data) => setHotels(data.result));
-  }, [dest_id]);
+  }, [adults, checkIn, checkOut, children, dest_id, rooms]);
 
   return (
     <>

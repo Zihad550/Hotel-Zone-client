@@ -1,11 +1,16 @@
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
-import HomeIcon from "@mui/icons-material/Home";
+import CategoryIcon from '@mui/icons-material/Category';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
-import { CircularProgress } from "@mui/material";
+import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
+import { Button, CircularProgress, Collapse, ListItemButton } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -21,19 +26,22 @@ import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import * as React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import useAuth from "../../../hooks/useAuth";
+import useAllContext from "../../../hooks/useAllContext";
 
 const drawerWidth = 240;
 
 function DashboardContainer(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [manageCityOpen, setManageCityOpen] = React.useState(false);
+  const [manageGalleryOpen, setManageGalleryOpen] = React.useState(false);
+  const {title} = useAllContext();
+
    // navigate
    const navigate = useNavigate();
 
-  // useAuth
-  const { admin, isLoading } = useAuth();
-  console.log(admin)
+  // useAllContext
+  const { admin, isLoading } = useAllContext();
   if(isLoading){
     return <CircularProgress/>
   }
@@ -42,27 +50,33 @@ function DashboardContainer(props) {
     setMobileOpen(!mobileOpen);
   };
 
- 
+  // manage city routes
+  const manageCityRoutes = [
+    {id:1, name: "Add New city", link: '/dashboard/AddNewCity', icon: <AddLocationAltRoundedIcon/> },
+    {id:2, name: "Manage Existing Cities", link: '/dashboard/manageExistingCities', icon: <CategoryIcon/> },
+  ]
+
+  // manage gallery routes
+  const manageGalleryRoutes = [
+    {id:1, name: "Add New Photo", link: '/dashboard/addPhoto', icon: <AddAPhotoIcon/> },
+    {id:2, name: "Manage Existing Photos", link: '/dashboard/manageExistingPhoto', icon: <CategoryIcon/> },
+  ]
+
+  
 
   const drawer = (
     <div>
-      <Toolbar />
+      {/* home page logo */}
+      <Toolbar >
+        <Button onClick={() => navigate('/')} variant="text">
+          Hotel Zone
+        </Button>
+      </Toolbar>
       <Divider />
 
       {/*============== 
           pages
       ================== */}
-      <List>
-        <ListItem button onClick={() => navigate("/home")}>
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText primary="Home" />
-        </ListItem>
-      </List>
-
-      <Divider />
-
       <List>
         {/* ================
       normal user pages
@@ -97,28 +111,73 @@ function DashboardContainer(props) {
             </ListItem>
 
             {/* manage popular cities */}
-            <ListItem
-              button
-              onClick={() => navigate("/dashboard/managePopularCities")}
-            >
-              <ListItemIcon>
-                <AddLocationAltRoundedIcon />
+            <ListItemButton onClick={() => setManageCityOpen(!manageCityOpen)}>
+               <ListItemIcon>
+                 <LocationCityIcon />
               </ListItemIcon>
-              <ListItemText primary="Manage Popular Cities" />
-            </ListItem>
+              <ListItemText primary="Manage Cities" />
+                {manageCityOpen ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+        <Collapse in={manageCityOpen} timeout="auto" unmountOnExit>
+          <List sx={{ml:3}} disablePadding>
+             {
+               manageCityRoutes.map(route => (
+                <ListItem
+                key={route.id}
+                button
+                onClick={() => navigate(route.link)}
+              >
+                <ListItemIcon>
+                  {route.icon}
+                </ListItemIcon>
+                <ListItemText primary={route.name} />
+              </ListItem>
+               ))
+             }
+        </List>
+      </Collapse>
+            
 
-            {/* Add new photo to photo gellery */}
-            <ListItem
-              button
-              onClick={() => navigate("/dashboard/managePhotoGallery")}
-            >
-              <ListItemIcon>
-                <AddPhotoAlternateIcon />
-              </ListItemIcon>
-              <ListItemText primary="Manage Photo Gallery" />
-            </ListItem>
+      {/* Manage photo gellery */}
+      <ListItemButton onClick={() => setManageGalleryOpen(!manageGalleryOpen)}>
+            <ListItemIcon>
+               <PhotoLibraryIcon />
+            </ListItemIcon>
+            <ListItemText primary="Manage Gallery" />
+                {manageGalleryOpen ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+      <Collapse in={manageGalleryOpen} timeout="auto" unmountOnExit>
+          <List sx={{ml:3}} disablePadding>
+             {
+               manageGalleryRoutes.map(route => (
+                <ListItem
+                key={route.id}
+                button
+                onClick={() => navigate(route.link)}
+              >
+                <ListItemIcon>
+                  {route.icon}
+                </ListItemIcon>
+                <ListItemText primary={route.name} />
+              </ListItem>
+               ))
+             }
+        </List>
+      </Collapse>
+
           </>
         )}
+      </List>
+
+      {/* exit to home page */}
+      <Divider />
+      <List>
+        <ListItem button onClick={() => navigate("/home")}>
+          <ListItemIcon>
+            <ExitToAppIcon />
+          </ListItemIcon>
+          <ListItemText primary="Exit" />
+        </ListItem>
       </List>
     </div>
   );
@@ -147,7 +206,7 @@ function DashboardContainer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Welcome to Dashboard
+            {title}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -206,10 +265,6 @@ function DashboardContainer(props) {
 }
 
 DashboardContainer.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window: PropTypes.func,
 };
 

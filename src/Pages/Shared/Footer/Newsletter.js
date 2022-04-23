@@ -6,9 +6,9 @@ import React from 'react';
 const Newsletter = () => {
   return (
    <Box sx={{background: "#F1EEE3", py:5}}>
-        <Container sx={{display:'flex', alignItems:'center', justifyContent:"center"}}>
+        <Container sx={{display:'flex', alignItems:'center', justifyContent:"center", flexDirection: {xs: 'column', sm: 'row'}, textAlign:'center'}}>
         <MailOutlineIcon sx={{fontSize:50, mr:1}}/>
-        <Typography variant="h4">
+        <Typography sx={{my: {xs: 2, sm:0}}} variant="h4">
             Join our weekly Newsletter
         </Typography>
         <TextField sx={{ml:2}} label="Email Address"/>

@@ -1,12 +1,13 @@
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
-import { Grid, IconButton, Typography } from "@mui/material";
+import { Container, Grid, IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
+import { useLocation } from 'react-router-dom';
 import partner1 from "../../../images/partners/1.png";
 import partner2 from "../../../images/partners/2.png";
-import partner3 from "../../../images/partners/3.png";
+// import partner3 from "../../../images/partners/3.png";
 import payment1 from "../../../images/payments/american-express.png";
 import payment2 from "../../../images/payments/money.png";
 import payment3 from "../../../images/payments/paypal1.png";
@@ -15,8 +16,15 @@ import Copyright from './Copyright';
 import Newsletter from "./Newsletter";
 
 const Footer = () => {
+  const location = useLocation();
+
   const partners = [
-    partner1, partner2, partner3
+    {
+      id:1, src: partner1,
+    }, 
+    {
+      id:2, src: partner2
+    }
   ]
 
   const contactTypes = [
@@ -28,18 +36,45 @@ const Footer = () => {
   ]
 
   const payments = [
-    payment1, payment2, payment3, payment4
+    {
+      id:1,
+      src: payment1,
+    },
+    {
+      id:2,
+      src: payment2,
+    },
+    {
+      id:3,
+      src:   payment3,
+    }, 
+    {
+      id:4,
+      src: payment4
+    }
   ]
 
   const socials = [
-    <LinkedInIcon/>, <FacebookIcon/>, <LogoDevIcon/>
+    {
+      id:1,
+      icon: <LinkedInIcon/>,
+    }, 
+    {
+      id:2,
+      icon: <FacebookIcon/>,
+    }, 
+    {
+      id:3,
+      icon: <LogoDevIcon/>
+    }
   ]
   return (
     <Box sx={{mt:15}}>
       {/* newsletter section */}
-      <Newsletter/>
+     <Newsletter/>
+      
       {/* footer */}
-      <Box className="footer-container" sx={{ py: 3 }}>
+      <Container className="footer-container" sx={{ py: 3 }}>
         <Grid
           container
           sx={{
@@ -53,12 +88,12 @@ const Footer = () => {
             <Box sx={{display:'flex',  height:'5rem'}}>
             {
               partners.map(partner => (
-                <img  key={partner} src={partner} alt="" />
+                <img key={partner.id} src={partner.src} alt="" />
               ))
             }
             </Box>
 
-            {/* It is one of my best projects. It is a hotel booking website. Here normal users can log in/register. Book a hotel see its location and give a review. And an admin can add a new popular city and choose which review to show on the home page. */}
+            
             
           </Grid>
           <Grid  item xxl={2} lg={3} md={6} xs={12} sx={{mt:{xs:5, md:0}}}>
@@ -94,25 +129,25 @@ const Footer = () => {
          <Box sx={{display:'flex'}}>
          {
             payments.map(payment => (
-             <Box sx={{pr:1}} key={payment}>
-                <img src={payment} alt="" />
+             <Box sx={{pr:1}} key={payment.id}>
+                <img src={payment.src} alt="" />
              </Box>
             ))
           }
          </Box>
-                  </Grid>
+        </Grid>
         {/* payment */}
         {/* social */}
         <Grid  item lg={3} md={6} xs={12} sx={{mt:{md:5, lg:0, xs:5}}}>
             <Typography sx={{fontFamily: "'Lora', serif"}} variant="h6">Get Social
-</Typography>
+      </Typography>
             <Typography sx={{width:'80%', my:2}} variant="body1">Follow us on social media and keep in touch with Alloggio.
 
-</Typography>
-{
+      </Typography>
+      {
           socials.map(social => (
-            <IconButton key={social}>
-              {social}
+            <IconButton key={social.id}>
+              {social.icon}
             </IconButton>
           ))
         }
@@ -120,7 +155,7 @@ const Footer = () => {
         {/* social */}
         
         </Grid>
-    </Box>
+    </Container>
 
     {/* copyright section */}
     <Copyright/>

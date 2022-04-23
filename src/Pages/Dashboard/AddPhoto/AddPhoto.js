@@ -1,27 +1,23 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Alert, Button, Grid, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import useAllContext from "../../../hooks/useAllContext";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  background: "white",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 
 const AddPhoto = () => {
+  // states
   const [photoInfo, setPhotoInfo] = useState({
     name: "",
     hotelName: "",
     src: "",
   });
   const [isAdded, setIsAdded] = useState(false);
-  console.log(photoInfo);
+
+  // context
+  const {setTitle} = useAllContext();
+  useEffect(() => {
+    setTitle('Add New Photo');
+  }, [])
 
   const handleBlur = (e) => {
     const field = e.target.name;

@@ -7,23 +7,20 @@ import {
   Typography
 } from "@mui/material";
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import useAuth from "../../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import useAllContext from "../../../hooks/useAllContext";
 import registerImage from "../../../images/register.jpg";
 
 const Register = () => {
   // use firebase
-  const { registerUser, error, user, googleLogin } = useAuth();
+  const { error } = useAllContext();
 
   // navigate & location
   const navigate = useNavigate();
-  const location = useLocation();
 
   // states
   const [registerData, setRegisterData] = useState({});
-  const { password, re_typed_password, name, email } = registerData;
-
-  console.log(registerData);
+  const { password, re_typed_password } = registerData;
 
   const handleBlur = (e) => {
     const field = e.target.name;
@@ -48,7 +45,6 @@ const Register = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          data.insertedId && console.log(data);
           if (data.insertedId) {
             alert("Authentication  successful");
             localStorage.setItem(

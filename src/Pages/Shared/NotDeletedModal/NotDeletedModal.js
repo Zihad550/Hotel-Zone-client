@@ -16,7 +16,6 @@ const style = {
 
 const NotDeletedModal = ({  setShowAlert, showAlert }) => {
   const handleClose = () => setShowAlert(false);
-  console.log(showAlert)
   return (
     <Modal
       open={showAlert}

@@ -11,7 +11,8 @@ import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
+import useAllContext from "../../hooks/useAllContext";
+import axios from "../../services/http.service";
 import Locations from "../Locations/Locations";
 
 const Details = () => {
@@ -19,7 +20,6 @@ const Details = () => {
 
   const hotel = useSelector((state) => state.hotel[0]);
   const bookingInfo = useSelector((state) => state.bookingInfo[0]);
-  useSelector((state) => console.log(state));
   const {
     hotel_name,
     max_photo_url,
@@ -30,7 +30,7 @@ const Details = () => {
   } = hotel;
 
   // usefirebase datas
-  const { user} = useAuth();
+  const { user} = useAllContext();
   
   const { adults, children, rooms, checkIn, checkOut } = bookingInfo;
   const [bookingDetails, setBookingDetails] = useState({
@@ -51,23 +51,14 @@ const Details = () => {
   const handleBooking = (e) => {
     e.preventDefault();
     if(user){
-      fetch("https://polar-island-87071.herokuapp.com/booked", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        userName: user.displayName,
-        userEmail: user.email,
-        img: max_photo_url,
-        ...bookingDetails,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        data.insertedId && alert("Successfully Booked");
-         navigate("/dashboard/mybookings");
-      });
+      axios.post('/booked', {userName: user.displayName, userEmail: user.email, img: max_photo_url, ...bookingDetails})
+      .then(res => {
+        if(res.data.insertedId){
+          alert('Successfully booked');
+          navigate('/dashboard/mybookings');
+        }
+      })
+      
     }else{
       navigate('/login')
     }

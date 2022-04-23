@@ -4,7 +4,7 @@ import {
   CardMedia,
   Grid,
   Rating,
-  Typography,
+  Typography
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
@@ -12,12 +12,9 @@ import React from "react";
 const ShowReview = ({ review }) => {
   const {
     hotelName,
-    caption,
-    city,
     securityRate,
     hotelRate,
     userName,
-    userEmail,
     homeMessage,
     securityMessage,
     hotelImage,
