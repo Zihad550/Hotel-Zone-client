@@ -2,20 +2,21 @@ import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
 import React, { useCallback, useEffect, useState } from "react";
 import Carousel, { Modal, ModalGateway } from "react-images";
-import Slider from 'react-slick';
+import Slider from "react-slick";
+import Loader from "../../../Shared/Loader/Loader";
 
 function PhotoGallery() {
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
-  const [photos, setPhotos] = useState([]);
-  
+  const [photos, setPhotos] = useState(null);
+
   // function to open the lightbox with current photo index
-  const openLightbox = useCallback(( index ) => {
+  const openLightbox = useCallback((index) => {
     setCurrentImage(index);
     setViewerIsOpen(true);
   }, []);
-  
-// close the lightbox
+
+  // close the lightbox
   const closeLightbox = () => {
     setCurrentImage(0);
     setViewerIsOpen(false);
@@ -29,9 +30,9 @@ function PhotoGallery() {
     slidesToShow: 3,
     slidesToScroll: 1,
     rows: 2,
-    autoplay: true
-  }
-  
+    autoplay: true,
+  };
+
   // side effect to load images from server
   useEffect(() => {
     fetch("https://polar-island-87071.herokuapp.com/photos")
@@ -40,7 +41,7 @@ function PhotoGallery() {
   }, []);
 
   return (
-    <Box sx={{mt:15}}>
+    <Box sx={{ mt: 15 }}>
       <Typography
         sx={{
           textAlign: "center",
@@ -53,42 +54,57 @@ function PhotoGallery() {
       >
         Gallery
       </Typography>
-      <Slider {...settings} >
-      {photos.map((photo, index) => (
-          <Box key={photo._id} onClick={() => openLightbox(index)} sx={{ position: "relative" , cursor:'pointer'}}>
+      {photos ? (
+        <Slider {...settings}>
+          {photos.map((photo, index) => (
             <Box
+              key={photo._id}
+              onClick={() => openLightbox(index)}
               sx={{
-                position: "absolute",
-                transform: "translate(-50%, -50%)",
-                bottom: "0",
-                left: "50%",
-                zIndex: 5,
+                position: "relative",
+                cursor: "pointer",
+                height: "300px",
+                background: `url(${photo.src}) no-repeat center`,
+                backgroundSize: "cover",
               }}
             >
-              <Typography
-                color="white"
-                variant="caption"
+              <Box
+                sx={{
+                  position: "absolute",
+                  transform: "translate(-50%, -50%)",
+                  bottom: "0",
+                  left: "50%",
+                  zIndex: 5,
+                }}
               >
-                Picture by: {photo.name}
-              </Typography>
-             
+                <Typography color="white" variant="caption">
+                  Picture by: {photo.name}
+                </Typography>
+              </Box>
+              <Box>
+                {/* <img
+                  style={{ width: `100%`, height: "auto" }}
+                  className="banner-img "
+                  src={photo.src}
+                  alt=""
+                /> */}
+              </Box>
             </Box>
-            <Box>
-              <img style={{width: `100%`, height: 'auto'}} className="banner-img " src={photo.src} alt="" />
-            </Box>
-          </Box>
-        ))}
+          ))}
         </Slider>
-        
+      ) : (
+        <Loader />
+      )}
+
       <ModalGateway>
         {viewerIsOpen ? (
           <Modal onClose={closeLightbox}>
             <Carousel
               currentIndex={currentImage}
-              views={photos.map(photo => ({
+              views={photos.map((photo) => ({
                 ...photo,
                 srcset: photo.srcSet,
-                caption: photo.title
+                caption: photo.title,
               }))}
             />
           </Modal>

@@ -5,7 +5,7 @@ import BestRooms from "./BestRooms/BestRooms";
 import Blog from "./Blog/Blog";
 import Banner from "./HomeBanner/HomeBanner";
 import OurPartners from "./OurPartners/OurPartners";
-import PhotoGellery from "./PhotoGellery/PhotoGellery";
+import PhotoGallery from "./PhotoGallery/PhotoGallery";
 
 const Home = () => {
   return (
@@ -34,7 +34,7 @@ const Home = () => {
       <Blog />
 
       {/* Photo gellery */}
-      <PhotoGellery />
+      <PhotoGallery />
 
       {/* footer container */}
       <Footer />

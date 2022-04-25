@@ -1,8 +1,8 @@
 import { Container, Grid, Pagination } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import useAllContext from "../../../hooks/useAllContext";
 import src from "../../../images/blogs/blogs-banner.jpg";
-import axiosInstance from "../../../services/http.service";
 import Banner from "../../Shared/Banner/Banner.jsx";
 import Footer from "../../Shared/Footer/Footer";
 import Loader from "../../Shared/Loader/Loader";
@@ -12,10 +12,18 @@ import Blog from "./Blog/Blog";
 const BLOGS_PER_PAGE = 9;
 const Blogs = () => {
   // states
-  const [blogs, setBlogs] = useState(null);
+  /* const [blogs, setBlogs] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalBlogs, setTotalBlogs] = useState(null);
+  const [totalBlogs, setTotalBlogs] = useState(null); */
+
+  const { blogs, currentPage, setCurrentPage, totalBlogs, setBlogsPerPage } =
+    useAllContext();
+
   useEffect(() => {
+    setBlogsPerPage(BLOGS_PER_PAGE);
+  }, []);
+
+  /*  useEffect(() => {
     (async () => {
       const res = await axiosInstance.get(
         `/blogs?blogsPerPage=${BLOGS_PER_PAGE}&currentPage=${currentPage}`
@@ -24,7 +32,7 @@ const Blogs = () => {
       setBlogs(res.data.blogs);
       setTotalBlogs(Math.ceil(res.data.total / BLOGS_PER_PAGE));
     })();
-  }, [currentPage]);
+  }, [currentPage]); */
   return (
     <div>
       {/* banner */}
