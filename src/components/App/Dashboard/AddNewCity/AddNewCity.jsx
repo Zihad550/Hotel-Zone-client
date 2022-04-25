@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import useAllContext from "../../../hooks/useAllContext";
+import useAllContext from "../../../../hooks/useAllContext";
 
 const AddNewCity = () => {
   // states

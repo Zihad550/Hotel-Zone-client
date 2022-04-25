@@ -1,11 +1,11 @@
 import { Container, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
-import src1 from "../../../images/partners/1.png";
-import src2 from "../../../images/partners/2.png";
-import src3 from "../../../images/partners/3.png";
-import src4 from "../../../images/partners/4.png";
-import src5 from "../../../images/partners/5.png";
+import src1 from "../../../../images/partners/1.png";
+import src2 from "../../../../images/partners/2.png";
+import src3 from "../../../../images/partners/3.png";
+import src4 from "../../../../images/partners/4.png";
+import src5 from "../../../../images/partners/5.png";
 
 const partners = [
   { id: 1, src: src1 },

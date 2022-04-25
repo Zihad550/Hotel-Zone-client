@@ -13,8 +13,8 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
-import blog1 from "../../../images/blog/blog-1.jpg";
-import blog2 from "../../../images/blog/blog-2.jpg";
+import blog1 from "../../../../images/blog/blog-1.jpg";
+import blog2 from "../../../../images/blog/blog-2.jpg";
 
 const Blog = () => {
   return (

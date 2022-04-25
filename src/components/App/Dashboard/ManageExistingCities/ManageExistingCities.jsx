@@ -1,14 +1,13 @@
 import { Grid } from "@mui/material";
 import React, { useEffect } from "react";
-import useAllContext from "../../../hooks/useAllContext";
-import useCities from "../../../hooks/useCities";
-import AlertModal from "../../Shared/AlertModal/AlertModal";
-import ManageCard from "../../Shared/ManageCard/ManageCard";
-import NotDeletedModal from "../../Shared/NotDeletedModal/NotDeletedModal";
+import useAllContext from "../../../../hooks/useAllContext";
+import AlertModal from "../../../Shared/AlertModal/AlertModal";
+import ManageCard from "../../../Shared/ManageCard/ManageCard";
+import NotDeletedModal from "../../../Shared/NotDeletedModal/NotDeletedModal";
 
 const ManageExistingCities = () => {
   // custom hooks
-  const { cities, isDeleted, setIsDeleted, setShowAlert, showAlert } = useCities();
+  const { cities, isDeleted, setIsDeleted, setShowAlert, showAlert } = useAllContext();
 
   // context 
   const {setTitle} = useAllContext();

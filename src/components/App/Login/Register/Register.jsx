@@ -8,8 +8,8 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useAllContext from "../../../hooks/useAllContext";
-import registerImage from "../../../images/register.jpg";
+import useAllContext from "../../../../hooks/useAllContext";
+import registerImage from "../../../../images/register.jpg";
 
 const Register = () => {
   // use firebase

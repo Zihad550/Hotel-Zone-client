@@ -4,11 +4,11 @@ import { Rating, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import Spinner from "../../../components/Spinner";
-import SearchHotels from "../../SearchHotels/SearchHotels";
+import Loader from "../../../Shared/Loader/Loader";
+import SearchHotels from "../SearchHotels/SearchHotels";
 
 function SampleNextArrow(props) {
-  const {  onClick } = props;
+  const { onClick } = props;
   return (
     <Box
       sx={{
@@ -31,7 +31,7 @@ function SampleNextArrow(props) {
 }
 
 function SamplePrevArrow(props) {
-  const {  onClick } = props;
+  const { onClick } = props;
   return (
     <Box
       sx={{
@@ -74,27 +74,27 @@ const Banner = () => {
       {
         breakpoint: 1024,
         settings: {
-         nextArrow: false,
-         prevArrow: false
-        }
+          nextArrow: false,
+          prevArrow: false,
+        },
       },
       {
         breakpoint: 600,
         settings: {
-         nextArrow: false,
-         prevArrow: false
-        }
+          nextArrow: false,
+          prevArrow: false,
+        },
       },
       {
         breakpoint: 0,
         settings: {
           nextArrow: false,
-          prevArrow: false
-        }
-      }
-    ]
+          prevArrow: false,
+        },
+      },
+    ],
   };
-  return ( cities.length ? 
+  return cities.length ? (
     <Box
       sx={{ position: "relative", mt: { lg: -35, md: 0, sm: -55, xs: -55 } }}
     >
@@ -104,9 +104,9 @@ const Banner = () => {
             sx={{
               background: `url(${city.img}) no-repeat center`,
               backgroundSize: "cover",
-              height: { lg: "800px", md: "800px", sm: "70vh", xs: '100vh' },
+              height: { lg: "800px", md: "800px", sm: "70vh", xs: "100vh" },
               width: "100vw",
-              zIndex:10
+              zIndex: 10,
             }}
             key={city._id}
           >
@@ -119,7 +119,7 @@ const Banner = () => {
                 alignItems: "center",
                 color: "white",
                 flexDirection: "column",
-                mt:{xs: 15, sm: 0}
+                mt: { xs: 15, sm: 0 },
               }}
             >
               <Typography color="white" variant="h3">
@@ -146,7 +146,9 @@ const Banner = () => {
 
       {/* search component */}
       <SearchHotels />
-    </Box> : <Spinner />
+    </Box>
+  ) : (
+    <Loader />
   );
 };
 

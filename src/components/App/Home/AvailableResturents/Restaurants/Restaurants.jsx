@@ -7,7 +7,8 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
-const Resturents = ({ setDetails, details }) => {
+
+const Restaurants = ({ setDetails, details }) => {
   const { checkIn, checkOut, adults, children, rooms } = details;
 
   const handleSubmit = (e) => {
@@ -127,4 +128,4 @@ const Resturents = ({ setDetails, details }) => {
   );
 };
 
-export default Resturents;
+export default Restaurants;

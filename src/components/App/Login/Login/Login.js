@@ -7,16 +7,15 @@ import {
   Typography
 } from "@mui/material";
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import useAllContext from "../../../hooks/useAllContext";
-import loginImage from "../../../images/login.jpg";
+import { useNavigate } from "react-router-dom";
+import useAllContext from "../../../../hooks/useAllContext";
+import loginImage from "../../../../images/login.jpg";
 
 const Login = () => {
-  // usefirebase
+  // context
   const { error } = useAllContext();
   // navigate & location
   const navigate = useNavigate();
-  const location = useLocation();
   
 
   // states
@@ -47,7 +46,7 @@ const Login = () => {
           alert("Authentication successful");
           localStorage.setItem(
             "hotelZoneUser",
-            JSON.stringify({ password: data.password, email: data.email })
+            JSON.stringify({ password: data.password, email: data.email, name: data.name })
           );
           
           navigate('/home')

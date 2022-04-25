@@ -1,13 +1,15 @@
 import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import useAllContext from "../../../hooks/useAllContext";
-import AlertModal from "../../Shared/AlertModal/AlertModal";
+import useAllContext from "../../../../hooks/useAllContext";
+import AlertModal from "../../../Shared/AlertModal/AlertModal";
 import MyBookedHotel from "../MyBookedHotel/MyBookedHotel";
 
 const MyBookings = () => {
+  // states
   const [bookedHotels, setBookedHotels] = useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
 
+  // context
   const { user } = useAllContext();
 
   useEffect(() => {

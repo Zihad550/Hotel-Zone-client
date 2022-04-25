@@ -11,9 +11,9 @@ import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import useAllContext from "../../hooks/useAllContext";
-import axios from "../../services/http.service";
-import Locations from "../Locations/Locations";
+import useAllContext from "../../../../hooks/useAllContext";
+import axios from "../../../../services/http.service";
+import Locations from "./Locations/Locations";
 
 const Details = () => {
   // redux datas

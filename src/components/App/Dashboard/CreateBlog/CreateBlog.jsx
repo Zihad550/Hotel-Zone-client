@@ -10,8 +10,9 @@ import {
   RadioGroup,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
-import axios from "../../../services/http.service";
+import React, { useEffect, useState } from "react";
+import useAllContext from "../../../../hooks/useAllContext";
+import axios from "../../../../services/http.service";
 
 const CreateBlog = () => {
   // states
@@ -21,13 +22,22 @@ const CreateBlog = () => {
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [url, setUrl] = useState("");
-  console.log(data, category);
+
+  // context
+  const { setTitle } = useAllContext();
+
+  // side effects
+  useEffect(() => {
+    setTitle("Create Blog");
+  }, []);
 
   // handlers
 
   // triggers when submits the form
   const handleCreateBlog = (e) => {
     e.preventDefault();
+    if (isSuccess || isError) resetMessage();
+
     const formData = new FormData();
     const date = new Date();
     formData.append("image", image);
@@ -35,6 +45,7 @@ const CreateBlog = () => {
       title: data.title,
       desc: data.desc,
       date: date.toLocaleDateString(),
+      category,
     };
 
     if (!image) {
@@ -51,12 +62,10 @@ const CreateBlog = () => {
         .then((data) => {
           axios
             .post("/blog", {
-              title: data.title,
-              desc: data.desc,
-              date: date.toLocaleDateString(),
-              src: data.url,
+              ...post,
+              src: data.data.url,
             })
-            .then((res) => console.log(res.data.insertedId));
+            .then((res) => res.data.insertedId && setIsSuccess(true));
         });
     }
   };
@@ -70,9 +79,15 @@ const CreateBlog = () => {
 
   // handle on blur
   const handleBlur = (e) => {
+    resetMessage();
+  };
+
+  // reset form values
+  const resetMessage = () => {
     setIsError(false);
     setIsSuccess(false);
   };
+
   return (
     <Box
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}

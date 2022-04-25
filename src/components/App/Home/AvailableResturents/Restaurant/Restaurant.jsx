@@ -5,23 +5,18 @@ import {
   CardMedia,
   Grid,
   Rating,
-  Typography
+  Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { addHotel } from "../../redux/actions/hotelActions";
-import { addBookingInfo } from "../../redux/actions/hotelBookingActions";
+import { addHotel } from "../../../../../redux/actions/hotelActions";
+import { addBookingInfo } from "../../../../../redux/actions/hotelBookingActions";
 
-const Resturent = ({ resturent, bookingInfo }) => {
-  const {
-    hotel_name,
-    address,
-    max_photo_url,
-    review_score,
-    min_total_price,
-  } = resturent;
+const Restaurant = ({ restaurant, bookingInfo }) => {
+  const { hotel_name, address, max_photo_url, review_score, min_total_price } =
+    restaurant;
   const rating = review_score / 2;
   const navigate = useNavigate();
 
@@ -30,7 +25,7 @@ const Resturent = ({ resturent, bookingInfo }) => {
 
   /* handlers */
   const handleGoToBook = () => {
-    dispatch(addHotel(resturent));
+    dispatch(addHotel(restaurant));
     dispatch(addBookingInfo(bookingInfo));
     navigate(`/book`);
   };
@@ -103,4 +98,4 @@ const Resturent = ({ resturent, bookingInfo }) => {
   );
 };
 
-export default Resturent;
+export default Restaurant;

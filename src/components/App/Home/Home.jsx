@@ -1,11 +1,11 @@
 import { Box } from "@mui/material";
 import React from "react";
 import Footer from "../../Shared/Footer/Footer";
-import Banner from "../Banner/Banner";
-import BestRooms from "../BestRooms/BestRooms";
-import Blog from "../Blog/Blog";
-import OurPartners from "../OurPartners/OurPartners";
-import PhotoGellery from "../PhotoGellery/PhotoGellery";
+import BestRooms from "./BestRooms/BestRooms";
+import Blog from "./Blog/Blog";
+import Banner from "./HomeBanner/HomeBanner";
+import OurPartners from "./OurPartners/OurPartners";
+import PhotoGellery from "./PhotoGellery/PhotoGellery";
 
 const Home = () => {
   return (

@@ -8,9 +8,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Container, Grid, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
-import Banner from "../../components/Banner";
-import src from "../../images/contactUs/contact-banner.jpg";
-import Footer from "../Shared/Footer/Footer";
+import src from "../../../images/contactUs/contact-banner.jpg";
+import Banner from "../../Shared/Banner/Banner";
+import Footer from "../../Shared/Footer/Footer";
 import { btn } from "./contact.style.module.css";
 import ContactAccordion from "./ContactAccordion";
 const ContactUs = () => {

@@ -10,8 +10,8 @@ import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
-import useAllContext from "../../../hooks/useAllContext";
-import reviewImage from "../../../images/review-image.svg";
+import useAllContext from "../../../../hooks/useAllContext";
+import reviewImage from "../../../../images/review-image.svg";
 
 const Review = () => {
   const { name } = useParams();

@@ -2,8 +2,8 @@ import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { useParams } from "react-router-dom";
-import Resturent from "../Resturent/Resturent";
-import Resturents from "../Resturents/Resturents";
+import Restaurant from "./Restaurant/Restaurant";
+import Restaurants from "./Restaurants/Restaurants";
 
 const Home = () => {
   const [hotels, setHotels] = useState([]);
@@ -23,8 +23,7 @@ const Home = () => {
       {
         headers: {
           "x-rapidapi-host": "booking-com.p.rapidapi.com",
-          "x-rapidapi-key":
-            process.env.REACT_APP_X_RAPID_API_KEY,
+          "x-rapidapi-key": process.env.REACT_APP_X_RAPID_API_KEY,
         },
       }
     )
@@ -57,13 +56,13 @@ const Home = () => {
           xs={12}
           md={6}
         >
-          <Resturents setDetails={setDetails} details={details} />
+          <Restaurants setDetails={setDetails} details={details} />
           <div style={{ height: "100vh", overflowY: "scroll" }}>
-            {hotels?.map((resturent) => (
-              <Resturent
-                key={resturent.hotel_id}
+            {hotels?.map((restaurant) => (
+              <Restaurant
+                key={restaurant.hotel_id}
                 bookingInfo={details}
-                resturent={resturent}
+                restaurant={restaurant}
               />
             ))}
           </div>

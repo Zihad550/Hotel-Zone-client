@@ -18,13 +18,14 @@ const Header = () => {
   const location = useLocation();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const { user} = useAllContext();
-  
+  const { user } = useAllContext();
+  console.log(user);
+
   const navigate = useNavigate();
 
   const handleLogOut = () => {
     localStorage.removeItem("hotelZoneUser");
-    window.location.reload()
+    window.location.reload();
   };
 
   const handleOpenNavMenu = (event) => {
@@ -43,18 +44,22 @@ const Header = () => {
   };
 
   const pages = [
-    {id:1, name: 'Home', link: '/'},
-    {id:2, name: 'Blogs', link: '/blogs'},
-    {id:3, name: 'About Us', link: '/about'},
-    {id:4, name: 'Contact Us', link: '/contact'},
-  ]
-
+    { id: 1, name: "Home", link: "/" },
+    { id: 2, name: "Blogs", link: "/blogs" },
+    { id: 3, name: "About Us", link: "/about" },
+    { id: 4, name: "Contact Us", link: "/contact" },
+  ];
 
   return (
     <AppBar
       position="relative"
-      style={ (location.pathname.startsWith('/dashboard') && {display: 'none'}) || (location.pathname === '/' ? {background: '#80808030'} : {background: 'gray'} ) }
-      sx={{ boxShadow: 0, zIndex: 10, color: "white", }}
+      style={
+        (location.pathname.startsWith("/dashboard") && { display: "none" }) ||
+        (location.pathname === "/"
+          ? { background: "#80808030" }
+          : { background: "gray" })
+      }
+      sx={{ boxShadow: 0, zIndex: 10, color: "white" }}
     >
       <Container maxWidth="xl">
         {/* ===============
@@ -73,7 +78,6 @@ const Header = () => {
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
-              aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
@@ -99,13 +103,11 @@ const Header = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {
-                pages.map(page => (
-                  <MenuItem key={page.id} onClick={() => navigate(page.link)}>
+              {pages.map((page) => (
+                <MenuItem key={page.id} onClick={() => navigate(page.link)}>
                   <Typography textalign="center">{page.name}</Typography>
                 </MenuItem>
-                ))
-              }
+              ))}
             </Menu>
           </Box>
 
@@ -121,24 +123,21 @@ const Header = () => {
             Hotel Zone
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {
-              pages.map(page => (
-                <Button
+            {pages.map((page) => (
+              <Button
                 key={page.id}
-              onClick={() => navigate(page.link)}
-              sx={{
-                my: 2,
-                color: "white",
-                display: "flex",
-                alignItems: "center",
-                fontSize: 17,
-              }}
-            >
-              {page.name}
-            </Button>
-              ))
-            }
-           
+                onClick={() => navigate(page.link)}
+                sx={{
+                  my: 2,
+                  color: "white",
+                  display: "flex",
+                  alignItems: "center",
+                  fontSize: 17,
+                }}
+              >
+                {page.name}
+              </Button>
+            ))}
           </Box>
 
           {/*================
@@ -147,7 +146,7 @@ const Header = () => {
 
           <Box sx={{ flexGrow: 0, alignItems: "center", display: "flex" }}>
             <Typography sx={{ mr: 1, fontSize: { md: 20 } }} variant="body1">
-              {/* {displayName || email} */}
+              {user?.name}
             </Typography>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

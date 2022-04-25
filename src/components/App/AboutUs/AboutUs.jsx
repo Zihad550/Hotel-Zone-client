@@ -10,9 +10,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Container, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
-import Banner from "../../components/Banner";
-import src from "../../images/aboutUs/aboutUs-banner.jpg";
-import Footer from "../Shared/Footer/Footer";
+import src from "../../../images/aboutUs/aboutUs-banner.jpg";
+import Banner from "../../Shared/Banner/Banner.jsx";
+import Footer from "../../Shared/Footer/Footer";
 const AboutUs = () => {
   const services = [
     {

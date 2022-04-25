@@ -1,14 +1,14 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import Spinner from "../../../components/Spinner";
-import useAllContext from "../../../hooks/useAllContext";
+import useAllContext from "../../../../hooks/useAllContext";
+import Loader from "../../../Shared/Loader/Loader";
 
 const PrivateRoute = ({ children, ...rest }) => {
   const { user, isLoading } = useAllContext();
   const location = useLocation();
   
   if(isLoading){
-    return <Spinner/>
+    return <Loader/>
   }
   else if (user) {
     return children;

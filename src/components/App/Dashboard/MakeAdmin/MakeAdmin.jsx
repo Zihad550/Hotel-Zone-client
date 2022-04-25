@@ -1,7 +1,7 @@
 import { Alert, Button, Grid, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import useAllContext from "../../../hooks/useAllContext";
-import makeAdminImage from "../../../images/admin.svg";
+import useAllContext from "../../../../hooks/useAllContext";
+import makeAdminImage from "../../../../images/admin.svg";
 
 const MakeAdmin = () => {
   // states
