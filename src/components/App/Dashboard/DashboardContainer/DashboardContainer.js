@@ -1,26 +1,31 @@
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded";
+import ArticleIcon from '@mui/icons-material/Article';
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import CategoryIcon from '@mui/icons-material/Category';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
-import { Button, CircularProgress, Collapse, ListItemButton } from "@mui/material";
-import AppBar from "@mui/material/AppBar";
+import { CircularProgress, Collapse, ListItemButton } from "@mui/material";
+import MuiAppBar from '@mui/material/AppBar';
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
+import MuiDrawer from '@mui/material/Drawer';
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import { styled, useTheme } from '@mui/material/styles';
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
@@ -28,13 +33,95 @@ import * as React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import useAllContext from "../../../hooks/useAllContext";
 
+
 const drawerWidth = 240;
 
+
+const openedMixin = (theme) => ({
+  width: drawerWidth,
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: 'hidden',
+});
+
+
+
+const closedMixin = (theme) => ({
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: 'hidden',
+  width: `calc(${theme.spacing(7)} + 1px)`,
+  [theme.breakpoints.up('sm')]: {
+    width: `calc(${theme.spacing(8)} + 1px)`,
+  },
+});
+
+
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+}));
+
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(['width', 'margin'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
+
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+  ({ theme, open }) => ({
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap',
+    boxSizing: 'border-box',
+    ...(open && {
+      ...openedMixin(theme),
+      '& .MuiDrawer-paper': openedMixin(theme),
+    }),
+    ...(!open && {
+      ...closedMixin(theme),
+      '& .MuiDrawer-paper': closedMixin(theme),
+    }),
+  }),
+);
+
+
 function DashboardContainer(props) {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
   const [manageCityOpen, setManageCityOpen] = React.useState(false);
   const [manageGalleryOpen, setManageGalleryOpen] = React.useState(false);
+  const [manageBlogOpen, setManageBlogOpen] = React.useState(false);
   const {title} = useAllContext();
 
    // navigate
@@ -46,9 +133,6 @@ function DashboardContainer(props) {
     return <CircularProgress/>
   }
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
 
   // manage city routes
   const manageCityRoutes = [
@@ -62,17 +146,21 @@ function DashboardContainer(props) {
     {id:2, name: "Manage Existing Photos", link: '/dashboard/manageExistingPhoto', icon: <CategoryIcon/> },
   ]
 
-  
+  // manage blogs routes
+  const manageBlogRoutes = [
+    {id:1, name: "Create blog", link: '/dashboard/createBlog', icon: <NoteAddIcon/> },
+    {id:2, name: "Manage Existing blogs", link: '/dashboard/manageBlogs', icon: <CategoryIcon/> },
+  ]
 
   const drawer = (
     <div>
       {/* home page logo */}
-      <Toolbar >
+      {/* <Toolbar >
         <Button onClick={() => navigate('/')} variant="text">
           Hotel Zone
         </Button>
       </Toolbar>
-      <Divider />
+      <Divider /> */}
 
       {/*============== 
           pages
@@ -119,7 +207,7 @@ function DashboardContainer(props) {
                 {manageCityOpen ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
         <Collapse in={manageCityOpen} timeout="auto" unmountOnExit>
-          <List sx={{ml:3}} disablePadding>
+          <List sx={{ml:1}} disablePadding>
              {
                manageCityRoutes.map(route => (
                 <ListItem
@@ -147,9 +235,36 @@ function DashboardContainer(props) {
                 {manageGalleryOpen ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={manageGalleryOpen} timeout="auto" unmountOnExit>
-          <List sx={{ml:3}} disablePadding>
+          <List sx={{ml:1}} disablePadding>
              {
                manageGalleryRoutes.map(route => (
+                <ListItem
+                key={route.id}
+                button
+                onClick={() => navigate(route.link)}
+              >
+                <ListItemIcon>
+                  {route.icon}
+                </ListItemIcon>
+                <ListItemText primary={route.name} />
+              </ListItem>
+               ))
+             }
+        </List>
+      </Collapse>
+
+      {/* Manage blogs */}
+      <ListItemButton onClick={() => setManageBlogOpen(!manageBlogOpen)}>
+            <ListItemIcon>
+               <ArticleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Manage Blogs" />
+                {manageBlogOpen ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+      <Collapse in={manageBlogOpen} timeout="auto" unmountOnExit>
+          <List sx={{ml:1}} disablePadding>
+             {
+               manageBlogRoutes.map(route => (
                 <ListItem
                 key={route.id}
                 button
@@ -182,26 +297,21 @@ function DashboardContainer(props) {
     </div>
   );
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-        }}
-      >
+      <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
+            onClick={handleDrawerOpen}
             edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{
+              marginRight: 5,
+              ...(open && { display: 'none' }),
+            }}
           >
             <MenuIcon />
           </IconButton>
@@ -210,54 +320,24 @@ function DashboardContainer(props) {
           </Typography>
         </Toolbar>
       </AppBar>
+      
+        
+        <Drawer variant="permanent" open={open}>
+        <DrawerHeader>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
+        {
+          drawer
+        }
+      </Drawer>
+
       <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
+       component="main" sx={{flexGrow: 1, p:3}}
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer>
-      </Box>
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-        }}
-      >
-        <Toolbar />
-        {/* must use */}
+        <DrawerHeader/>
         <Outlet />
       </Box>
     </Box>

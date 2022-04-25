@@ -55,7 +55,7 @@ function PhotoGallery() {
       </Typography>
       <Slider {...settings} >
       {photos.map((photo, index) => (
-          <Box key={photo._id} onClick={() => openLightbox(index)} sx={{ position: "relative" }}>
+          <Box key={photo._id} onClick={() => openLightbox(index)} sx={{ position: "relative" , cursor:'pointer'}}>
             <Box
               sx={{
                 position: "absolute",

@@ -12,8 +12,10 @@ import Book from "./Pages/Book/Book";
 import ContactUs from "./Pages/ContactUs";
 import AddNewCity from "./Pages/Dashboard/AddNewCity/AddNewCity";
 import AddPhoto from "./Pages/Dashboard/AddPhoto/AddPhoto";
+import CreateBlog from "./Pages/Dashboard/CreateBlog/CreateBlog";
 import DashboardContainer from "./Pages/Dashboard/DashboardContainer/DashboardContainer";
 import MakeAdmin from "./Pages/Dashboard/MakeAdmin/MakeAdmin";
+import ManageBlogs from "./Pages/Dashboard/ManageBlogs/ManageBlogs";
 import ManageExistingCities from "./Pages/Dashboard/ManageExistingCities/ManageExistingCities";
 import ManageExistingPhoto from "./Pages/Dashboard/ManageExistingPhoto/ManageExistingPhoto";
 import MyBookings from "./Pages/Dashboard/MyBookings/MyBookings";
@@ -81,6 +83,7 @@ const App = () => {
                 }
               />
              
+             {/* city routes */}
               <Route
                 path="/dashboard/manageExistingCities"
                 element={
@@ -98,6 +101,7 @@ const App = () => {
                 }
               />
              
+             {/* gallery routes */}
               <Route
                 path="/dashboard/addPhoto"
                 element={
@@ -111,6 +115,23 @@ const App = () => {
                 element={
                   <AdminRoute>
                     <ManageExistingPhoto />
+                  </AdminRoute>
+                }
+              />
+             {/* blog routes */}
+              <Route
+                path="/dashboard/createBlog"
+                element={
+                  <AdminRoute>
+                    <CreateBlog />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/dashboard/manageBlogs"
+                element={
+                  <AdminRoute>
+                    <ManageBlogs />
                   </AdminRoute>
                 }
               />

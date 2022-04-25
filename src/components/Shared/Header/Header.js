@@ -49,13 +49,12 @@ const Header = () => {
     {id:4, name: 'Contact Us', link: '/contact'},
   ]
 
-  
 
   return (
     <AppBar
       position="relative"
-      style={location.pathname === '/' ? {background: '#80808030'} : {background: 'gray'}}
-      sx={{ boxShadow: 0, zIndex: 10, color: "white" }}
+      style={ (location.pathname.startsWith('/dashboard') && {display: 'none'}) || (location.pathname === '/' ? {background: '#80808030'} : {background: 'gray'} ) }
+      sx={{ boxShadow: 0, zIndex: 10, color: "white", }}
     >
       <Container maxWidth="xl">
         {/* ===============
