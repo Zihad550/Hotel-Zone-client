@@ -100,7 +100,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-function DashboardContainer(props) {
+function DashboardContainer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -122,6 +122,7 @@ function DashboardContainer(props) {
 
   // useAllContext
   const { admin, isLoading } = useAllContext();
+
   if (isLoading) {
     return <CircularProgress />;
   }

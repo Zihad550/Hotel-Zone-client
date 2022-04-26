@@ -7,28 +7,7 @@ import Slider from "react-slick";
 import axiosInstance from "../../../../services/http.service";
 import Loader from "../../../Shared/Loader/Loader";
 import SearchHotels from "../SearchHotels/SearchHotels";
-function NextArrow(props) {
-  const { onClick } = props;
-  return (
-    <Box
-      sx={{
-        background: "violet",
-        zIndex: "10",
-        position: "absolute",
-        right: 0,
-        bottom: "50%",
-        padding: "10px",
-        borderTopLeftRadius: "50px",
-        borderBottomLeftRadius: "50px",
-        cursor: "pointer",
-        color: "white",
-      }}
-      onClick={onClick}
-    >
-      <ArrowForwardIosIcon />
-    </Box>
-  );
-}
+import BannerArrow from "./BannerArrow/BannerArrow";
 
 function PrevArrow(props) {
   const { onClick } = props;
@@ -69,8 +48,8 @@ const Banner = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    nextArrow: <BannerArrow icon={<ArrowForwardIosIcon />} position="right" />,
+    prevArrow: <BannerArrow icon={<ArrowBackIosNewIcon />} position="left" />,
     autoplay: true,
     responsive: [
       {
