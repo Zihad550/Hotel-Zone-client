@@ -20,7 +20,7 @@ const Blog = ({ blog: { title, src, category, desc } }) => {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {title}
+            {title} {category}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {desc}

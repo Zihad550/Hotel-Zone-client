@@ -21,7 +21,6 @@ const CreateBlog = () => {
   const [image, setImage] = useState(null);
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [url, setUrl] = useState("");
 
   // context
   const { setTitle } = useAllContext();
@@ -46,6 +45,7 @@ const CreateBlog = () => {
       desc: data.desc,
       date: date.toLocaleDateString(),
       category,
+      deletable: true,
     };
 
     if (!image) {
@@ -65,20 +65,21 @@ const CreateBlog = () => {
               ...post,
               src: data.data.url,
             })
-            .then((res) => res.data.insertedId && setIsSuccess(true));
+            .then((res) => {
+              if (res.data.insertedId) setIsSuccess(true);
+              setData("");
+              e.target.reset();
+              console.log(category);
+            });
         });
     }
   };
 
   // triggers when form input fields changes
-  const handleChange = (e) => {
+  const handleBlur = (e) => {
     const newData = { ...data };
     newData[e.target.name] = e.target.value;
     setData(newData);
-  };
-
-  // handle on blur
-  const handleBlur = (e) => {
     resetMessage();
   };
 
@@ -106,17 +107,10 @@ const CreateBlog = () => {
           onSubmit={handleCreateBlog}
         >
           {/* title */}
-          <TextField
-            onChange={handleChange}
-            onBlur={handleBlur}
-            label="Title"
-            name="title"
-            required
-          />
+          <TextField onBlur={handleBlur} label="Title" name="title" required />
 
           {/* description */}
           <TextField
-            onChange={handleChange}
             onBlur={handleBlur}
             margin="normal"
             label="Description"
@@ -135,7 +129,7 @@ const CreateBlog = () => {
           />
 
           {/* category */}
-          <FormControl>
+          <FormControl sx={{ mt: 1 }}>
             <FormLabel>Category</FormLabel>
             <RadioGroup
               onChange={(e) => setCategory(e.target.value)}

@@ -20,6 +20,7 @@ const BLOGS_PER_PAGE = 9;
 const ManageBlogs = () => {
   // states
   const [isDeleted, setIsDeleted] = useState(false);
+  const [isDeletable, setIsDeletable] = useState(false);
 
   // context
   const {
@@ -46,10 +47,16 @@ const ManageBlogs = () => {
 
   // handlers
   const handleDeleteBlog = (id) => {
+    //  reseting messages
+    setIsDeletable(false);
+    setIsDeleted(false);
+    // sending delete request
     axiosInstance.delete(`/blog?id=${id}`).then((res) => {
       if (res.data.deletedCount) {
         setIsDeleted(true);
         setRefresh((prevState) => !prevState);
+      } else {
+        setIsDeletable(true);
       }
     });
   };
@@ -108,6 +115,13 @@ const ManageBlogs = () => {
           severity="success"
           message="Deleted Successfully"
           setShowToast={setIsDeleted}
+        />
+      )}
+      {isDeletable && (
+        <Toast
+          severity="warning"
+          message="Sorry, You cannot delete the existing blog. Please create a new one to perform this action."
+          setShowToast={setIsDeletable}
         />
       )}
     </Paper>
