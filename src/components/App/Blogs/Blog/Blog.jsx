@@ -1,35 +1,46 @@
 import { Grid } from "@mui/material";
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import { Box } from "@mui/system";
 import * as React from "react";
+import { blog, blog_img, img_container } from "./blog.style.module.css";
 
-const Blog = ({ blog: { title, src, category, desc } }) => {
+const Blog = ({ blog: { title, src, category, desc, date } }) => {
   return (
     <Grid item md={4} sm={6} xs={12}>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          component="img"
-          height="140"
-          width="100%"
-          image={src}
-          alt={title}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {title} {category}
+      <Card sx={{ height: "100%" }} className={blog}>
+        <Box className={img_container}>
+          <CardMedia
+            className={blog_img}
+            component="img"
+            width="100%"
+            image={src}
+            alt={title}
+          />
+        </Box>
+
+        <CardContent sx={{ pb: 0 }}>
+          <Box sx={{ display: "flex" }}>
+            <Typography variant="body2">{category} - </Typography>
+            <Typography sx={{ ml: 1 }} variant="body2">
+              {" "}
+              {date}
+            </Typography>
+          </Box>
+          <Typography
+            sx={{ fontFamily: "Lora", lineHeight: "1.3em" }}
+            gutterBottom
+            variant="h6"
+            component="div"
+          >
+            {title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {desc}
+            {desc.substring(0, 100)}...
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small">Share</Button>
-          <Button size="small">Learn More</Button>
-        </CardActions>
       </Card>
     </Grid>
   );

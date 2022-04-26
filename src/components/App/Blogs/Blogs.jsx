@@ -10,12 +10,8 @@ import Blog from "./Blog/Blog";
 
 // global variables
 const BLOGS_PER_PAGE = 9;
-const Blogs = () => {
-  // states
-  /* const [blogs, setBlogs] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalBlogs, setTotalBlogs] = useState(null); */
 
+const Blogs = () => {
   const { blogs, currentPage, setCurrentPage, totalBlogs, setBlogsPerPage } =
     useAllContext();
 
@@ -23,16 +19,6 @@ const Blogs = () => {
     setBlogsPerPage(BLOGS_PER_PAGE);
   }, []);
 
-  /*  useEffect(() => {
-    (async () => {
-      const res = await axiosInstance.get(
-        `/blogs?blogsPerPage=${BLOGS_PER_PAGE}&currentPage=${currentPage}`
-      );
-      console.log(res);
-      setBlogs(res.data.blogs);
-      setTotalBlogs(Math.ceil(res.data.total / BLOGS_PER_PAGE));
-    })();
-  }, [currentPage]); */
   return (
     <div>
       {/* banner */}

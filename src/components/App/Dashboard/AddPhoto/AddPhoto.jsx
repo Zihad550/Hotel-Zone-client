@@ -3,21 +3,19 @@ import { Alert, Button, Grid, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import useAllContext from "../../../../hooks/useAllContext";
 
-
 const AddPhoto = () => {
   // states
   const [photoInfo, setPhotoInfo] = useState({
     name: "",
-    hotelName: "",
     src: "",
   });
   const [isAdded, setIsAdded] = useState(false);
 
   // context
-  const {setTitle} = useAllContext();
+  const { setTitle } = useAllContext();
   useEffect(() => {
-    setTitle('Add New Photo');
-  }, [])
+    setTitle("Add New Photo");
+  }, []);
 
   const handleBlur = (e) => {
     const field = e.target.name;
@@ -35,7 +33,7 @@ const AddPhoto = () => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({...photoInfo, deletable: true}),
+      body: JSON.stringify({ ...photoInfo, deletable: true }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -79,14 +77,7 @@ const AddPhoto = () => {
             name="name"
             required
           />
-          <TextField
-            onBlur={handleBlur}
-            margin="normal"
-            label="Hotel name"
-            fullWidth
-            name="hotelName"
-            required
-          />
+
           <TextField
             onBlur={handleBlur}
             label="Photo url"

@@ -4,10 +4,10 @@ import { Rating, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
+import axiosInstance from "../../../../services/http.service";
 import Loader from "../../../Shared/Loader/Loader";
 import SearchHotels from "../SearchHotels/SearchHotels";
-
-function SampleNextArrow(props) {
+function NextArrow(props) {
   const { onClick } = props;
   return (
     <Box
@@ -30,7 +30,7 @@ function SampleNextArrow(props) {
   );
 }
 
-function SamplePrevArrow(props) {
+function PrevArrow(props) {
   const { onClick } = props;
   return (
     <Box
@@ -54,12 +54,14 @@ function SamplePrevArrow(props) {
 }
 
 const Banner = () => {
-  const [cities, setCities] = useState([]);
+  const [cities, setCities] = useState(null);
+  console.log(cities);
 
   useEffect(() => {
-    fetch("https://polar-island-87071.herokuapp.com/cities")
-      .then((res) => res.json())
-      .then((data) => setCities(data));
+    (async () => {
+      const res = await axiosInstance.get("/cities");
+      setCities(res.data);
+    })();
   }, []);
   const settings = {
     dots: true,
@@ -67,8 +69,8 @@ const Banner = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     autoplay: true,
     responsive: [
       {
@@ -94,7 +96,7 @@ const Banner = () => {
       },
     ],
   };
-  return cities.length ? (
+  return cities ? (
     <Box
       sx={{ position: "relative", mt: { lg: -35, md: 0, sm: -55, xs: -55 } }}
     >

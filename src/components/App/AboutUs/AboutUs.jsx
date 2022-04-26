@@ -66,7 +66,7 @@ const AboutUs = () => {
       {/* body */}
       <Container>
         {/* about */}
-        <Box sx={{ textAlign: "center", mt: 5 }}>
+        <Box sx={{ textAlign: "center", my: 5 }}>
           <Typography variant="h4">Since 1996 year</Typography>
           <Typography variant="body1">
             Founded in 1996 in Bangladesh, HotelZone.com has grown from a small
@@ -98,7 +98,12 @@ const AboutUs = () => {
                 icon={service.icon}
               />
               <Typography variant="h6">{service.title}</Typography>
-              <Typography variant="body2">{service.about}</Typography>
+              <Typography
+                sx={{ width: { md: "80%", xs: "100%" } }}
+                variant="body2"
+              >
+                {service.about}
+              </Typography>
             </Grid>
           ))}
         </Grid>

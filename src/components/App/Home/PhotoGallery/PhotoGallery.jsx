@@ -3,12 +3,14 @@ import { Box } from "@mui/system";
 import React, { useCallback, useEffect, useState } from "react";
 import Carousel, { Modal, ModalGateway } from "react-images";
 import Slider from "react-slick";
+import axiosInstance from "../../../../services/http.service";
 import Loader from "../../../Shared/Loader/Loader";
 
 function PhotoGallery() {
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
   const [photos, setPhotos] = useState(null);
+  console.log(photos);
 
   // function to open the lightbox with current photo index
   const openLightbox = useCallback((index) => {
@@ -31,13 +33,36 @@ function PhotoGallery() {
     slidesToScroll: 1,
     rows: 2,
     autoplay: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 820,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   // side effect to load images from server
   useEffect(() => {
-    fetch("https://polar-island-87071.herokuapp.com/photos")
-      .then((res) => res.json())
-      .then((data) => setPhotos(data));
+    (async () => {
+      setPhotos(await axiosInstance.get("/photos").then((res) => res.data));
+    })();
   }, []);
 
   return (
@@ -63,7 +88,7 @@ function PhotoGallery() {
               sx={{
                 position: "relative",
                 cursor: "pointer",
-                height: "300px",
+                height: { md: "300px", xs: "200px" },
                 background: `url(${photo.src}) no-repeat center`,
                 backgroundSize: "cover",
               }}
@@ -80,14 +105,6 @@ function PhotoGallery() {
                 <Typography color="white" variant="caption">
                   Picture by: {photo.name}
                 </Typography>
-              </Box>
-              <Box>
-                {/* <img
-                  style={{ width: `100%`, height: "auto" }}
-                  className="banner-img "
-                  src={photo.src}
-                  alt=""
-                /> */}
               </Box>
             </Box>
           ))}

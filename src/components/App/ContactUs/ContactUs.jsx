@@ -38,7 +38,7 @@ const ContactUs = () => {
       {/* body */}
       <Container sx={{ my: 10 }}>
         {/* contact actions */}
-        <Box sx={{ mb: 2 }}>
+        <Box sx={{ mb: 2, display: "flex", flexWrap: "wrap" }}>
           {contactActions.map((action) => (
             <button className={btn} key={action.id}>
               {action.name}
