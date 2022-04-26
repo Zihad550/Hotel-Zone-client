@@ -4,7 +4,7 @@ import {
   Container,
   Grid,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -49,14 +49,19 @@ const Register = () => {
             alert("Authentication  successful");
             localStorage.setItem(
               "hotelZoneUser",
-              JSON.stringify({ password: data.password, email: data.email })
+              JSON.stringify({
+                name: data.name,
+                password: data.password,
+                email: data.email,
+              })
             );
-            navigate('/')
-            window.location.reload()
-          }else{
-            alert(data.error)
+            navigate("/");
+            window.location.reload();
+          } else {
+            alert(data.error);
           }
-        }).finally(e.target.reset())
+        })
+        .finally(e.target.reset());
     }
   };
   return (
@@ -131,7 +136,6 @@ const Register = () => {
 
           {/* {user.email ? alert("successfully registered") : alert(error)} */}
 
-          
           <Typography sx={{ textAlign: "center" }} variant="body1">
             Alredy registered{" "}
             <Button onClick={() => navigate("/login")}>Login</Button>

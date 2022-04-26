@@ -14,7 +14,7 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
-import { CircularProgress, Collapse, ListItemButton } from "@mui/material";
+import { Collapse, ListItemButton } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -121,11 +121,7 @@ function DashboardContainer() {
   const navigate = useNavigate();
 
   // useAllContext
-  const { admin, isLoading } = useAllContext();
-
-  if (isLoading) {
-    return <CircularProgress />;
-  }
+  const { admin } = useAllContext();
 
   // manage city routes
   const manageCityRoutes = [
@@ -333,12 +329,14 @@ function DashboardContainer() {
             )}
           </IconButton>
         </DrawerHeader>
+
         <Divider />
         {drawer}
       </Drawer>
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
+
         <Outlet />
       </Box>
     </Box>

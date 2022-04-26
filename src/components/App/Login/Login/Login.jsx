@@ -4,7 +4,7 @@ import {
   Container,
   Grid,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,10 +13,9 @@ import loginImage from "../../../../images/login.jpg";
 
 const Login = () => {
   // context
-  const { error } = useAllContext();
+  const { error, setUser } = useAllContext();
   // navigate & location
   const navigate = useNavigate();
-  
 
   // states
   const [loginData, setLoginData] = useState({});
@@ -44,16 +43,18 @@ const Login = () => {
       .then((data) => {
         if (data.success) {
           alert("Authentication successful");
+          setUser({ email: data.email, name: data.name, role: data.role });
           localStorage.setItem(
             "hotelZoneUser",
-            JSON.stringify({ password: data.password, email: data.email, name: data.name })
+            JSON.stringify({ email: data.email })
           );
-          
-          navigate('/home')
-          window.location.reload();
+
+          navigate("/home");
+          // window.location.reload();
         }
         data.error && alert("Authentication failed");
-      }).finally(e.target.reset())
+      })
+      .finally(e.target.reset());
   };
   return (
     <Container
@@ -106,7 +107,6 @@ const Login = () => {
             {error && <Alert severity="error">{error}</Alert>}
           </form>
 
-         
           <Typography sx={{ textAlign: "center" }} variant="body1">
             New user{" "}
             <Button onClick={() => navigate("/register")}>

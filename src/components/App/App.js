@@ -43,7 +43,7 @@ const App = () => {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
 
-            {/* sub routes */}
+            {/* other routes */}
             <Route path="/searchHotels" element={<SearchHotels />} />
             <Route path="/bestRooms" element={<BestRooms />} />
             <Route
@@ -58,10 +58,11 @@ const App = () => {
                 </PrivateRoute>
               }
             />
-            {/* <Route path="/review/:name" element={<Review />} />
-            <Route path="/reviews" element={<Reviews />} /> */}
+           
+           {/* authentication routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            
             {/* dashboard routes */}]
             <Route
               path="/dashboard"
@@ -71,9 +72,27 @@ const App = () => {
                 </PrivateRoute>
               }
             >
+
+            {/* admin route dashboard home page */}
+            <Route
+              path="/dashboard"
+              element={
+                <AdminRoute>
+                  <MakeAdmin/>
+                </AdminRoute>
+              }
+            />
+            {/* normal user dashboard home page */}
+            <Route path="/dashboard" element={<PrivateRoute><MyBookings /></PrivateRoute>} />
+            
+
+              {/* normal user routes */}
               <Route path="/dashboard/myBookings" element={<MyBookings />} />
               <Route path="/dashboard/myReviews" element={<MyReviews />} />
               <Route path="/dashboard/review/:name" element={<Review />} />
+              
+              {/* admin routes */}
+              
               <Route
                 path="/dashboard/makeAdmin"
                 element={

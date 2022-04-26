@@ -146,9 +146,9 @@ const Header = () => {
 
           <Box sx={{ flexGrow: 0, alignItems: "center", display: "flex" }}>
             <Typography sx={{ mr: 1, fontSize: { md: 20 } }} variant="body1">
-              {user?.name}
+              {user?.name || "User"}
             </Typography>
-            <Tooltip title="Open settings">
+            <Tooltip title={`Logged as ${user?.role || "User"}`}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="user" src="" />
               </IconButton>

@@ -4,17 +4,12 @@ import useAllContext from "../../../../hooks/useAllContext";
 import Loader from "../../../Shared/Loader/Loader";
 
 const PrivateRoute = ({ children, ...rest }) => {
-  const { user, isLoading } = useAllContext();
+  const { user, userLoading } = useAllContext();
   const location = useLocation();
+  if(userLoading)return <Loader/>
+  if (user.email) return children;
+  if(!user.email) return <Navigate to="/login" state={{ from: location }} />;
   
-  if(isLoading){
-    return <Loader/>
-  }
-  else if (user) {
-    return children;
-  } else {
-    return <Navigate to="/login" state={{ from: location }} />;
-  }
 };
 
 export default PrivateRoute;
