@@ -14,50 +14,48 @@ import axiosInstance from "../../../../services/http.service";
 import Loader from "../../../Shared/Loader/Loader";
 import Toast from "../../../Shared/Toasts/Toast";
 
-const ManageExistingCities = () => {
+const ManageBannerCities = () => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [isDeletable, setIsDeletable] = useState(false);
-  const [cities, setCities] = useState(null);
+  const [photos, setPhotos] = useState(null);
 
   // context
   const { setTitle } = useAllContext();
 
   useEffect(() => {
-    setTitle("Manage Existing Cities");
+    setTitle("Manage Gallery Photos");
     (async () => {
-      const res = await axiosInstance.get("/cities");
-      setCities(res.data);
+      const res = await axiosInstance.get("/photos");
+      setPhotos(res.data);
     })();
   }, []);
 
-  console.log(cities);
+  console.log(photos);
 
   // table titles
   const titles = [
     { id: 1, label: "Image" },
-    { id: 2, label: "Name" },
-    { id: 3, label: "Available Hotels" },
-    { id: 4, label: "Rating" },
+    { id: 2, label: "Photographer" },
     { id: 5, label: "Actions" },
   ];
 
   // handlers
-  const handleDeleteCity = (id) => {
+  const handleDeletePhoto = (id) => {
     //  reset messages
     setIsDeletable(false);
     setIsDeleted(false);
     // sending delete request
-    axiosInstance.delete(`/city?id=${id}`).then((res) => {
+    axiosInstance.delete(`/photo?id=${id}`).then((res) => {
       if (res.data.deletedCount) {
         setIsDeleted(true);
-        setCities((prevState) => prevState.filter((city) => city._id !== id));
+        setPhotos((prevState) => prevState.filter((photo) => photo._id !== id));
       } else {
         setIsDeletable(true);
       }
     });
   };
 
-  return cities ? (
+  return photos ? (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 540 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -69,21 +67,19 @@ const ManageExistingCities = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {cities.map((row) => {
+            {photos.map((row) => {
               return (
                 <TableRow key={row._id} hover>
                   <TableCell
                     component={"img"}
-                    sx={{ width: "100%", height: "100px" }}
-                    src={row.img}
+                    sx={{ width: "200px", height: "auto" }}
+                    src={row.src}
                   />
                   <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.hotels}</TableCell>
-                  <TableCell>{row.rating}</TableCell>
 
                   <TableCell>
                     <IconButton
-                      onClick={() => handleDeleteCity(row._id)}
+                      onClick={() => handleDeletePhoto(row._id)}
                       title="Delete Blog"
                       color="error"
                     >
@@ -112,7 +108,7 @@ const ManageExistingCities = () => {
       {isDeletable && (
         <Toast
           severity="warning"
-          message="Sorry, You cannot delete the existing city. Please create a new one to perform this action."
+          message="Sorry, You cannot delete the existing photos. Please create a new one to perform this action."
           setShowToast={setIsDeletable}
         />
       )}
@@ -122,4 +118,4 @@ const ManageExistingCities = () => {
   );
 };
 
-export default ManageExistingCities;
+export default ManageBannerCities;

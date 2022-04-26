@@ -14,9 +14,9 @@ import AddPhoto from "./Dashboard/AddPhoto/AddPhoto";
 import CreateBlog from "./Dashboard/CreateBlog/CreateBlog";
 import DashboardContainer from "./Dashboard/Dashboard";
 import MakeAdmin from "./Dashboard/MakeAdmin/MakeAdmin";
+import ManageBannerCities from './Dashboard/ManageBannerCities/ManageBannerCities';
 import ManageBlogs from "./Dashboard/ManageBlogs/ManageBlogs";
-import ManageExistingCities from "./Dashboard/ManageExistingCities/ManageExistingCities";
-import ManageExistingPhoto from "./Dashboard/ManageExistingPhoto/ManageExistingPhoto";
+import ManageGalleryPhotos from "./Dashboard/ManageGalleryPhotos/ManageGalleryPhotos";
 import MyBookings from "./Dashboard/MyBookings/MyBookings";
 import MyReviews from "./Dashboard/MyReviews/MyReviews";
 import Review from "./Dashboard/Review/Review";
@@ -88,7 +88,7 @@ const App = () => {
                 path="/dashboard/manageExistingCities"
                 element={
                   <AdminRoute>
-                    <ManageExistingCities />
+                    <ManageBannerCities />
                   </AdminRoute>
                 }
               />
@@ -114,7 +114,7 @@ const App = () => {
                 path="/dashboard/manageExistingPhoto"
                 element={
                   <AdminRoute>
-                    <ManageExistingPhoto />
+                    <ManageGalleryPhotos />
                   </AdminRoute>
                 }
               />
