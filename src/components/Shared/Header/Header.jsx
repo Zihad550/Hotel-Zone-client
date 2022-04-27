@@ -19,7 +19,7 @@ const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { user } = useAllContext();
-  console.log(user);
+  const { name, role } = user;
 
   const navigate = useNavigate();
 
@@ -146,9 +146,9 @@ const Header = () => {
 
           <Box sx={{ flexGrow: 0, alignItems: "center", display: "flex" }}>
             <Typography sx={{ mr: 1, fontSize: { md: 20 } }} variant="body1">
-              {user?.name || "User"}
+              {name}
             </Typography>
-            <Tooltip title={`Logged as ${user?.role || "User"}`}>
+            <Tooltip title={role ? `Logged as ${role}` : `User menu`}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="user" src="" />
               </IconButton>

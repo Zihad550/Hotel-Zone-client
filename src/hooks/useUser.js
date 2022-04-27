@@ -22,8 +22,10 @@ const useUser = () => {
   }, [])
 
   useEffect(() => {
-    // setUserLoading(true)
+   
     (async() => {
+      setUserLoading(true)
+      console.log('loading')
       const res = await axiosInstance.get(`/user?email=${savedUser.email}`) 
       setUser(res.data)
       setUserLoading(false)
