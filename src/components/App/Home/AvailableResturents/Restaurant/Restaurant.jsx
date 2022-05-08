@@ -9,24 +9,22 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { addHotel } from "../../../../../redux/actions/hotelActions";
-import { addBookingInfo } from "../../../../../redux/actions/hotelBookingActions";
 
-const Restaurant = ({ restaurant, bookingInfo }) => {
-  const { hotel_name, address, max_photo_url, review_score, min_total_price } =
-    restaurant;
+const Restaurant = ({
+  restaurant: {
+    hotel_name,
+    address,
+    max_photo_url,
+    review_score,
+    min_total_price,
+  },
+}) => {
   const rating = review_score / 2;
   const navigate = useNavigate();
 
-  /* redux hooks */
-  const dispatch = useDispatch();
-
   /* handlers */
   const handleGoToBook = () => {
-    dispatch(addHotel(restaurant));
-    dispatch(addBookingInfo(bookingInfo));
     navigate(`/book`);
   };
 
@@ -45,7 +43,7 @@ const Restaurant = ({ restaurant, bookingInfo }) => {
             height="auto"
             width="100%"
             image={max_photo_url}
-            alt="green iguana"
+            alt={`${hotel_name} restaurant`}
           />
         </Grid>
         <Grid sx={{ height: "100%" }} item md={6} sm={6} xs={12}>
@@ -82,11 +80,6 @@ const Restaurant = ({ restaurant, bookingInfo }) => {
                 color="primary"
                 onClick={handleGoToBook}
                 sx={{ mt: "auto", height: "100%", fontSize: 17 }}
-                /*  onClick={() =>
-                  navigate(
-                    `/book/${hotel_name}/${min_total_price}/${latitude}/${longitude}/${currency_code}`
-                  )
-                } */
               >
                 Book
               </Button>

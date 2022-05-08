@@ -5,15 +5,18 @@ import {
   CardContent,
   CardMedia,
   Grid,
-  Typography
+  Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const MyBookedHotel = ({ hotel }) => {
+const MyBookedHotel = ({
+  hotel: { name, price, img, _id },
+  setRefresh,
+  setIsDeleted,
+}) => {
   const navigate = useNavigate();
-  const { name, price, img,  _id, setIsDeleted } = hotel;
 
   const handleCancelBook = () => {
     if (window.confirm("Are you sure")) {
@@ -25,6 +28,7 @@ const MyBookedHotel = ({ hotel }) => {
           if (data.deletedCount > 0) {
             alert("successfully deleted");
             setIsDeleted(true);
+            setRefresh(true);
           }
         });
     }

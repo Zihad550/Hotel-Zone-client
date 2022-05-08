@@ -7,36 +7,30 @@ import { useNavigate } from "react-router-dom";
 const SearchHotels = () => {
   // states
   const [cityName, setCityName] = useState("");
-  const [city, setCity] = useState({});
   const [searching, setSearching] = useState(false);
-  console.log(cityName)
 
   // react router hooks
   const navigate = useNavigate();
 
   // handlers
-  const  handleSearch = async () => {
+  const handleSearch = async () => {
     setSearching(true);
     const res = await fetch(
-        `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=${cityName}`,
-        {
-          headers: {
-            "x-rapidapi-host": "booking-com.p.rapidapi.com",
-            "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
-          },
-        }
-      )
-      
-        const data = await res.json();
-        setCity(data[0])
-        if(data[0].hotels > 0){
-          setSearching(false)
-          setCity(data[0])
-          const {dest_id, latitude, longitude} = data[0];
-          navigate(
-            `/AvailableResturents/${dest_id}/${latitude}/${longitude}`
-          );
-        }
+      `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=${cityName}`,
+      {
+        headers: {
+          "x-rapidapi-host": "booking-com.p.rapidapi.com",
+          "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
+        },
+      }
+    );
+
+    const data = await res.json();
+    if (data[0].hotels > 0) {
+      setSearching(false);
+      const { dest_id, latitude, longitude } = data[0];
+      navigate(`/AvailableResturents/${dest_id}/${latitude}/${longitude}`);
+    }
   };
 
   return (
@@ -67,7 +61,7 @@ const SearchHotels = () => {
         <Box
           sx={{
             display: "flex",
-            flexDirection: {xs: 'column', md: 'row'}
+            flexDirection: { xs: "column", md: "row" },
           }}
         >
           <TextField

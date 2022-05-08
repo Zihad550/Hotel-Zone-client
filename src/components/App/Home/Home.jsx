@@ -24,9 +24,6 @@ const Home = () => {
       {/* best rooms */}
       <BestRooms />
 
-      {/* recent reviews */}
-      {/* <RecentReviews /> */}
-
       {/* our partners */}
       <OurPartners />
 

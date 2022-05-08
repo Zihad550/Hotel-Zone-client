@@ -1,10 +1,10 @@
+import Header from "components/Shared/Header/Header";
+import ContextProvider from "contexts/ContextProvider";
+import { ErrorBoundary } from 'ErrorBoundary/ErrorBoundary';
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import ContextProvider from "../../contexts/ContextProvider";
-import { ErrorBoundary } from '../../ErrorBoundary/ErrorBoundary';
-import Header from "../Shared/Header/Header";
 import AboutUs from './AboutUs/AboutUs';
 import "./App.css";
 import Blogs from "./Blogs/Blogs";
@@ -29,6 +29,8 @@ import AdminRoute from "./Login/AdminRoute/AdminRoute";
 import Login from "./Login/Login/Login";
 import PrivateRoute from "./Login/PrivateRoute/PrivateRoute";
 import Register from "./Login/Register/Register";
+
+
 const App = () => {
   return (
     <ErrorBoundary>

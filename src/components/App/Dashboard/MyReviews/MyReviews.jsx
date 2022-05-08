@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
+import ShowReview from "components/Shared/ShowReview/ShowReview";
+import useAllContext from "hooks/useAllContext";
 import React, { useEffect, useState } from "react";
-import useAllContext from "../../../../hooks/useAllContext";
-import ShowReview from "../../../Shared/ShowReview/ShowReview";
 
 const MyReviews = () => {
   const [myReviews, setMyReviews] = useState([]);

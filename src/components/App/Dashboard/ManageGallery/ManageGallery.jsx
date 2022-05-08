@@ -8,15 +8,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/system";
+import Loader from "components/Shared/Loader/Loader";
+import Toast from "components/Shared/Toasts/Toast";
+import useAllContext from "hooks/useAllContext";
 import React, { useEffect, useState } from "react";
-import useAllContext from "../../../../hooks/useAllContext";
-import axiosInstance from "../../../../services/http.service";
-import Loader from "../../../Shared/Loader/Loader";
-import Toast from "../../../Shared/Toasts/Toast";
+import axiosInstance from "services/http.service";
 
-const ManageBannerCities = () => {
+const ManageGallery = () => {
   const [isDeleted, setIsDeleted] = useState(false);
-  const [isDeletable, setIsDeletable] = useState(false);
+  const [isNotDeletable, setIsNotDeletable] = useState(false);
   const [photos, setPhotos] = useState(null);
 
   // context
@@ -30,8 +30,6 @@ const ManageBannerCities = () => {
     })();
   }, []);
 
-  console.log(photos);
-
   // table titles
   const titles = [
     { id: 1, label: "Image" },
@@ -41,18 +39,22 @@ const ManageBannerCities = () => {
 
   // handlers
   const handleDeletePhoto = (id) => {
-    //  reset messages
-    setIsDeletable(false);
-    setIsDeleted(false);
+    //  reset all alerts
+    handleResetAlerts();
     // sending delete request
     axiosInstance.delete(`/photo?id=${id}`).then((res) => {
       if (res.data.deletedCount) {
         setIsDeleted(true);
         setPhotos((prevState) => prevState.filter((photo) => photo._id !== id));
       } else {
-        setIsDeletable(true);
+        setIsNotDeletable(true);
       }
     });
+  };
+
+  const handleResetAlerts = () => {
+    setIsNotDeletable(false);
+    setIsDeleted(false);
   };
 
   return photos ? (
@@ -105,11 +107,11 @@ const ManageBannerCities = () => {
           setShowToast={setIsDeleted}
         />
       )}
-      {isDeletable && (
+      {isNotDeletable && (
         <Toast
           severity="warning"
           message="Sorry, You cannot delete the existing photos. Please create a new one to perform this action."
-          setShowToast={setIsDeletable}
+          setShowToast={setIsNotDeletable}
         />
       )}
     </Paper>
@@ -118,4 +120,4 @@ const ManageBannerCities = () => {
   );
 };
 
-export default ManageBannerCities;
+export default ManageGallery;

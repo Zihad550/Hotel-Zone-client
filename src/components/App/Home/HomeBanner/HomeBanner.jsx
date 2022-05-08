@@ -9,32 +9,8 @@ import Loader from "../../../Shared/Loader/Loader";
 import SearchHotels from "../SearchHotels/SearchHotels";
 import BannerArrow from "./BannerArrow/BannerArrow";
 
-function PrevArrow(props) {
-  const { onClick } = props;
-  return (
-    <Box
-      sx={{
-        background: "violet",
-        zIndex: "10",
-        position: "absolute",
-        left: 0,
-        bottom: " 50%",
-        padding: "10px",
-        borderTopRightRadius: "50px",
-        borderBottomRightRadius: "50px",
-        cursor: "pointer",
-        color: "white",
-      }}
-      onClick={onClick}
-    >
-      <ArrowBackIosNewIcon />
-    </Box>
-  );
-}
-
 const Banner = () => {
   const [cities, setCities] = useState(null);
-  console.log(cities);
 
   useEffect(() => {
     (async () => {

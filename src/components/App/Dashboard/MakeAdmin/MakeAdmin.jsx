@@ -1,7 +1,7 @@
 import { Alert, Button, Grid, TextField, Typography } from "@mui/material";
+import makeAdminImage from "assets/images/admin.svg";
+import useAllContext from "hooks/useAllContext";
 import React, { useEffect, useState } from "react";
-import useAllContext from "../../../../hooks/useAllContext";
-import makeAdminImage from "../../../../images/admin.svg";
 
 const MakeAdmin = () => {
   // states
@@ -9,11 +9,11 @@ const MakeAdmin = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
-  // context 
-  const {setTitle} = useAllContext();
+  // context
+  const { setTitle } = useAllContext();
   useEffect(() => {
-    setTitle('Make Admin');
-  }, [])
+    setTitle("Make Admin");
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,9 +27,8 @@ const MakeAdmin = () => {
       .then((data) => {
         if (data.modifiedCount) {
           setSuccess(true);
-        }
-        else{
-          setError(true)
+        } else {
+          setError(true);
         }
       });
   };
@@ -78,8 +77,8 @@ const MakeAdmin = () => {
             Make Admin
           </Button>
         </form>
-        {success && <Alert severity="success">Made Admin successfully</Alert> }
-        {error &&  <Alert severity="error">User does not exists</Alert>}
+        {success && <Alert severity="success">Made Admin successfully</Alert>}
+        {error && <Alert severity="error">User does not exists</Alert>}
       </Grid>
     </Grid>
   );

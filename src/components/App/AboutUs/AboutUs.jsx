@@ -4,15 +4,15 @@ import {
   faHeadset,
   faSackDollar,
   faShield,
-  faSquareCheck,
+  faSquareCheck
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Container, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import Banner from "components/Shared/Banner/Banner.jsx";
+import Footer from "components/Shared/Footer/Footer";
+import src from "images/aboutUs/aboutUs-banner.jpg";
 import React from "react";
-import src from "../../../images/aboutUs/aboutUs-banner.jpg";
-import Banner from "../../Shared/Banner/Banner.jsx";
-import Footer from "../../Shared/Footer/Footer";
 const AboutUs = () => {
   const services = [
     {

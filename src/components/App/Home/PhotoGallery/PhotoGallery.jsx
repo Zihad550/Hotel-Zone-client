@@ -10,7 +10,6 @@ function PhotoGallery() {
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
   const [photos, setPhotos] = useState(null);
-  console.log(photos);
 
   // function to open the lightbox with current photo index
   const openLightbox = useCallback((index) => {

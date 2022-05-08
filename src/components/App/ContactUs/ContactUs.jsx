@@ -7,19 +7,19 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Container, Grid, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import Banner from "components/Shared/Banner/Banner";
+import Footer from "components/Shared/Footer/Footer";
+import src from "images/contactUs/contact-banner.jpg";
 import React from "react";
-import src from "../../../images/contactUs/contact-banner.jpg";
-import Banner from "../../Shared/Banner/Banner";
-import Footer from "../../Shared/Footer/Footer";
 import { btn } from "./contact.style.module.css";
 import ContactAccordion from "./ContactAccordion";
+
 const ContactUs = () => {
-  // handlers
-  const handleContactUs = (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
   };
 
-  const inputs = [
+  const inputFields = [
     { id: 1, name: "name", label: "Name", type: "text" },
     { id: 2, name: "email", label: "E-mail", type: "email" },
   ];
@@ -61,9 +61,9 @@ const ContactUs = () => {
             <form
               className="responsive-form"
               style={{ width: "100%" }}
-              onSubmit={handleContactUs}
+              onSubmit={handleFormSubmit}
             >
-              {inputs.map((input) => (
+              {inputFields.map((input) => (
                 <TextField
                   fullWidth
                   required

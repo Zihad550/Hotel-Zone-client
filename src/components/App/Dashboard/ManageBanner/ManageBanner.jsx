@@ -8,13 +8,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/system";
+import Loader from "components/Shared/Loader/Loader";
+import Toast from "components/Shared/Toasts/Toast";
+import useAllContext from "hooks/useAllContext";
 import React, { useEffect, useState } from "react";
-import useAllContext from "../../../../hooks/useAllContext";
-import axiosInstance from "../../../../services/http.service";
-import Loader from "../../../Shared/Loader/Loader";
-import Toast from "../../../Shared/Toasts/Toast";
+import axiosInstance from "services/http.service";
 
-const ManageBannerCities = () => {
+const ManageBanner = () => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [isDeletable, setIsDeletable] = useState(false);
   const [cities, setCities] = useState(null);
@@ -29,8 +29,6 @@ const ManageBannerCities = () => {
       setCities(res.data);
     })();
   }, []);
-
-  console.log(cities);
 
   // table titles
   const titles = [
@@ -122,4 +120,4 @@ const ManageBannerCities = () => {
   );
 };
 
-export default ManageBannerCities;
+export default ManageBanner;

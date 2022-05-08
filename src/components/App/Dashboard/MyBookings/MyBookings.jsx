@@ -1,39 +1,54 @@
 import { Grid } from "@mui/material";
+import Loader from "components/Shared/Loader/Loader";
+import Toast from "components/Shared/Toasts/Toast";
+import useAllContext from "hooks/useAllContext";
 import React, { useEffect, useState } from "react";
-import useAllContext from "../../../../hooks/useAllContext";
-import axiosInstance from "../../../../services/http.service";
-import AlertModal from "../../../Shared/AlertModal/AlertModal";
-import Loader from "../../../Shared/Loader/Loader";
-import MyBookedHotel from "../MyBookedHotel/MyBookedHotel";
+import axiosInstance from "services/http.service";
+import MyBookedHotel from "./MyBookedHotel";
 
 const MyBookings = () => {
   // states
   const [bookedHotels, setBookedHotels] = useState(null);
+  const [refresh, setRefresh] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
-  console.log("here");
   // context
   const { user } = useAllContext();
 
   useEffect(() => {
     (async () => {
+      setRefresh(false);
+      setIsDeleted(false);
       setBookedHotels(
         await axiosInstance
           .get(`/booked?email${user.email}`)
           .then((res) => res.data)
       );
     })();
-  }, [isDeleted, user.email]);
+  }, [refresh, user.email]);
 
   return (
     <Grid container spacing={{ md: 2, xs: 1 }}>
       {bookedHotels ? (
         bookedHotels.map((hotel) => (
-          <MyBookedHotel key={hotel._id} hotel={{ ...hotel, setIsDeleted }} />
+          <MyBookedHotel
+            key={hotel._id}
+            hotel={hotel}
+            setRefresh={setRefresh}
+            setIsDeleted={setIsDeleted}
+          />
         ))
       ) : (
         <Loader />
       )}
-      <AlertModal isDeleted={isDeleted} setIsDeleted={setIsDeleted} />
+
+      {/* alerts */}
+      {isDeleted && (
+        <Toast
+          severity="success"
+          message="Successful"
+          setShowToast={setIsDeleted}
+        />
+      )}
     </Grid>
   );
 };

@@ -14,9 +14,7 @@ const useBlogs = () => {
             const res = await axiosInstance.get(
               `/blogs?blogsPerPage=${blogsPerPage}&currentPage=${currentPage}`
             );
-            console.log(res);
             setBlogs(res.data.blogs);
-            console.log(Math.ceil(res.data.total / blogsPerPage))
             setTotalBlogs(Math.ceil(res.data.total / blogsPerPage));
           })();
     }, [currentPage, refresh])

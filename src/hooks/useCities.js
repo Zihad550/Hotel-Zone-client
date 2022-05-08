@@ -5,7 +5,6 @@ const useCities = () => {
   const [cities, setCities] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
   useEffect(() => {
-    console.log('loading cities')
     (async() => {
       const res = await axios.get('/cities');
       setCities(res.data);

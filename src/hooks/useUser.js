@@ -11,7 +11,7 @@ const useUser = () => {
   const savedUser = JSON.parse(localStorage.getItem('hotelZoneUser'));
   
   useEffect(() => {
-      if(Object.keys(user).length > 0){
+      if(user.email){
         setIsLoading(true);
         (async() => {
           axios.get(`/admin?email=${user.email}`)
@@ -22,10 +22,9 @@ const useUser = () => {
   }, [])
 
   useEffect(() => {
-   
     (async() => {
+      if(!savedUser) return;
       setUserLoading(true)
-      console.log('loading')
       const res = await axiosInstance.get(`/user?email=${savedUser.email}`) 
       setUser(res.data)
       setUserLoading(false)

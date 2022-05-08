@@ -4,16 +4,16 @@ import {
   Grid,
   Rating,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import reviewImage from "assets/images/review-image.svg";
+import useAllContext from "hooks/useAllContext";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
-import useAllContext from "../../../../hooks/useAllContext";
-import reviewImage from "../../../../images/review-image.svg";
 
-const Review = () => {
+const GiveReview = () => {
   const { name } = useParams();
   const { user } = useAllContext();
   // hotel state variables
@@ -48,7 +48,7 @@ const Review = () => {
         userEmail: user.email,
         userName: user.displayName,
         ...review,
-        deletable: true
+        deletable: true,
       }),
     })
       .then((res) => res.json())
@@ -66,7 +66,7 @@ const Review = () => {
         </Grid>
         <Grid item xs={12} md={6}>
           <Typography variant="h5">
-            Review{" "}
+            Review
             <Typography
               sx={{ display: "inline-block" }}
               variant="h5"
@@ -78,7 +78,6 @@ const Review = () => {
           <form onSubmit={handleReview}>
             <TextField
               required
-              // defaultValue={user.displayName}
               size="small"
               name="userName"
               label="Name"
@@ -89,7 +88,6 @@ const Review = () => {
 
             <TextField
               required
-              // defaultValue={user.email}
               type="email"
               size="small"
               label="Email"
@@ -109,7 +107,7 @@ const Review = () => {
                   onChange={(event, newValue) => {
                     setSecurityRate(newValue);
                   }}
-                />{" "}
+                />
               </Box>
               <TextField
                 multiline
@@ -131,7 +129,7 @@ const Review = () => {
                   onChange={(event, newValue) => {
                     setHotelRate(newValue);
                   }}
-                />{" "}
+                />
               </Box>
               <TextField
                 multiline
@@ -144,14 +142,14 @@ const Review = () => {
               />
             </Box>
 
-            <Button type="submit" variant="contained" >
+            <Button type="submit" variant="contained">
               Send
             </Button>
-          </form>{" "}
+          </form>
         </Grid>
       </Grid>
     </Container>
   );
 };
 
-export default Review;
+export default GiveReview;

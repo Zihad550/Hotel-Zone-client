@@ -10,9 +10,9 @@ import {
   RadioGroup,
   TextField,
 } from "@mui/material";
+import useAllContext from "hooks/useAllContext";
 import React, { useEffect, useState } from "react";
-import useAllContext from "../../../../hooks/useAllContext";
-import axios from "../../../../services/http.service";
+import axios from "services/http.service";
 
 const CreateBlog = () => {
   // states
@@ -30,9 +30,7 @@ const CreateBlog = () => {
     setTitle("Create Blog");
   }, []);
 
-  // handlers
-
-  // triggers when submits the form
+  // handle create new blog
   const handleCreateBlog = (e) => {
     e.preventDefault();
     if (isSuccess || isError) resetMessage();
@@ -69,7 +67,6 @@ const CreateBlog = () => {
               if (res.data.insertedId) setIsSuccess(true);
               setData("");
               e.target.reset();
-              console.log(category);
             });
         });
     }

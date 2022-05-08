@@ -2,7 +2,6 @@ import { Box } from "@mui/system";
 import React from "react";
 
 const BannerArrow = ({ onClick, icon, position }) => {
-  console.log(position);
   return (
     <Box
       /*  style={position === "left" ? { left: 0 } : { right: 0 }} */

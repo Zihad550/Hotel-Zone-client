@@ -1,7 +1,7 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Alert, Button, Grid, TextField, Typography } from "@mui/material";
+import useAllContext from "hooks/useAllContext";
 import React, { useEffect, useState } from "react";
-import useAllContext from "../../../../hooks/useAllContext";
 
 const AddPhoto = () => {
   // states

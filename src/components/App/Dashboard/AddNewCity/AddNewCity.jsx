@@ -5,11 +5,11 @@ import {
   Grid,
   Rating,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import useAllContext from "hooks/useAllContext";
 import React, { useEffect, useState } from "react";
-import useAllContext from "../../../../hooks/useAllContext";
 
 const AddNewCity = () => {
   // states
@@ -17,11 +17,11 @@ const AddNewCity = () => {
   const [isAdded, setIsAdded] = useState(false);
 
   // context
-  const {setTitle} = useAllContext();
- 
+  const { setTitle } = useAllContext();
+
   useEffect(() => {
-    setTitle('Add New City');
-  }, [])
+    setTitle("Add New City");
+  }, []);
 
   const handleBlur = (e) => {
     const field = e.target.name;
@@ -39,7 +39,7 @@ const AddNewCity = () => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({...cityInfo, deletable: true}),
+      body: JSON.stringify({ ...cityInfo, deletable: true }),
     })
       .then((res) => res.json())
       .then((data) => data.insertedId && setIsAdded(true));

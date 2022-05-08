@@ -8,11 +8,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/system";
+import Loader from "components/Shared/Loader/Loader";
+import Toast from "components/Shared/Toasts/Toast";
+import useAllContext from "hooks/useAllContext";
 import React, { useEffect, useState } from "react";
-import useAllContext from "../../../../hooks/useAllContext";
-import axiosInstance from "../../../../services/http.service";
-import Loader from "../../../Shared/Loader/Loader";
-import Toast from "../../../Shared/Toasts/Toast";
+import axiosInstance from "services/http.service";
 
 // global variables
 const BLOGS_PER_PAGE = 9;
@@ -20,7 +20,7 @@ const BLOGS_PER_PAGE = 9;
 const ManageBlogs = () => {
   // states
   const [isDeleted, setIsDeleted] = useState(false);
-  const [isDeletable, setIsDeletable] = useState(false);
+  const [isNotDeletable, setIsNotDeletable] = useState(false);
 
   // context
   const {
@@ -48,17 +48,22 @@ const ManageBlogs = () => {
   // handlers
   const handleDeleteBlog = (id) => {
     //  reseting messages
-    setIsDeletable(false);
-    setIsDeleted(false);
+    handleResetAlerts();
     // sending delete request
     axiosInstance.delete(`/blog?id=${id}`).then((res) => {
       if (res.data.deletedCount) {
         setIsDeleted(true);
         setRefresh((prevState) => !prevState);
       } else {
-        setIsDeletable(true);
+        // if not deleted that means the blogs are private. so they are no deletable
+        setIsNotDeletable(true);
       }
     });
+  };
+
+  const handleResetAlerts = () => {
+    setIsNotDeletable(false);
+    setIsDeleted(false);
   };
   return blogs ? (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -117,11 +122,11 @@ const ManageBlogs = () => {
           setShowToast={setIsDeleted}
         />
       )}
-      {isDeletable && (
+      {isNotDeletable && (
         <Toast
           severity="warning"
           message="Sorry, You cannot delete the existing blog. Please create a new one to perform this action."
-          setShowToast={setIsDeletable}
+          setShowToast={setIsNotDeletable}
         />
       )}
     </Paper>
