@@ -10,20 +10,16 @@ import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/system";
 import Loader from "components/Shared/Loader/Loader";
 import Toast from "components/Shared/Toasts/Toast";
-import useAllContext from "hooks/useAllContext";
 import React, { useEffect, useState } from "react";
 import axiosInstance from "services/http.service";
 
-const ManageBanner = () => {
+const ManageBanner = ({ setDashboardPageTitle }) => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [isDeletable, setIsDeletable] = useState(false);
   const [cities, setCities] = useState(null);
 
-  // context
-  const { setTitle } = useAllContext();
-
   useEffect(() => {
-    setTitle("Manage Existing Cities");
+    setDashboardPageTitle("Manage Existing Cities");
     (async () => {
       const res = await axiosInstance.get("/cities");
       setCities(res.data);

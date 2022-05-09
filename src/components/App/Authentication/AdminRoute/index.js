@@ -1,2 +1,2 @@
-import AdminRoute from './AdmonRoute';
+import AdminRoute from './AdminRoute';
 export default AdminRoute;

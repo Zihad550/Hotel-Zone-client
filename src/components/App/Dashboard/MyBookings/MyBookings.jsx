@@ -1,21 +1,21 @@
 import { Grid } from "@mui/material";
 import Loader from "components/Shared/Loader/Loader";
 import Toast from "components/Shared/Toasts/Toast";
-import useAllContext from "hooks/useAllContext";
+import useAuth from "hooks/useAuth";
 import React, { useEffect, useState } from "react";
 import axiosInstance from "services/http.service";
 import MyBookedHotel from "./MyBookedHotel";
 
-const MyBookings = () => {
+const MyBookings = ({ setDashboardPageTitle }) => {
   // states
   const [bookedHotels, setBookedHotels] = useState(null);
   const [refresh, setRefresh] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
   // context
-  const { user } = useAllContext();
+  const { user } = useAuth();
 
   useEffect(() => {
-    (async () => {
+    setDashboardPageTitle("My Bookings")(async () => {
       setRefresh(false);
       setIsDeleted(false);
       setBookedHotels(

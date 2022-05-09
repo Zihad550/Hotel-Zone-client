@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import useAllContext from "hooks/useAllContext";
+import useAuth from "hooks/useAuth";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "services/http.service";
@@ -27,7 +27,7 @@ const Details = () => {
   } = hotel;
 
   // usefirebase datas
-  const { user } = useAllContext();
+  const { user } = useAuth();
 
   const { adults, children, rooms, checkIn, checkOut } = bookingInfo;
   const [bookingDetails, setBookingDetails] = useState({

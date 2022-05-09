@@ -10,11 +10,10 @@ import {
   RadioGroup,
   TextField,
 } from "@mui/material";
-import useAllContext from "hooks/useAllContext";
 import React, { useEffect, useState } from "react";
 import axios from "services/http.service";
 
-const CreateBlog = () => {
+const CreateBlog = ({ setDashboardPageTitle }) => {
   // states
   const [data, setData] = useState({});
   const [category, setCategory] = useState("Offer");
@@ -22,12 +21,8 @@ const CreateBlog = () => {
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  // context
-  const { setTitle } = useAllContext();
-
-  // side effects
   useEffect(() => {
-    setTitle("Create Blog");
+    setDashboardPageTitle("Create Blog");
   }, []);
 
   // handle create new blog

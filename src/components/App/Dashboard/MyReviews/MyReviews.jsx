@@ -1,11 +1,11 @@
 import { Grid } from "@mui/material";
 import ShowReview from "components/Shared/ShowReview/ShowReview";
-import useAllContext from "hooks/useAllContext";
+import useAuth from "hooks/useAuth";
 import React, { useEffect, useState } from "react";
 
 const MyReviews = () => {
   const [myReviews, setMyReviews] = useState([]);
-  const { user } = useAllContext();
+  const { user } = useAuth();
   useEffect(() => {
     fetch(
       `https://polar-island-87071.herokuapp.com/reviews/review?email=${user.email}`

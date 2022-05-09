@@ -4,7 +4,7 @@ import bannerImgSrc from "assets/images/blogs/blogs-banner.jpg";
 import Banner from "components/Shared/Banner";
 import Footer from "components/Shared/Footer";
 import Loader from "components/Shared/Loader";
-import useAllContext from "hooks/useAllContext";
+import useBlogs from "hooks/useBlogs";
 import React, { useEffect } from "react";
 import Blog from "./Blog";
 
@@ -13,7 +13,7 @@ const BLOGS_PER_PAGE = 9;
 
 const Blogs = () => {
   const { blogs, currentPage, setCurrentPage, totalBlogs, setBlogsPerPage } =
-    useAllContext();
+    useBlogs();
 
   useEffect(() => {
     setBlogsPerPage(BLOGS_PER_PAGE);

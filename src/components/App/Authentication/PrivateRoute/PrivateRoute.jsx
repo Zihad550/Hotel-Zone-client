@@ -1,10 +1,10 @@
 import Loader from "components/Shared/Loader";
-import useAllContext from "hooks/useAllContext";
+import useAuth from "hooks/useAuth";
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
 const PrivateRoute = ({ children, ...rest }) => {
-  const { user, userLoading } = useAllContext();
+  const { user, userLoading } = useAuth();
   const location = useLocation();
   if (userLoading) return <Loader />;
   if (user.email) return children;

@@ -10,14 +10,14 @@ import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/system";
 import Loader from "components/Shared/Loader/Loader";
 import Toast from "components/Shared/Toasts/Toast";
-import useAllContext from "hooks/useAllContext";
+import useBlogs from "hooks/useBlogs";
 import React, { useEffect, useState } from "react";
 import axiosInstance from "services/http.service";
 
 // global variables
 const BLOGS_PER_PAGE = 9;
 
-const ManageBlogs = () => {
+const ManageBlogs = ({ setDashboardPageTitle }) => {
   // states
   const [isDeleted, setIsDeleted] = useState(false);
   const [isNotDeletable, setIsNotDeletable] = useState(false);
@@ -30,11 +30,12 @@ const ManageBlogs = () => {
     totalBlogs,
     setBlogsPerPage,
     setRefresh,
-  } = useAllContext();
+  } = useBlogs();
 
   // side effects
   useEffect(() => {
     setBlogsPerPage(BLOGS_PER_PAGE);
+    setDashboardPageTitle("Manage Blogs");
   }, []);
 
   // table titles

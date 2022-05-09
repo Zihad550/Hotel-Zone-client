@@ -10,20 +10,16 @@ import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/system";
 import Loader from "components/Shared/Loader/Loader";
 import Toast from "components/Shared/Toasts/Toast";
-import useAllContext from "hooks/useAllContext";
 import React, { useEffect, useState } from "react";
 import axiosInstance from "services/http.service";
 
-const ManageGallery = () => {
+const ManageGallery = ({ setDashboardPageTitle }) => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [isNotDeletable, setIsNotDeletable] = useState(false);
   const [photos, setPhotos] = useState(null);
 
-  // context
-  const { setTitle } = useAllContext();
-
   useEffect(() => {
-    setTitle("Manage Gallery Photos");
+    setDashboardPageTitle("Manage Gallery Photos");
     (async () => {
       const res = await axiosInstance.get("/photos");
       setPhotos(res.data);

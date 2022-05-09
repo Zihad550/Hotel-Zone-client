@@ -1,9 +1,8 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Alert, Button, Grid, TextField, Typography } from "@mui/material";
-import useAllContext from "hooks/useAllContext";
 import React, { useEffect, useState } from "react";
 
-const AddPhoto = () => {
+const AddPhoto = ({ setDashboardPageTitle }) => {
   // states
   const [photoInfo, setPhotoInfo] = useState({
     name: "",
@@ -11,10 +10,8 @@ const AddPhoto = () => {
   });
   const [isAdded, setIsAdded] = useState(false);
 
-  // context
-  const { setTitle } = useAllContext();
   useEffect(() => {
-    setTitle("Add New Photo");
+    setDashboardPageTitle("Add New Photo");
   }, []);
 
   const handleBlur = (e) => {

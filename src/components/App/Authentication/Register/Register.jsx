@@ -7,13 +7,13 @@ import {
   Typography,
 } from "@mui/material";
 import registerImage from "assets/images/register.jpg";
-import useAllContext from "hooks/useAllContext";
+import useAuth from "hooks/useAuth";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   // use firebase
-  const { error } = useAllContext();
+  const { error } = useAuth();
 
   // navigate & location
   const navigate = useNavigate();

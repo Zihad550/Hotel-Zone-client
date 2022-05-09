@@ -31,7 +31,7 @@ import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import * as React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import useAllContext from "../../../hooks/useAllContext";
+import useAuth from "../../../hooks/useAuth";
 
 const drawerWidth = 240;
 
@@ -100,7 +100,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-function DashboardContainer() {
+function DashboardContainer({ dashboardPageTitle }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -115,13 +115,12 @@ function DashboardContainer() {
   const [manageCityOpen, setManageCityOpen] = React.useState(false);
   const [manageGalleryOpen, setManageGalleryOpen] = React.useState(false);
   const [manageBlogOpen, setManageBlogOpen] = React.useState(false);
-  const { title } = useAllContext();
 
   // navigate
   const navigate = useNavigate();
 
-  // useAllContext
-  const { admin } = useAllContext();
+  // useAuth
+  const { admin } = useAuth();
 
   // manage city routes
   const manageCityRoutes = [
@@ -314,7 +313,7 @@ function DashboardContainer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            {title}
+            {dashboardPageTitle}
           </Typography>
         </Toolbar>
       </AppBar>

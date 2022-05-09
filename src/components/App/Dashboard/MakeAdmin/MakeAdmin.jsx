@@ -1,18 +1,15 @@
 import { Alert, Button, Grid, TextField, Typography } from "@mui/material";
 import makeAdminImage from "assets/images/admin.svg";
-import useAllContext from "hooks/useAllContext";
 import React, { useEffect, useState } from "react";
 
-const MakeAdmin = () => {
+const MakeAdmin = ({ setDashboardPageTitle }) => {
   // states
   const [email, setEmail] = useState("");
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
-  // context
-  const { setTitle } = useAllContext();
   useEffect(() => {
-    setTitle("Make Admin");
+    setDashboardPageTitle("Make Admin");
   }, []);
 
   const handleSubmit = (e) => {

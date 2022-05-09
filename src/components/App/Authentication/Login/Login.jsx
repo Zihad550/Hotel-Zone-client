@@ -7,13 +7,13 @@ import {
   Typography,
 } from "@mui/material";
 import loginImage from "assets/images/login.jpg";
-import useAllContext from "hooks/useAllContext";
+import useAuth from "hooks/useAuth";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   // context
-  const { error, setUser } = useAllContext();
+  const { error, setUser } = useAuth();
   // navigate & location
   const navigate = useNavigate();
 

@@ -8,19 +8,23 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import reviewImage from "assets/images/review-image.svg";
-import useAllContext from "hooks/useAllContext";
-import React, { useState } from "react";
+import useAuth from "hooks/useAuth";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 
-const GiveReview = () => {
+const GiveReview = ({ setDashboardPageTitle }) => {
   const { name } = useParams();
-  const { user } = useAllContext();
+  const { user } = useAuth();
   // hotel state variables
   const [securityRate, setSecurityRate] = useState(0);
   const [hotelRate, setHotelRate] = useState(0);
   const [homeMessage, setHomeMessage] = useState("");
   const [securityMessage, setSecurityMessage] = useState("");
+
+  useEffect(() => {
+    setDashboardPageTitle("Review");
+  }, []);
 
   // redux
   const hotel = useSelector((state) => state.hotel[0]);

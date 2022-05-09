@@ -10,7 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import useAllContext from "hooks/useAllContext";
+import useAuth from "hooks/useAuth";
 import * as React from "react";
 import { useLocation, useNavigate } from "react-router";
 
@@ -18,7 +18,7 @@ const Header = () => {
   const location = useLocation();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const { user } = useAllContext();
+  const { user } = useAuth();
   const { name, role } = user;
 
   const navigate = useNavigate();
