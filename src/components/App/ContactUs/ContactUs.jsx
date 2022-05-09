@@ -7,9 +7,9 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Container, Grid, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import Banner from "components/Shared/Banner/Banner";
-import Footer from "components/Shared/Footer/Footer";
-import src from "images/contactUs/contact-banner.jpg";
+import src from "assets/images/contactUs/contact-banner.jpg";
+import Banner from "components/Shared/Banner";
+import Footer from "components/Shared/Footer";
 import React from "react";
 import { btn } from "./contact.style.module.css";
 import ContactAccordion from "./ContactAccordion";

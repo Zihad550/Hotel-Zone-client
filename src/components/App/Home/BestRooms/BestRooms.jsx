@@ -11,8 +11,8 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import Loader from "components/Shared/Loader";
 import React, { useEffect, useState } from "react";
-import Loader from "../../../Shared/Loader/Loader";
 
 const BestRooms = () => {
   const [rooms, setRooms] = useState(null);

@@ -10,9 +10,9 @@ import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
+import useAllContext from "hooks/useAllContext";
 import * as React from "react";
 import { useLocation, useNavigate } from "react-router";
-import useAllContext from "../../../hooks/useAllContext";
 
 const Header = () => {
   const location = useLocation();

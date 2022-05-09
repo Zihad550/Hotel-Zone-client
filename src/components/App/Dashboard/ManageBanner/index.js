@@ -1,2 +1,2 @@
-import ManageBannerCities from './ManageBannerCities';
-export default ManageBannerCities;
+import ManageBanner from './ManageBanner';
+export default ManageBanner;

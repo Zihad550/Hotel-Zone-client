@@ -1,12 +1,12 @@
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
+import Loader from "components/Shared/Loader";
 import React, { useCallback, useEffect, useState } from "react";
 import Carousel, { Modal, ModalGateway } from "react-images";
 import Slider from "react-slick";
-import axiosInstance from "../../../../services/http.service";
-import Loader from "../../../Shared/Loader/Loader";
+import axiosInstance from "services/http.service";
 
-function PhotoGallery() {
+const PhotoGallery = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
   const [photos, setPhotos] = useState(null);
@@ -128,6 +128,6 @@ function PhotoGallery() {
       </ModalGateway>
     </Box>
   );
-}
+};
 
 export default PhotoGallery;

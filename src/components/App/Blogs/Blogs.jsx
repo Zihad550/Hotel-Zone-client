@@ -1,10 +1,10 @@
 import { Container, Grid, Pagination } from "@mui/material";
 import { Box } from "@mui/system";
+import bannerImgSrc from "assets/images/blogs/blogs-banner.jpg";
 import Banner from "components/Shared/Banner";
 import Footer from "components/Shared/Footer";
 import Loader from "components/Shared/Loader";
 import useAllContext from "hooks/useAllContext";
-import bannerImgSrc from "images/blogs/blogs-banner.jpg";
 import React, { useEffect } from "react";
 import Blog from "./Blog";
 

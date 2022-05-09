@@ -7,28 +7,27 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import AboutUs from './AboutUs/AboutUs';
 import "./App.css";
+import AdminRoute from "./Authentication/AdminRoute/AdminRoute";
+import Login from "./Authentication/Login/Login";
+import PrivateRoute from "./Authentication/PrivateRoute/PrivateRoute";
+import Register from "./Authentication/Register/Register";
 import Blogs from "./Blogs/Blogs";
 import ContactUs from "./ContactUs/ContactUs";
 import AddNewCity from './Dashboard/AddNewCity/AddNewCity';
 import AddPhoto from "./Dashboard/AddPhoto/AddPhoto";
 import CreateBlog from "./Dashboard/CreateBlog/CreateBlog";
 import DashboardContainer from "./Dashboard/Dashboard";
+import GiveReview from "./Dashboard/GiveReview/GiveReview";
 import MakeAdmin from "./Dashboard/MakeAdmin/MakeAdmin";
-import ManageBannerCities from './Dashboard/ManageBannerCities/ManageBannerCities';
+import ManageBanner from './Dashboard/ManageBanner/ManageBanner';
 import ManageBlogs from "./Dashboard/ManageBlogs/ManageBlogs";
-import ManageGalleryPhotos from "./Dashboard/ManageGalleryPhotos/ManageGalleryPhotos";
+import ManageGalleryPhotos from "./Dashboard/ManageGallery/ManageGallery";
 import MyBookings from "./Dashboard/MyBookings/MyBookings";
 import MyReviews from "./Dashboard/MyReviews/MyReviews";
-import Review from "./Dashboard/Review/Review";
-import AvailableResturents from "./Home/AvailableResturents/AvailableResturents";
 import BestRooms from "./Home/BestRooms/BestRooms";
 import Book from "./Home/Book/Book";
 import Home from "./Home/Home";
-import SearchHotels from "./Home/SearchHotels/SearchHotels";
-import AdminRoute from "./Login/AdminRoute/AdminRoute";
-import Login from "./Login/Login/Login";
-import PrivateRoute from "./Login/PrivateRoute/PrivateRoute";
-import Register from "./Login/Register/Register";
+import AvailableResturents from "./Home/Hotels/Hotels";
 
 
 const App = () => {
@@ -46,7 +45,6 @@ const App = () => {
             <Route path="/contact" element={<ContactUs />} />
 
             {/* other routes */}
-            <Route path="/searchHotels" element={<SearchHotels />} />
             <Route path="/bestRooms" element={<BestRooms />} />
             <Route
               path="/availableResturents/:dest_id/:latitude/:longitude"
@@ -91,7 +89,7 @@ const App = () => {
               {/* normal user routes */}
               <Route path="/dashboard/myBookings" element={<MyBookings />} />
               <Route path="/dashboard/myReviews" element={<MyReviews />} />
-              <Route path="/dashboard/review/:name" element={<Review />} />
+              <Route path="/dashboard/review/:name" element={<GiveReview />} />
               
               {/* admin routes */}
               
@@ -109,7 +107,7 @@ const App = () => {
                 path="/dashboard/manageExistingCities"
                 element={
                   <AdminRoute>
-                    <ManageBannerCities />
+                    <ManageBanner />
                   </AdminRoute>
                 }
               />

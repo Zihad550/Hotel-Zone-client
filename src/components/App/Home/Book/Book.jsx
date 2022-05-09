@@ -5,21 +5,18 @@ import {
   InputAdornment,
   InputLabel,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import useAllContext from "hooks/useAllContext";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import useAllContext from "../../../../hooks/useAllContext";
-import axios from "../../../../services/http.service";
-import Locations from "./Locations/Locations";
+import axios from "services/http.service";
+import Locations from "./Locations";
 
 const Details = () => {
-  // redux datas
-
-  const hotel = useSelector((state) => state.hotel[0]);
-  const bookingInfo = useSelector((state) => state.bookingInfo[0]);
+  const hotel = {};
+  const bookingInfo = {};
   const {
     hotel_name,
     max_photo_url,
@@ -30,8 +27,8 @@ const Details = () => {
   } = hotel;
 
   // usefirebase datas
-  const { user} = useAllContext();
-  
+  const { user } = useAllContext();
+
   const { adults, children, rooms, checkIn, checkOut } = bookingInfo;
   const [bookingDetails, setBookingDetails] = useState({
     ...bookingInfo,
@@ -50,20 +47,23 @@ const Details = () => {
   };
   const handleBooking = (e) => {
     e.preventDefault();
-    if(user){
-      axios.post('/booked', {userName: user.displayName, userEmail: user.email, img: max_photo_url, ...bookingDetails})
-      .then(res => {
-        if(res.data.insertedId){
-          alert('Successfully booked');
-          navigate('/dashboard/mybookings');
-        }
-      })
-      
-    }else{
-      navigate('/login')
+    if (user) {
+      axios
+        .post("/booked", {
+          userName: user.displayName,
+          userEmail: user.email,
+          img: max_photo_url,
+          ...bookingDetails,
+        })
+        .then((res) => {
+          if (res.data.insertedId) {
+            alert("Successfully booked");
+            navigate("/dashboard/mybookings");
+          }
+        });
+    } else {
+      navigate("/login");
     }
-    
-    
   };
 
   return (

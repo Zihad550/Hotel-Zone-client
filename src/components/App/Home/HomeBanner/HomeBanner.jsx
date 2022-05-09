@@ -2,12 +2,12 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Rating, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import Loader from "components/Shared/Loader";
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import axiosInstance from "../../../../services/http.service";
-import Loader from "../../../Shared/Loader/Loader";
-import SearchHotels from "../SearchHotels/SearchHotels";
-import BannerArrow from "./BannerArrow/BannerArrow";
+import axiosInstance from "services/http.service";
+import BannerArrow from "./BannerArrow";
+import SearchHotels from "./SearchHotels";
 
 const Banner = () => {
   const [cities, setCities] = useState(null);

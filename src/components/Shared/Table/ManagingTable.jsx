@@ -9,11 +9,12 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import React from "react";
-import Loader from "../../Shared/Loader/Loader";
+import Loader from "../Loader";
+
+const ROWS_PER_PAGE = 10;
 
 const ManagingTable = ({ rows, cols }) => {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -56,7 +57,7 @@ const ManagingTable = ({ rows, cols }) => {
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}
-        rowsPerPage={rowsPerPage}
+        rowsPerPage={ROWS_PER_PAGE}
         page={page}
         onPageChange={handleChangePage}
       />
