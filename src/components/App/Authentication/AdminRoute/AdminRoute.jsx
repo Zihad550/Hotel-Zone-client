@@ -8,7 +8,7 @@ const AdminRoute = ({ children, ...rest }) => {
   const location = useLocation();
   if (isLoading) {
     return <Loader />;
-  } else if (admin && user) {
+  } else if (user.role === "admin") {
     return children;
   } else {
     return <Navigate to="/login" state={{ from: location }} />;

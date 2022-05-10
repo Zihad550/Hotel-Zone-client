@@ -8,35 +8,49 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import axios from "axios";
+import Loader from "components/Shared/Loader";
 import useAuth from "hooks/useAuth";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "services/http.service";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axiosInstance from "services/http.service";
 import Locations from "./Locations";
 
-const Details = () => {
-  const hotel = {};
-  const bookingInfo = {};
-  const {
-    hotel_name,
-    max_photo_url,
-    latitude,
-    longitude,
-    currency_code,
-    min_total_price,
-  } = hotel;
-
-  // usefirebase datas
+const Book = () => {
   const { user } = useAuth();
-
-  const { adults, children, rooms, checkIn, checkOut } = bookingInfo;
+  const [hotel, setHotel] = useState(null);
+  const { id, price } = useParams();
+  const navigate = useNavigate();
+  const { bookingInfo } = useAuth();
   const [bookingDetails, setBookingDetails] = useState({
     ...bookingInfo,
-    min_total_price,
-    hotel_name,
   });
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    const options = {
+      method: "GET",
+      url: "https://booking-com.p.rapidapi.com/v1/hotels/data",
+      params: { hotel_id: id, locale: "en-gb" },
+      headers: {
+        "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
+        "X-RapidAPI-Key": "0a3e9bf460msh6f2200b2ad45533p183995jsn461d6364bf35",
+      },
+    };
+    (async () => {
+      const data = await axios.request(options).then((res) => res.data);
+      setHotel(data);
+    })();
+  }, [id]);
+
+  if (!hotel || !bookingInfo) return <Loader />;
+
+  const {
+    name,
+    main_photo_url,
+    location: { latitude, longitude },
+    currency_code,
+  } = hotel;
+  const { adults, children, rooms, checkIn, checkOut } = bookingInfo;
 
   const handleBlur = (e) => {
     const field = e.target.name;
@@ -48,11 +62,13 @@ const Details = () => {
   const handleBooking = (e) => {
     e.preventDefault();
     if (user) {
-      axios
+      axiosInstance
         .post("/booked", {
           userName: user.displayName,
           userEmail: user.email,
-          img: max_photo_url,
+          img: main_photo_url,
+          name,
+          price,
           ...bookingDetails,
         })
         .then((res) => {
@@ -81,13 +97,7 @@ const Details = () => {
           md={6}
         >
           <Typography variant="h4">Book Hotel</Typography>
-          <Box sx={{ display: { xs: "block", md: "none" } }}>
-            <img
-              style={{ width: "100%", height: "auto" }}
-              src={max_photo_url}
-              alt=""
-            />
-          </Box>
+
           <form style={{ width: "100%" }} onSubmit={handleBooking}>
             <Box
               sx={{
@@ -170,7 +180,7 @@ const Details = () => {
               fullWidth
               aria-readonly
               id="hotel-name"
-              value={hotel_name}
+              value={name}
             />
             <InputLabel htmlFor="hotel=name">Hotel price</InputLabel>
             <TextField
@@ -178,7 +188,7 @@ const Details = () => {
               fullWidth
               aria-readonly
               id="hotel-name"
-              value={min_total_price}
+              value={price}
               type="number"
               name="hotelPrice"
               InputProps={{
@@ -228,22 +238,11 @@ const Details = () => {
           xs={12}
           md={6}
         >
-          <Box sx={{ display: { xs: "none", md: "block" } }}>
-            <img
-              style={{ width: "100%", height: "auto" }}
-              src={max_photo_url}
-              alt=""
-            />
-          </Box>
-          <Locations
-            latitude={latitude}
-            longitude={longitude}
-            name={hotel_name}
-          />{" "}
+          <Locations latitude={latitude} longitude={longitude} name={name} />{" "}
         </Grid>
       </Grid>
     </Container>
   );
 };
 
-export default Details;
+export default Book;

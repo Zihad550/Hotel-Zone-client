@@ -8,20 +8,27 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import useAuth from "hooks/useAuth";
 import React from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
-const Hotel = ({
-  hotel: { hotel_name, address, max_photo_url, review_score, min_total_price },
-}) => {
+const Hotel = ({ hotel, bookingInfo }) => {
+  const {
+    hotel_name,
+    address,
+    max_photo_url,
+    review_score,
+    min_total_price,
+    hotel_id,
+  } = hotel;
+
+  const { setBookingInfo } = useAuth();
   const rating = review_score / 2;
   const navigate = useNavigate();
-
-  /* handlers */
   const handleGoToBook = () => {
-    navigate(`/book`);
+    setBookingInfo(bookingInfo);
+    navigate(`/book/${hotel_id}/${min_total_price}`);
   };
-
   return (
     <Card
       sx={{
@@ -70,9 +77,9 @@ const Hotel = ({
                 Price: {min_total_price} {"USD"}
               </Typography>
               <Button
+                onClick={handleGoToBook}
                 variant="contained"
                 color="primary"
-                onClick={handleGoToBook}
                 sx={{ mt: "auto", height: "100%", fontSize: 17 }}
               >
                 Book

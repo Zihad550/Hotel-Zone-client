@@ -9,7 +9,7 @@ import axiosInstance from "services/http.service";
 import BannerArrow from "./BannerArrow";
 import SearchHotels from "./SearchHotels";
 
-const Banner = () => {
+const HomeBanner = () => {
   const [cities, setCities] = useState(null);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const Banner = () => {
             sx={{
               background: `url(${city.img}) no-repeat center`,
               backgroundSize: "cover",
-              height: { lg: "800px", md: "800px", sm: "70vh", xs: "100vh" },
+              height: { lg: "900px", md: "800px", sm: "70vh", xs: "100vh" },
               width: "100vw",
               zIndex: 10,
             }}
@@ -109,4 +109,4 @@ const Banner = () => {
   );
 };
 
-export default Banner;
+export default HomeBanner;

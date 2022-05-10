@@ -4,7 +4,7 @@ import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SearchHotels = () => {
+const SearchHotels = ({ setDestinationId }) => {
   // states
   const [cityName, setCityName] = useState("");
   const [searching, setSearching] = useState(false);
@@ -14,6 +14,7 @@ const SearchHotels = () => {
 
   // handlers
   const handleSearch = async () => {
+    if (!cityName) return;
     setSearching(true);
     const res = await fetch(
       `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=${cityName}`,
@@ -29,7 +30,8 @@ const SearchHotels = () => {
     if (data[0].hotels) {
       setSearching(false);
       const { dest_id, latitude, longitude } = data[0];
-      navigate(`/AvailableResturents/${dest_id}/${latitude}/${longitude}`);
+      // navigate(`/AvailableResturents/${dest_id}/${latitude}/${longitude}`);
+      navigate(`/hotels/${dest_id}/${latitude}/${longitude}`);
     }
   };
 

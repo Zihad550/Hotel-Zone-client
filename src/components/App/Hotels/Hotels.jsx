@@ -1,4 +1,5 @@
 import { Grid, Typography } from "@mui/material";
+import Loader from "components/Shared/Loader";
 import React, { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { useParams } from "react-router-dom";
@@ -59,9 +60,13 @@ const Hotels = () => {
         </Typography>
         <FilterHotels setDetails={setDetails} details={details} />
         <div style={{ height: "100vh", overflowY: "scroll" }}>
-          {hotels?.map((hotel) => (
-            <Hotel key={hotel.hotel_id} bookingInfo={details} hotel={hotel} />
-          ))}
+          {hotels ? (
+            hotels.map((hotel) => (
+              <Hotel key={hotel.hotel_id} bookingInfo={details} hotel={hotel} />
+            ))
+          ) : (
+            <Loader />
+          )}
         </div>
       </Grid>
       <Grid

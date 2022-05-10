@@ -12,6 +12,7 @@ import Login from "./Authentication/Login";
 import PrivateRoute from "./Authentication/PrivateRoute";
 import Register from "./Authentication/Register";
 import Blogs from "./Blogs";
+import Book from "./Book";
 import ContactUs from "./ContactUs";
 import DashboardContainer from "./Dashboard";
 import AddNewCity from "./Dashboard/AddNewCity";
@@ -25,12 +26,11 @@ import ManageGalleryPhotos from "./Dashboard/ManageGallery";
 import MyBookings from "./Dashboard/MyBookings";
 import MyReviews from "./Dashboard/MyReviews";
 import Home from "./Home";
-import BestRooms from "./Home/BestRooms";
-import Book from "./Home/Book";
-import Hotels from "./Home/Hotels";
+import Hotels from "./Hotels";
 
 const App = () => {
   const [dashboardPageTitle, setDashboardPageTitle] = useState("Dashboard");
+
   return (
     <ErrorBoundary>
       <ContextProvider>
@@ -44,13 +44,12 @@ const App = () => {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
             {/* other routes */}
-            <Route path="/bestRooms" element={<BestRooms />} />
             <Route
-              path="/availableResturents/:dest_id/:latitude/:longitude"
+              path="/hotels/:dest_id/:latitude/:longitude"
               element={<Hotels />}
             />
             <Route
-              path="/book"
+              path="/book/:id/:price"
               element={
                 <PrivateRoute>
                   <Book />
@@ -69,25 +68,6 @@ const App = () => {
                 </PrivateRoute>
               }
             >
-              {/* admin route dashboard home page */}
-              <Route
-                path="/dashboard"
-                element={
-                  <AdminRoute>
-                    <MakeAdmin setDashboardPageTitle={setDashboardPageTitle} />
-                  </AdminRoute>
-                }
-              />
-              {/* normal user dashboard home page */}
-              <Route
-                path="/dashboard"
-                element={
-                  <PrivateRoute>
-                    <MyBookings setDashboardPageTitle={setDashboardPageTitle} />
-                  </PrivateRoute>
-                }
-              />
-
               {/* normal user routes */}
               <Route
                 path="/dashboard/myBookings"
@@ -97,8 +77,9 @@ const App = () => {
               />
               <Route
                 path="/dashboard/myReviews"
-                element={<MyReviews />}
-                setDashboardPageTitle={setDashboardPageTitle}
+                element={
+                  <MyReviews setDashboardPageTitle={setDashboardPageTitle} />
+                }
               />
               <Route
                 path="/dashboard/review/:name"

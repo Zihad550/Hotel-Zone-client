@@ -169,12 +169,18 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {user ? (
+              {user.name ? (
                 <div>
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Typography
-                      onClick={() => navigate("/dashboard")}
-                      textalign="center"
+                      onClick={() =>
+                        navigate(
+                          role
+                            ? "/dashboard/makeAdmin"
+                            : "/dashboard/myBookings"
+                        )
+                      }
+                      textAlign="center"
                     >
                       Dashboard
                     </Typography>

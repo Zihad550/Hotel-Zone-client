@@ -9,7 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/system";
 import Loader from "components/Shared/Loader/Loader";
-import Toast from "components/Shared/Toasts/Toast";
+import Toast from "components/Shared/Toast/Toast";
 import React, { useEffect, useState } from "react";
 import axiosInstance from "services/http.service";
 
