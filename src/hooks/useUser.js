@@ -1,42 +1,24 @@
 import { useEffect, useState } from "react";
-import { default as axios, default as axiosInstance } from "../services/http.service";
+import { default as axiosInstance } from "../services/http.service";
 
 
 const useUser = () => {
-  const [admin, setAdmin] = useState(false);
   const [user, setUser] = useState({})
-  const [isLoading, setIsLoading] = useState(true);
-  const [userLoading, setUserLoading] = useState(true);
   
   const savedUser = JSON.parse(localStorage.getItem('hotelZoneUser'));
   
   useEffect(() => {
-      if(user.email){
-        setIsLoading(true);
-        (async() => {
-          axios.get(`/admin?email=${user.email}`)
-        .then(res => setAdmin(res.data.admin))
-        .finally(() => setIsLoading(false))
-        })()
-      }
-  }, [])
-
-  useEffect(() => {
     (async() => {
       if(!savedUser) return;
-      setUserLoading(true)
       const res = await axiosInstance.get(`/user?email=${savedUser.email}`) 
       setUser(res.data)
-      setUserLoading(false)
     })()
   }, [])
+  
   return {
     user,
-    isLoading,
-    admin,
     setUser,
-    userLoading,
-    setUser
+    loading: Object.keys(user).length === 0,
   };
 };
 

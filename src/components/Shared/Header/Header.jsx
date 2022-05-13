@@ -54,7 +54,12 @@ const Header = () => {
     <AppBar
       position="relative"
       style={
-        (location.pathname.startsWith("/dashboard") && { display: "none" }) ||
+        (location.pathname.startsWith("/userDashboard") && {
+          display: "none",
+        }) ||
+        (location.pathname.startsWith("/adminDashboard") && {
+          display: "none",
+        }) ||
         (location.pathname === "/"
           ? { background: "#80808030" }
           : { background: "gray" })
@@ -143,7 +148,6 @@ const Header = () => {
           {/*================
            user menu
            ================== */}
-
           <Box sx={{ flexGrow: 0, alignItems: "center", display: "flex" }}>
             <Typography sx={{ mr: 1, fontSize: { md: 20 } }} variant="body1">
               {name}
@@ -174,11 +178,7 @@ const Header = () => {
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Typography
                       onClick={() =>
-                        navigate(
-                          role
-                            ? "/dashboard/makeAdmin"
-                            : "/dashboard/myBookings"
-                        )
+                        navigate(role ? "/adminDashboard" : "/userDashboard")
                       }
                       textAlign="center"
                     >

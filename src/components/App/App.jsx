@@ -14,17 +14,18 @@ import Register from "./Authentication/Register";
 import Blogs from "./Blogs";
 import Book from "./Book";
 import ContactUs from "./ContactUs";
-import DashboardContainer from "./Dashboard";
-import AddNewCity from "./Dashboard/AddNewCity";
-import AddPhoto from "./Dashboard/AddPhoto";
-import CreateBlog from "./Dashboard/CreateBlog";
-import GiveReview from "./Dashboard/GiveReview";
-import MakeAdmin from "./Dashboard/MakeAdmin";
-import ManageBanner from "./Dashboard/ManageBanner";
-import ManageBlogs from "./Dashboard/ManageBlogs";
-import ManageGalleryPhotos from "./Dashboard/ManageGallery";
-import MyBookings from "./Dashboard/MyBookings";
-import MyReviews from "./Dashboard/MyReviews";
+import AdminDashboard from "./Dashboards/AdminDashboard";
+import AddNewCity from "./Dashboards/AdminDashboard/AddNewCity";
+import AddPhoto from "./Dashboards/AdminDashboard/AddPhoto";
+import CreateBlog from "./Dashboards/AdminDashboard/CreateBlog";
+import MakeAdmin from "./Dashboards/AdminDashboard/MakeAdmin";
+import ManageBanner from "./Dashboards/AdminDashboard/ManageBanner";
+import ManageBlogs from "./Dashboards/AdminDashboard/ManageBlogs";
+import ManageGalleryPhotos from "./Dashboards/AdminDashboard/ManageGallery";
+import UserDashboard from "./Dashboards/UserDashboard";
+import GiveReview from "./Dashboards/UserDashboard/GiveReview";
+import MyBookings from "./Dashboards/UserDashboard/MyBookings";
+import MyReviews from "./Dashboards/UserDashboard/MyReviews";
 import Home from "./Home";
 import Hotels from "./Hotels";
 
@@ -59,39 +60,60 @@ const App = () => {
             {/* authentication routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            {/* dashboard routes */}]
+            {/* userDashboard routes */}]
             <Route
-              path="/dashboard"
+              path="/userDashboard"
               element={
                 <PrivateRoute>
-                  <DashboardContainer dashboardPageTitle={dashboardPageTitle} />
+                  <UserDashboard dashboardPageTitle={dashboardPageTitle} />
                 </PrivateRoute>
               }
             >
               {/* normal user routes */}
               <Route
-                path="/dashboard/myBookings"
+                path="/userDashboard/myBookings"
                 element={
-                  <MyBookings setDashboardPageTitle={setDashboardPageTitle} />
+                  <PrivateRoute>
+                    <MyBookings setDashboardPageTitle={setDashboardPageTitle} />
+                  </PrivateRoute>
                 }
               />
               <Route
-                path="/dashboard/myReviews"
+                path="/userDashboard/myReviews"
                 element={
-                  <MyReviews setDashboardPageTitle={setDashboardPageTitle} />
+                  <PrivateRoute>
+                    <MyReviews setDashboardPageTitle={setDashboardPageTitle} />
+                  </PrivateRoute>
                 }
               />
               <Route
-                path="/dashboard/review/:name"
+                path="/userDashboard/review/:name"
                 element={
-                  <GiveReview setDashboardPageTitle={setDashboardPageTitle} />
+                  <PrivateRoute>
+                    <GiveReview setDashboardPageTitle={setDashboardPageTitle} />
+                  </PrivateRoute>
                 }
               />
-
-              {/* admin routes */}
-
+            </Route>
+            {/* admin dashboard */}
+            <Route
+              path="/adminDashboard"
+              element={
+                <AdminRoute>
+                  <AdminDashboard dashboardPageTitle={dashboardPageTitle} />
+                </AdminRoute>
+              }
+            >
+              {/* <Route
+                path="/adminDashboard"
+                element={
+                  <AdminRoute>
+                    <MakeAdmin setDashboardPageTitle={setDashboardPageTitle} />
+                  </AdminRoute>
+                }
+              /> */}
               <Route
-                path="/dashboard/makeAdmin"
+                path="/adminDashboard/makeAdmin"
                 element={
                   <AdminRoute>
                     <MakeAdmin setDashboardPageTitle={setDashboardPageTitle} />
@@ -101,7 +123,7 @@ const App = () => {
 
               {/* city routes */}
               <Route
-                path="/dashboard/manageExistingCities"
+                path="/adminDashboard/manageExistingCities"
                 element={
                   <AdminRoute>
                     <ManageBanner
@@ -111,7 +133,7 @@ const App = () => {
                 }
               />
               <Route
-                path="/dashboard/AddNewCity"
+                path="/adminDashboard/AddNewCity"
                 element={
                   <AdminRoute>
                     <AddNewCity setDashboardPageTitle={setDashboardPageTitle} />
@@ -121,7 +143,7 @@ const App = () => {
 
               {/* gallery routes */}
               <Route
-                path="/dashboard/addPhoto"
+                path="/adminDashboard/addPhoto"
                 element={
                   <AdminRoute>
                     <AddPhoto setDashboardPageTitle={setDashboardPageTitle} />
@@ -129,7 +151,7 @@ const App = () => {
                 }
               />
               <Route
-                path="/dashboard/manageExistingPhoto"
+                path="/adminDashboard/manageExistingPhoto"
                 element={
                   <AdminRoute>
                     <ManageGalleryPhotos
@@ -140,7 +162,7 @@ const App = () => {
               />
               {/* blog routes */}
               <Route
-                path="/dashboard/createBlog"
+                path="/adminDashboard/createBlog"
                 element={
                   <AdminRoute>
                     <CreateBlog setDashboardPageTitle={setDashboardPageTitle} />
@@ -148,7 +170,7 @@ const App = () => {
                 }
               />
               <Route
-                path="/dashboard/manageBlogs"
+                path="/adminDashboard/manageBlogs"
                 element={
                   <AdminRoute>
                     <ManageBlogs

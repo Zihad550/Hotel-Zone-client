@@ -62,7 +62,7 @@ const MyBookedHotel = ({
           >
             <Button
               variant="contained"
-              onClick={() => navigate(`/dashboard/review/${name}`)}
+              onClick={() => navigate(`/userDashboard/review/${name}`)}
             >
               Give Review
             </Button>

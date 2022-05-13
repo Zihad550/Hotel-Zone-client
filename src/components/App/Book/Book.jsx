@@ -74,7 +74,7 @@ const Book = () => {
         .then((res) => {
           if (res.data.insertedId) {
             alert("Successfully booked");
-            navigate("/dashboard/mybookings");
+            navigate("/userDashboard/mybookings");
           }
         });
     } else {
