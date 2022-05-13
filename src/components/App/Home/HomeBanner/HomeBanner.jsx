@@ -52,9 +52,7 @@ const HomeBanner = () => {
     ],
   };
   return cities ? (
-    <Box
-      sx={{ position: "relative", mt: { lg: -35, md: 0, sm: -55, xs: -55 } }}
-    >
+    <Box sx={{ position: "relative", mt: { lg: -35, md: 0, xs: -55 } }}>
       <Slider {...settings}>
         {cities.map((city) => (
           <Box

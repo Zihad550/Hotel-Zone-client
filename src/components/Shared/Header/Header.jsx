@@ -54,15 +54,17 @@ const Header = () => {
     <AppBar
       position="relative"
       style={
+        (location.pathname === "/"
+          ? { background: "#80808030" }
+          : {
+              background: "gray",
+            }) ||
         (location.pathname.startsWith("/userDashboard") && {
           display: "none",
         }) ||
         (location.pathname.startsWith("/adminDashboard") && {
           display: "none",
-        }) ||
-        (location.pathname === "/"
-          ? { background: "#80808030" }
-          : { background: "gray" })
+        })
       }
       sx={{ boxShadow: 0, zIndex: 10, color: "white" }}
     >

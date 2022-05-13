@@ -15,6 +15,7 @@ const Home = () => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
+          height: { lg: "900px", md: "600px", xs: "800px" },
         }}
       >
         <HomeBanner />
