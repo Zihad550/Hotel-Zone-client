@@ -10,6 +10,7 @@ import registerImage from "assets/images/register.jpg";
 import useAuth from "hooks/useAuth";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "services/http.service";
 
 const Register = () => {
   // use firebase
@@ -35,15 +36,9 @@ const Register = () => {
     if (password !== re_typed_password) {
       alert("password not matched");
     } else {
-      fetch("https://polar-island-87071.herokuapp.com/register", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(registerData),
-      })
-        .then((res) => res.json())
-        .then((data) => {
+      axiosInstance
+        .post("https://polar-island-87071.herokuapp.com/register", registerData)
+        .then(({ data }) => {
           if (data.insertedId) {
             alert("Authentication  successful");
             localStorage.setItem(

@@ -10,6 +10,7 @@ import {
 import { Box } from "@mui/system";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "services/http.service";
 
 const MyBookedHotel = ({
   hotel: { name, price, img, _id },
@@ -20,11 +21,9 @@ const MyBookedHotel = ({
 
   const handleCancelBook = () => {
     if (window.confirm("Are you sure")) {
-      fetch(`https://polar-island-87071.herokuapp.com/booked?id=${_id}`, {
-        method: "DELETE",
-      })
-        .then((res) => res.json())
-        .then((data) => {
+      axiosInstance
+        .delete(`https://polar-island-87071.herokuapp.com/booked?id=${_id}`)
+        .then(({ data }) => {
           if (data.deletedCount > 0) {
             alert("successfully deleted");
             setIsDeleted(true);

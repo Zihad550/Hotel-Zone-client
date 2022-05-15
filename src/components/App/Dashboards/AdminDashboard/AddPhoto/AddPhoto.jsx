@@ -1,6 +1,7 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Alert, Button, Grid, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import axiosInstance from "services/http.service";
 
 const AddPhoto = ({ setDashboardPageTitle }) => {
   // states
@@ -25,15 +26,13 @@ const AddPhoto = ({ setDashboardPageTitle }) => {
   const handleAddPhoto = (e) => {
     setIsAdded(false);
     e.preventDefault();
-    fetch("https://polar-island-87071.herokuapp.com/photos", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ ...photoInfo, deletable: true }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
+    axiosInstance
+      .post("https://polar-island-87071.herokuapp.com/photos", {
+        ...photoInfo,
+        deletable: true,
+      })
+
+      .then(({ data }) => {
         data.insertedId && setIsAdded(true);
         setPhotoInfo("");
       });

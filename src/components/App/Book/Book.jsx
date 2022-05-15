@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Container,
   Grid,
@@ -222,9 +223,15 @@ const Book = () => {
               color="secondary"
               type="submit"
               sx={{ width: "100%", mt: 2, fontSize: 18 }}
+              disabled={user.role === "admin" ? true : false}
             >
               Book
             </Button>
+            {user.role === "admin" && (
+              <Alert sx={{ mt: 1 }} severity="info">
+                Admin Cannot Book hotel
+              </Alert>
+            )}
           </form>
         </Grid>
         <Grid

@@ -13,13 +13,23 @@ import {
 import { Box } from "@mui/system";
 import Loader from "components/Shared/Loader";
 import React, { useEffect, useState } from "react";
+import axiosInstance from "services/http.service";
 
 const BestRooms = () => {
   const [rooms, setRooms] = useState(null);
   useEffect(() => {
-    fetch("https://polar-island-87071.herokuapp.com/rooms")
-      .then((res) => res.json())
-      .then((data) => setRooms(data));
+    const controller = new AbortController();
+    (async () => {
+      setRooms(
+        await axiosInstance
+          .get("https://polar-island-87071.herokuapp.com/rooms")
+          .then((res) => res.data)
+      );
+    })();
+
+    return () => {
+      controller.abort();
+    };
   }, []);
   return (
     <Container sx={{ mt: { lg: 0, md: 25, sm: -20, xs: -5 } }}>

@@ -1,7 +1,7 @@
 import MuiAppBar from "@mui/material/AppBar";
 import { styled } from "@mui/material/styles";
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 
 const DashboardHeader = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",

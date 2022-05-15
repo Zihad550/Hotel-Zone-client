@@ -9,20 +9,33 @@ import TableRow from "@mui/material/TableRow";
 import Loader from "components/Shared/Loader";
 import useAuth from "hooks/useAuth";
 import React, { useEffect, useState } from "react";
+import axiosInstance from "services/http.service";
 
 const MyReviews = ({ setDashboardPageTitle }) => {
   // states
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState(null);
   const { user } = useAuth();
 
   // side effects
   useEffect(() => {
     setDashboardPageTitle("My Reviews");
-    fetch(
-      `https://polar-island-87071.herokuapp.com/reviews/review?email=${user.email}`
-    )
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
+    const controller = new AbortController();
+    (async () => {
+      setReviews(
+        await axiosInstance
+          .get(
+            `https://polar-island-87071.herokuapp.com/reviews/review?email=${user.email}`,
+            {
+              signal: controller.signal,
+            }
+          )
+          .then((res) => res.data)
+      );
+    })();
+
+    return () => {
+      controller.abort();
+    };
   }, [user.email]);
 
   /* 

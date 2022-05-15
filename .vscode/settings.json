@@ -4,6 +4,7 @@
     "**/bower_components": true,
     "**/*.code-search": true,
     "**/.git": true,
-    "**/public": true
+    "**/public": true,
+    "yarn.lock": true
   }
 }

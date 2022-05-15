@@ -68,11 +68,13 @@ const ManageGallery = ({ setDashboardPageTitle }) => {
             {photos.map((row) => {
               return (
                 <TableRow key={row._id} hover>
-                  <TableCell
-                    component={"img"}
-                    sx={{ width: "200px", height: "auto" }}
-                    src={row.src}
-                  />
+                  <TableCell>
+                    <img
+                      style={{ width: "200px", height: "auto" }}
+                      src={row.src}
+                      alt={row.name}
+                    />
+                  </TableCell>
                   <TableCell>{row.name}</TableCell>
 
                   <TableCell>

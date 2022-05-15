@@ -1,6 +1,7 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { Alert, Button, Paper, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -16,17 +17,19 @@ const SearchHotels = ({ setDestinationId }) => {
   const handleSearch = async () => {
     if (!cityName) return;
     setSearching(true);
-    const res = await fetch(
-      `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=${cityName}`,
-      {
-        headers: {
-          "x-rapidapi-host": "booking-com.p.rapidapi.com",
-          "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
-        },
-      }
-    );
 
-    const data = await res.json();
+    const data = await axios
+      .get(
+        `https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=${cityName}`,
+        {
+          headers: {
+            "x-rapidapi-host": "booking-com.p.rapidapi.com",
+            "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
+          },
+        }
+      )
+      .then((res) => res.data);
+
     if (data[0].hotels) {
       setSearching(false);
       const { dest_id, latitude, longitude } = data[0];

@@ -10,6 +10,7 @@ import loginImage from "assets/images/login.jpg";
 import useAuth from "hooks/useAuth";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "services/http.service";
 
 const Login = () => {
   // context
@@ -31,15 +32,9 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    fetch("https://polar-island-87071.herokuapp.com/login", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(loginData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
+    axiosInstance
+      .post("https://polar-island-87071.herokuapp.com/login", loginData)
+      .then(({ data }) => {
         if (data.success) {
           alert("Authentication successful");
           setUser({ email: data.email, name: data.name, role: data.role });

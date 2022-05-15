@@ -12,6 +12,7 @@ import useAuth from "hooks/useAuth";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
+import axiosInstance from "services/http.service";
 
 const GiveReview = ({ setDashboardPageTitle }) => {
   const { name } = useParams();
@@ -43,20 +44,14 @@ const GiveReview = ({ setDashboardPageTitle }) => {
     };
 
     // send to the server
-    fetch("https://polar-island-87071.herokuapp.com/reviews", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
+    axiosInstance
+      .post("https://polar-island-87071.herokuapp.com/reviews", {
         userEmail: user.email,
         userName: user.displayName,
         ...review,
         deletable: true,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
+      })
+      .then(({ data }) => {
         if (data.insertedId) {
           alert("Review added successfully");
         }

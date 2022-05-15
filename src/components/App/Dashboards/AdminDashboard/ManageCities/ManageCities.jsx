@@ -13,7 +13,7 @@ import Toast from "components/Shared/Toast/Toast";
 import React, { useEffect, useState } from "react";
 import axiosInstance from "services/http.service";
 
-const ManageBanner = ({ setDashboardPageTitle }) => {
+const ManageCities = ({ setDashboardPageTitle }) => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [isDeletable, setIsDeletable] = useState(false);
   const [cities, setCities] = useState(null);
@@ -66,11 +66,13 @@ const ManageBanner = ({ setDashboardPageTitle }) => {
             {cities.map((row) => {
               return (
                 <TableRow key={row._id} hover>
-                  <TableCell
-                    component={"img"}
-                    sx={{ width: "200px", height: "100%" }}
-                    src={row.img}
-                  />
+                  <TableCell>
+                    <img
+                      style={{ width: "200px", height: "100%" }}
+                      src={row.img}
+                      alt={row.name}
+                    />
+                  </TableCell>
                   <TableCell>{row.name}</TableCell>
                   <TableCell>{row.hotels}</TableCell>
                   <TableCell>{row.rating}</TableCell>
@@ -116,4 +118,4 @@ const ManageBanner = ({ setDashboardPageTitle }) => {
   );
 };
 
-export default ManageBanner;
+export default ManageCities;

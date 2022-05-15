@@ -1,6 +1,7 @@
 import { Alert, Button, Grid, TextField, Typography } from "@mui/material";
 import makeAdminImage from "assets/images/admin.svg";
 import React, { useEffect, useState } from "react";
+import axiosInstance from "services/http.service";
 
 const MakeAdmin = ({ setDashboardPageTitle }) => {
   // states
@@ -14,14 +15,9 @@ const MakeAdmin = ({ setDashboardPageTitle }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`https://polar-island-87071.herokuapp.com/admin?email=${email}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
+    axiosInstance
+      .put(`https://polar-island-87071.herokuapp.com/admin?email=${email}`)
+      .then(({ data }) => {
         if (data.modifiedCount) {
           setSuccess(true);
         } else {

@@ -11,7 +11,10 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import axios from "services/http.service";
+import {
+  default as axios,
+  default as axiosInstance,
+} from "services/http.service";
 
 const CreateBlog = ({ setDashboardPageTitle }) => {
   // states
@@ -44,15 +47,12 @@ const CreateBlog = ({ setDashboardPageTitle }) => {
     if (!image) {
       setIsError(true);
     } else {
-      fetch(
-        `https://api.imgbb.com/1/upload?key=120eb66f81a548efb0c10de7b88fca02`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      )
-        .then((res) => res.json())
-        .then((data) => {
+      axiosInstance
+        .post(
+          "https://api.imgbb.com/1/upload?key=120eb66f81a548efb0c10de7b88fca02",
+          formData
+        )
+        .then(({ data }) => {
           axios
             .post("/blog", {
               ...post,

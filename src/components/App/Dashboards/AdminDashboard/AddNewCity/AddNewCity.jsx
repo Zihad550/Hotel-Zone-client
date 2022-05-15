@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
+import axiosInstance from "services/http.service";
 
 const AddNewCity = ({ setDashboardPageTitle }) => {
   // states
@@ -30,15 +31,12 @@ const AddNewCity = ({ setDashboardPageTitle }) => {
   const handleAddNewCity = (e) => {
     setIsAdded(false);
     e.preventDefault();
-    fetch("https://polar-island-87071.herokuapp.com/cities", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ ...cityInfo, deletable: true }),
-    })
-      .then((res) => res.json())
-      .then((data) => data.insertedId && setIsAdded(true));
+    axiosInstance
+      .post("https://polar-island-87071.herokuapp.com/cities", {
+        ...cityInfo,
+        deletable: true,
+      })
+      .then(({ data }) => data.insertedId && setIsAdded(true));
   };
 
   return (

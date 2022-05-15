@@ -2,14 +2,25 @@ import { Container, Grid, Paper, Rating, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
+import axiosInstance from "services/http.service";
 
 const RecentReviews = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch("https://polar-island-87071.herokuapp.com/reviews")
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
+    const controller = new AbortController();
+    (async () => {
+      setReviews(
+        await axiosInstance.get(
+          "https://polar-island-87071.herokuapp.com/reviews",
+          { signal: controller.signal }
+        )
+      ).then(({ data }) => data);
+    })();
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   // slider settings

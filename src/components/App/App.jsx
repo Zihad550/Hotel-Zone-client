@@ -19,8 +19,8 @@ import AddNewCity from "./Dashboards/AdminDashboard/AddNewCity";
 import AddPhoto from "./Dashboards/AdminDashboard/AddPhoto";
 import CreateBlog from "./Dashboards/AdminDashboard/CreateBlog";
 import MakeAdmin from "./Dashboards/AdminDashboard/MakeAdmin";
-import ManageBanner from "./Dashboards/AdminDashboard/ManageBanner";
 import ManageBlogs from "./Dashboards/AdminDashboard/ManageBlogs";
+import ManageCities from "./Dashboards/AdminDashboard/ManageCities";
 import ManageGalleryPhotos from "./Dashboards/AdminDashboard/ManageGallery";
 import UserDashboard from "./Dashboards/UserDashboard";
 import GiveReview from "./Dashboards/UserDashboard/GiveReview";
@@ -126,7 +126,7 @@ const App = () => {
                 path="/adminDashboard/manageExistingCities"
                 element={
                   <AdminRoute>
-                    <ManageBanner
+                    <ManageCities
                       setDashboardPageTitle={setDashboardPageTitle}
                     />
                   </AdminRoute>

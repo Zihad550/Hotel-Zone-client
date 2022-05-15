@@ -82,11 +82,13 @@ const ManageBlogs = ({ setDashboardPageTitle }) => {
               return (
                 <TableRow key={row._id} hover>
                   <TableCell>{row.title}</TableCell>
-                  <TableCell
-                    component={"img"}
-                    sx={{ width: "100%", height: "100px" }}
-                    src={row.src}
-                  />
+                  <TableCell>
+                    <img
+                      style={{ width: "100%", height: "100px" }}
+                      src={row.src}
+                      alt={row.title}
+                    />
+                  </TableCell>
                   <TableCell>{row.desc}</TableCell>
                   <TableCell>
                     <IconButton

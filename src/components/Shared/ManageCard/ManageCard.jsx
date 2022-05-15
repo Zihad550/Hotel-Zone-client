@@ -5,19 +5,20 @@ import {
   CardContent,
   CardMedia,
   Grid,
-  Typography
+  Typography,
 } from "@mui/material";
 import React from "react";
+import axiosInstance from "services/http.service";
 
-const ManageCard = ({ prop: { img, name, _id, setIsDeleted, src, setShowAlert }, route }) => {
-
+const ManageCard = ({
+  prop: { img, name, _id, setIsDeleted, src, setShowAlert },
+  route,
+}) => {
   const handleDelete = () => {
     if (window.confirm("Are you sure!")) {
-      fetch(`https://polar-island-87071.herokuapp.com/${route}?id=${_id}`, {
-        method: "DELETE",
-      })
-        .then((res) => res.json())
-        .then((data) => {
+      axiosInstance
+        .delete(`https://polar-island-87071.herokuapp.com/${route}?id=${_id}`)
+        .then(({ data }) => {
           data.deletedCount > 0 && setIsDeleted(true);
           data.deletedCount === 0 && setShowAlert(true);
         });
@@ -26,7 +27,6 @@ const ManageCard = ({ prop: { img, name, _id, setIsDeleted, src, setShowAlert },
   return (
     <Grid item md={4} lg={3}>
       <Card>
-        
         <CardMedia component="img" image={img || src} />
         <CardContent>
           <Typography variant="h4">{name}</Typography>
