@@ -13,10 +13,17 @@ const HomeBanner = () => {
   const [cities, setCities] = useState(null);
 
   useEffect(() => {
+    const controller = new AbortController();
     (async () => {
-      const res = await axiosInstance.get("/cities");
+      const res = await axiosInstance.get("/cities", {
+        signal: controller.signal,
+      });
       setCities(res.data);
     })();
+
+    return () => {
+      controller.abort();
+    };
   }, []);
   const settings = {
     dots: true,
@@ -51,7 +58,9 @@ const HomeBanner = () => {
       },
     ],
   };
-  return cities ? (
+
+  if (!cities) return <Loader />;
+  return (
     <Box sx={{ position: "relative", mt: { lg: -35, md: 0, xs: -55 } }}>
       <Slider {...settings}>
         {cities.map((city) => (
@@ -102,8 +111,6 @@ const HomeBanner = () => {
       {/* search component */}
       <SearchHotels />
     </Box>
-  ) : (
-    <Loader />
   );
 };
 

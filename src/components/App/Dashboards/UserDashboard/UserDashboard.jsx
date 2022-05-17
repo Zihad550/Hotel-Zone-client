@@ -17,7 +17,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import DashboardDrawer from "components/Shared/DashboardDrawer/DashboardDrawer";
 import DashboardHeader from "components/Shared/DashboardHeader";
-import * as React from "react";
+import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -46,9 +46,6 @@ const UserDashboard = ({ dashboardPageTitle }) => {
 
   const drawer = (
     <div>
-      {/*============== 
-          pages
-      ================== */}
       <List>
         <ListItem button onClick={() => navigate("/userDashboard/myReviews")}>
           <ListItemIcon>

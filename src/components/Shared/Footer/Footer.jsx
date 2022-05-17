@@ -5,7 +5,6 @@ import { Container, Grid, IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import partner1 from "assets/images/partners/1.png";
 import partner2 from "assets/images/partners/2.png";
-// import partner3 from "../../../images/partners/3.png";
 import payment1 from "assets/images/payments/american-express.png";
 import payment2 from "assets/images/payments/money.png";
 import payment3 from "assets/images/payments/paypal1.png";

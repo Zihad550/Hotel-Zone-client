@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
-import * as React from "react";
+import React from "react";
 import { blog, blog_img, img_container } from "./blog.style.module.css";
 
 const Blog = ({ blog: { title, src, category, desc, date } }) => {

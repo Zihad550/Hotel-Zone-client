@@ -5,7 +5,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SearchHotels = ({ setDestinationId }) => {
+const SearchHotels = () => {
   // states
   const [cityName, setCityName] = useState("");
   const [searching, setSearching] = useState(false);
@@ -33,7 +33,6 @@ const SearchHotels = ({ setDestinationId }) => {
     if (data[0].hotels) {
       setSearching(false);
       const { dest_id, latitude, longitude } = data[0];
-      // navigate(`/AvailableResturents/${dest_id}/${latitude}/${longitude}`);
       navigate(`/hotels/${dest_id}/${latitude}/${longitude}`);
     }
   };

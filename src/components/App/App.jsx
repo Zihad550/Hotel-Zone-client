@@ -104,14 +104,14 @@ const App = () => {
                 </AdminRoute>
               }
             >
-              {/* <Route
+              <Route
                 path="/adminDashboard"
                 element={
                   <AdminRoute>
                     <MakeAdmin setDashboardPageTitle={setDashboardPageTitle} />
                   </AdminRoute>
                 }
-              /> */}
+              />
               <Route
                 path="/adminDashboard/makeAdmin"
                 element={

@@ -15,15 +15,13 @@ const MakeAdmin = ({ setDashboardPageTitle }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axiosInstance
-      .put(`https://polar-island-87071.herokuapp.com/admin?email=${email}`)
-      .then(({ data }) => {
-        if (data.modifiedCount) {
-          setSuccess(true);
-        } else {
-          setError(true);
-        }
-      });
+    axiosInstance.put(`/admin?email=${email}`).then(({ data }) => {
+      if (data.modifiedCount) {
+        setSuccess(true);
+      } else {
+        setError(true);
+      }
+    });
   };
   return (
     <Grid container spacing={{ md: 2, sm: 1 }}>

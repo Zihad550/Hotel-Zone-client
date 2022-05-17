@@ -10,8 +10,9 @@ import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
+import logoSrc from "assets/images/logo.png";
 import useAuth from "hooks/useAuth";
-import * as React from "react";
+import React from "react";
 import { useLocation, useNavigate } from "react-router";
 
 const Header = () => {
@@ -73,15 +74,6 @@ const Header = () => {
         mobile menu
         ================== */}
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" }, color: "white" }}
-          >
-            Hotel Zone
-          </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -117,18 +109,25 @@ const Header = () => {
               ))}
             </Menu>
           </Box>
+          {/* website logo */}
+          <Box
+            sx={{
+              display: { xs: "flex", md: "none" },
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+            }}
+          >
+            <img src={logoSrc} alt="" />
+          </Box>
 
           {/* ==============
           large screen menu
           ================ */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-          >
-            Hotel Zone
-          </Typography>
+
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <img src={logoSrc} alt="logo" />
+          </Box>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button

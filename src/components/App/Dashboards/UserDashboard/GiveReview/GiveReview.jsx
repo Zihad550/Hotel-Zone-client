@@ -45,7 +45,7 @@ const GiveReview = ({ setDashboardPageTitle }) => {
 
     // send to the server
     axiosInstance
-      .post("https://polar-island-87071.herokuapp.com/reviews", {
+      .post("/reviews", {
         userEmail: user.email,
         userName: user.displayName,
         ...review,

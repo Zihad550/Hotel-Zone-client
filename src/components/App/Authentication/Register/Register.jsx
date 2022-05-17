@@ -37,7 +37,7 @@ const Register = () => {
       alert("password not matched");
     } else {
       axiosInstance
-        .post("https://polar-island-87071.herokuapp.com/register", registerData)
+        .post("/register", registerData)
         .then(({ data }) => {
           if (data.insertedId) {
             alert("Authentication  successful");
@@ -127,8 +127,6 @@ const Register = () => {
 
             {error && <Alert severity="error">{error}</Alert>}
           </form>
-
-          {/* {user.email ? alert("successfully registered") : alert(error)} */}
 
           <Typography sx={{ textAlign: "center" }} variant="body1">
             Alredy registered{" "}

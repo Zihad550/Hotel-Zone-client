@@ -1,16 +1,14 @@
-import useHotel from "hooks/useHotel";
 import React, { createContext } from "react";
 import useUser from "../hooks/useUser";
 
 export const AuthContext = createContext(null);
 
 const ContextProvider = ({ children }) => {
-  const userContext = useUser();
-  const hotelContext = useHotel();
+  const authContext = useUser();
   return (
-    <AuthContext.Provider value={{
-      ...userContext, ...hotelContext
-    }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={
+      authContext
+    }>{children}</AuthContext.Provider>
   );
 };
 

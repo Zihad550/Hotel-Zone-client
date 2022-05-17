@@ -59,9 +59,18 @@ const PhotoGallery = () => {
 
   // side effect to load images from server
   useEffect(() => {
+    const controller = new AbortController();
     (async () => {
-      setPhotos(await axiosInstance.get("/photos").then((res) => res.data));
+      setPhotos(
+        await axiosInstance
+          .get("/photos", { signal: controller.signal })
+          .then((res) => res.data)
+      );
     })();
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   return (

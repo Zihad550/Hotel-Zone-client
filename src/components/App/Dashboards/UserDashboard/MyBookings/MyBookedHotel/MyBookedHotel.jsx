@@ -21,15 +21,13 @@ const MyBookedHotel = ({
 
   const handleCancelBook = () => {
     if (window.confirm("Are you sure")) {
-      axiosInstance
-        .delete(`https://polar-island-87071.herokuapp.com/booked?id=${_id}`)
-        .then(({ data }) => {
-          if (data.deletedCount > 0) {
-            alert("successfully deleted");
-            setIsDeleted(true);
-            setRefresh(true);
-          }
-        });
+      axiosInstance.delete(`/booked?id=${_id}`).then(({ data }) => {
+        if (data.deletedCount > 0) {
+          alert("successfully deleted");
+          setIsDeleted(true);
+          setRefresh(true);
+        }
+      });
     }
   };
   return (

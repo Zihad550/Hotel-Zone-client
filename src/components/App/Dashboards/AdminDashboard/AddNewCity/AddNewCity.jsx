@@ -32,7 +32,7 @@ const AddNewCity = ({ setDashboardPageTitle }) => {
     setIsAdded(false);
     e.preventDefault();
     axiosInstance
-      .post("https://polar-island-87071.herokuapp.com/cities", {
+      .post("/cities", {
         ...cityInfo,
         deletable: true,
       })

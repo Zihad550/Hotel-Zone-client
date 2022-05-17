@@ -28,6 +28,7 @@ const Book = () => {
   });
 
   useEffect(() => {
+    const controller = new AbortController();
     const options = {
       method: "GET",
       url: "https://booking-com.p.rapidapi.com/v1/hotels/data",
@@ -36,11 +37,16 @@ const Book = () => {
         "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
         "X-RapidAPI-Key": "0a3e9bf460msh6f2200b2ad45533p183995jsn461d6364bf35",
       },
+      signal: controller.signal,
     };
     (async () => {
       const data = await axios.request(options).then((res) => res.data);
       setHotel(data);
     })();
+
+    return () => {
+      controller.abort();
+    };
   }, [id]);
 
   if (!hotel || !bookingInfo) return <Loader />;
@@ -53,7 +59,7 @@ const Book = () => {
   } = hotel;
   const { adults, children, rooms, checkIn, checkOut } = bookingInfo;
 
-  const handleBlur = (e) => {
+  const handleFormData = (e) => {
     const field = e.target.name;
     const value = e.target.value;
     const newDetails = { ...bookingDetails };
@@ -110,7 +116,7 @@ const Book = () => {
               <Box sx={{ width: "100%", mr: 2 }}>
                 <InputLabel htmlFor="check-in">Select check in date</InputLabel>
                 <TextField
-                  onBlur={handleBlur}
+                  onBlur={handleFormData}
                   id="check-in"
                   type="date"
                   fullWidth
@@ -123,7 +129,7 @@ const Book = () => {
                   Select check out date
                 </InputLabel>
                 <TextField
-                  onBlur={handleBlur}
+                  onBlur={handleFormData}
                   id="check-out"
                   type="date"
                   fullWidth
@@ -144,7 +150,7 @@ const Book = () => {
               <Box sx={{ width: "100%" }}>
                 <InputLabel htmlFor="adults">Number of Adults</InputLabel>
                 <TextField
-                  onBlur={handleBlur}
+                  onBlur={handleFormData}
                   fullWidth
                   id="adults"
                   defaultValue={adults}
@@ -155,7 +161,7 @@ const Book = () => {
               <Box sx={{ width: "100%", mx: 2 }}>
                 <InputLabel htmlFor="childrens">Number of Childrens</InputLabel>
                 <TextField
-                  onBlur={handleBlur}
+                  onBlur={handleFormData}
                   fullWidth
                   id="childrens"
                   defaultValue={children}
@@ -166,7 +172,7 @@ const Book = () => {
               <Box sx={{ width: "100%" }}>
                 <InputLabel htmlFor="rooms">Number of Rooms</InputLabel>
                 <TextField
-                  onBlur={handleBlur}
+                  onBlur={handleFormData}
                   fullWidth
                   id="rooms"
                   defaultValue={rooms}
@@ -177,7 +183,7 @@ const Book = () => {
             </Box>
             <InputLabel htmlFor="hotel=name">Hotel name</InputLabel>
             <TextField
-              onChange={handleBlur}
+              onChange={handleFormData}
               fullWidth
               aria-readonly
               id="hotel-name"
@@ -185,7 +191,7 @@ const Book = () => {
             />
             <InputLabel htmlFor="hotel=name">Hotel price</InputLabel>
             <TextField
-              onChange={handleBlur}
+              onChange={handleFormData}
               fullWidth
               aria-readonly
               id="hotel-name"
@@ -203,7 +209,7 @@ const Book = () => {
             {/* user details */}
             <InputLabel htmlFor="user-name">Your name</InputLabel>
             <TextField
-              onBlur={handleBlur}
+              onBlur={handleFormData}
               name="userName"
               fullWidth
               id="user-name"
@@ -211,7 +217,7 @@ const Book = () => {
             />
             <InputLabel htmlFor="user-email">Your E-mail</InputLabel>
             <TextField
-              onBlur={handleBlur}
+              onBlur={handleFormData}
               name="userEmail"
               fullWidth
               aria-readonly

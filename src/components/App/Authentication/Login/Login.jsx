@@ -33,7 +33,7 @@ const Login = () => {
     e.preventDefault();
 
     axiosInstance
-      .post("https://polar-island-87071.herokuapp.com/login", loginData)
+      .post("/login", loginData)
       .then(({ data }) => {
         if (data.success) {
           alert("Authentication successful");

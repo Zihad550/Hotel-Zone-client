@@ -4,7 +4,7 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
+import React from "react";
 import accordionsData from "./data";
 
 const Accordion = styled((props) => (

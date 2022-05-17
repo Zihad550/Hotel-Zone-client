@@ -20,11 +20,7 @@ const BestRooms = () => {
   useEffect(() => {
     const controller = new AbortController();
     (async () => {
-      setRooms(
-        await axiosInstance
-          .get("https://polar-island-87071.herokuapp.com/rooms")
-          .then((res) => res.data)
-      );
+      setRooms(await axiosInstance.get("/rooms").then((res) => res.data));
     })();
 
     return () => {

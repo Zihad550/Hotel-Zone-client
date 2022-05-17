@@ -27,7 +27,7 @@ const AddPhoto = ({ setDashboardPageTitle }) => {
     setIsAdded(false);
     e.preventDefault();
     axiosInstance
-      .post("https://polar-island-87071.herokuapp.com/photos", {
+      .post("/photos", {
         ...photoInfo,
         deletable: true,
       })
